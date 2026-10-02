@@ -80,8 +80,9 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
   bins over µ ± 4σ/√n), the sample-size steps (1–5, 10, 15, 20, 25, 30, 40, 50, 75, 100), and the summary line
   comparing the means' actual average and SD to the CLT's predictions.
 - **Note:** question 3's model answer says the exponential case at n = 100 "might still be very slightly skewed
-  to the left". That's the original text; any remaining skew is to the right. It's a free-response question, so
-  it doesn't affect grading.
+  to the left". That's the original text, and it's wrong for sample means (any remaining skew is to the right).
+  It describes t statistics instead: the One-Sample t Statistic page shares this quiz, and its applet does show
+  a slight left skew there. It's a free-response question, so it doesn't affect grading.
 - **Verified:** the SD of the 10,000 means matches σ/√n for every population and n tried, the quiz's expected
   shapes show up as described, and a full quiz run scores 10/10.
 
@@ -191,6 +192,24 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
 - **Verified:** the simulated mean and SD match p and √(p(1−p)/n); the quiz's shapes appear as described
   (right-skewed for p = .05, n = 75; left-skewed for p = .95, n = 75; symmetric for p = .95, n = 750); 10,000
   samples at n = 2000 take under half a second; a full quiz run scores 16/16.
+
+### Distribution of the One-Sample t Statistic (`asset/distonesamplet/`)
+
+- **From the originals:** the page text, whose instructions match the Central Limit Theorem applet's except that
+  it plots t statistics and a "Show t curve" overlay (t with n − 1 degrees of freedom), and the quiz. No Java
+  ancestor. Built from the Central Limit Theorem rebuild: same populations (mean 1, SD 1), sample-size slider, and
+  10,000 samples per click.
+- **Designed for the rebuild:** sample sizes start at 2 (s needs two observations), the histogram uses a fixed
+  scale of −5 to 5 so shapes are comparable across n, and the count of t statistics beyond ±5 is shown (with
+  n = 2, the t distribution has very heavy tails).
+- **Original quiz errors (important for teachers):** this page's quiz is the Central Limit Theorem quiz, nearly
+  word for word, and two of its answer keys describe sample means rather than t statistics. Measured on 10,000 t
+  statistics: for an exponential population at n = 2 the distribution is clearly skewed *left* (quartile skewness
+  −0.43), but question 1 expects "skewed right"; for a uniform population at n = 3 it's *more peaked* than the t
+  curve (37% of values within ±0.5 against 33% for the curve), but question 2 expects "too flat". Question 3's
+  model answer (slight left skew at n = 100) does match t statistics. The page's notice warns about this.
+- **Verified:** with a Normal population the t statistics match the t curve (as theory says), and the shapes
+  above were measured from the applet's own output.
 
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.

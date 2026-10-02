@@ -1,0 +1,97 @@
+/* LOCAL RECONSTRUCTION: copied from the Central Limit Theorem rebuild (3_cltmean/style.css), resized for this
+   applet's 760x480 frame. */
+
+body {
+	margin:0px;
+}
+
+body, td {
+	font-family:Arial, sans-serif;
+	font-size:14px;
+}
+
+#fone {
+    position:relative;
+    background: #fff;
+    width:760px;
+}
+
+#generate {
+    background-color: #11E911;
+    border: 2px solid;
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border-color: #00D800;
+    border-width: 3px;
+    margin-left:auto;
+    margin-right:auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: All 0.5s ease;
+}
+
+.label{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.input{
+	width: 40px;
+    margin-top: 10px;
+    border: 0;
+    color: #960;
+    font-weight :bold;
+    font-size:12px;
+    background: transparent;
+}
+
+.settings{
+    padding: 12px 15px 0 15px;
+}
+
+.radio_row {
+    margin: 6px 0 0 12px;
+}
+
+.checkbox_row {
+    margin: 14px 0 0 20px;
+}
+
+#left_panel {
+    padding: 0px;
+    width: 200px;
+    height: 470px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    border-right: none;
+    margin-bottom: 0px;
+    float: left;
+    font-family: Helvetica Neue, Arial, sans-serif;
+	text-align: left;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#notepad {
+    margin-top: 0px;
+    width: 545px;
+    height: 470px;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    float: left;
+    background-image: linear-gradient(to bottom, #fafbfc, #f2f3f4);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
