@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Reasoning of a Statistical Test</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+        <script src="../common/jquery.min.js"></script>
+        <script src="../common/raphael-min.js"></script>
+        <script src="math_script.js"></script>
+        <script src="main_script.js"></script>
+    </head>
+    <body>
+        <div id="fone">
+            <div id="left_panel">
+                <div id="info"> </div>
+                <div id="enter">
+                    <form action="" method="get" id="enter_form">
+                        <div id="settings">
+                            <div class="label_box">
+                                <label for="shoots">Shots:&nbsp; </label>
+                                <input id="shoots" type="text"/>
+                            </div>    
+                            <div id="trueProb_checkbox">
+                                <input name="show_true_probability" id="trueProb" type="checkbox"/>
+                            </div>    
+                            <div id="trueProb_label">
+                                <label for="trueProb">Show true probability</label>
+                            </div>  
+                        </div>
+                        <p class="inputForm">
+                            <a href="#" id="s_button" >SHOOT</a>
+                        </p>
+                        <p class="inputForm">
+                            <a href="#" id="c_button" >NEW SHOOTER</a>
+                        </p>
+                    </form>
+                </div>
+                <div>
+                    <p id="hits">Hits = 0/0 = 0%</p>
+                    <p id="misses">Misses = 0/0 = 0%</p>
+                </div>
+                <div id = "img">
+                    <img id="image" src="animation/Animation1.png" width="140px" align="center">
+                </div>
+            </div>
+            <div id="notepad"> 
+            </div>
+        </div>
+    </body>
+</html>

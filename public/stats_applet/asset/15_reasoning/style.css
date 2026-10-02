@@ -1,0 +1,175 @@
+body {
+	margin:0px;
+	padding:0px;
+}
+
+root { 
+    display: block;
+}
+
+#fone {
+    background: #fff;
+}
+
+#c_button {
+    background-color: #d11717;
+    border: 2px solid #eee;
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border-color: #aa1313;
+    border-width: 3px;
+    margin-left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    background-image: -webkit-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -moz-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -o-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -ms-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: linear-gradient(top, #c23737, #ad2b2b);
+
+    -webkit-transition: All 0.5s ease;
+    -moz-transition: All 0.5s ease;
+    -o-transition: All 0.5s ease;
+    -ms-transition: All 0.5s ease;
+    transition: All 0.5s ease;
+}
+
+
+#c_button:hover {
+    background-color: #ff3434;
+    background-image: -webkit-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: -moz-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: -o-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: -ms-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: linear-gradient(top, #e25757, #ad2b2b);
+}
+
+#s_button {
+    background-color: #11e911;
+    border: 2px solid;
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border-color: #00d800;
+    border-width: 3px;
+    margin-left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    /*background-image: -webkit-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -moz-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -o-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -ms-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: linear-gradient(top, #c23737, #ad2b2b);*/
+
+    -webkit-transition: All 0.5s ease;
+    -moz-transition: All 0.5s ease;
+    -o-transition: All 0.5s ease;
+    -ms-transition: All 0.5s ease;
+    transition: All 0.5s ease;
+}
+
+#s_button:hover {
+    /*background-image: -webkit-linear-gradient(top, #21f957, #ad2b2b);
+    background-image: -moz-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: -o-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: -ms-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: linear-gradient(top, #e25757, #ad2b2b);*/
+}
+
+#notepad {
+	padding-left: 20px; 
+	background: url(reasoning-applet-back-with-labels.jpg) no-repeat top left #F3F4F5;
+	margin-top: 0px;
+    width: 525px;
+    height: 450px;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    float: left;  
+	-webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#left_panel {
+    width: 195px;
+    height: 450px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    border-right: none;
+    margin-bottom: 0px;
+    float: left;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#img {
+    width: 194px;
+	text-align:center;    
+    padding-top: 10px;
+}
+
+.inputForm {
+	margin-left:12px;
+}
+
+.input_box {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.label_box {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#trueProb_checkbox {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#trueProb_label {
+    margin-top: 10px;
+    margin-left: 35px;
+}
+
+#hits, #misses {
+    margin-left: 10px;
+    text-align:center;
+}
+
+#shoots {
+	width:50px;
+}
