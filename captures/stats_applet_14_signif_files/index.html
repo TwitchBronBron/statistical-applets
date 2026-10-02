@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- saved from url=(0114)https://web.archive.org/web/20220504144459/https://digitalfirst.bfwpub.com/stats_applet/asset/14_signif/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./bundle-playback.js.download" charset="utf-8"></script>
+<script type="text/javascript" src="./wombat.js.download" charset="utf-8"></script>
+<script>window.RufflePlayer=window.RufflePlayer||{};window.RufflePlayer.config={"autoplay":"on","unmuteOverlay":"hidden","showSwfDownload":true};</script>
+<script type="text/javascript" src="./ruffle.js.download"></script>
+<script type="text/javascript">
+    __wm.init("https://web.archive.org/web");
+  __wm.wombat("https://digitalfirst.bfwpub.com/stats_applet/asset/14_signif/index.html","20220504144459","https://web.archive.org/","web","https://web-static.archive.org/_static/",
+	      "1651675499");
+</script>
+<link rel="stylesheet" type="text/css" href="./banner-styles.css">
+<link rel="stylesheet" type="text/css" href="./iconochive.css">
+<!-- End Wayback Rewrite JS Include -->
+
+        <title>Statistical Significance</title>
+        
+        <link rel="stylesheet" href="./style.css" type="text/css" media="screen">        
+        <script src="./jquery.min.js.download" type="text/javascript"></script>        
+        <script src="./raphael-min.js.download"></script>
+        <script src="./math_script.js.download"></script>
+        <script src="./main_script.js.download"></script>
+    </head>
+    <body>
+        <div id="fone">
+            <div id="left_panel">
+                <div id="info"> </div>
+                <div id="enter">
+                    <form action="https://web.archive.org/web/20220504144459/https://digitalfirst.bfwpub.com/stats_applet/asset/14_signif/index.html" method="get" id="enter_form">
+                        <div class="settings">
+
+                        	<table id="hypotheses_table" border="0" cellspacing="0" cellpadding="0">
+                        	<tbody><tr>
+                        		<td style="vertical-align:middle">H<sub>0</sub>:</td>
+                                <td><label for="h0">µ = </label><input class="input_box" id="h0" type="text"></td>
+                            </tr>    
+							
+							<tr>
+                            	<td style="padding-right:10px;"><label>H<sub>a</sub>:</label></td>
+                            	<td>
+									<div class="ha_box">
+										<input name="ha" id="ha1" type="radio" checked="checked">
+										<label for="ha1" id="lha1">µ &gt; 0</label>
+									</div>
+									<div class="ha_box">
+										<input name="ha" id="ha2" type="radio">
+										<label for="ha2" id="lha2">µ &lt; 0</label>
+									</div>
+									<div class="ha_box">
+										<input name="ha" id="ha3" type="radio">
+										<label for="ha3" id="lha3">µ ≠ 0</label>
+									</div>
+                            	</td>
+                            </tr>
+							</tbody></table>
+
+
+
+                            <div class="label_box">
+                                <label for="alpha">α = </label><input class="input_box" id="alpha" type="text">
+                            </div>  
+
+                            <div class="label_box">
+                                <label for="sigma">σ = </label><input class="input_box" id="sigma" type="text">
+                            </div>    
+                            <div class="label_box">
+                                <label for="n"><i>n</i> = </label><input class="input_box" id="n" type="text">
+                            </div>  
+                        </div>
+                        <div id="advanced_settings">
+							<div class="settings">
+								<div class="radio_box">
+									<input name="options" type="radio" id="opt1" checked="checked">&nbsp;
+								</div>
+								<div class="label_box">
+									<label for="opt1" style="line-height:1.35em">I have data, and the observed <i><span style="text-decoration: overline;">x</span></i> = </label><input class="input_box" id="opt_field1" type="text">
+								</div>
+							</div>
+							<div class="settings">
+								<div class="radio_box">
+									<input name="options" type="radio" id="opt2">&nbsp;
+								</div>
+								<div class="label_box">
+									<label for="opt2">The truth about the population is µ = </label><input class="input_box" id="opt_field2" type="text">
+								</div>    
+							</div>
+						</div>
+                        <p class="inputForm" style="margin-left:12px">
+                            <a href="https://web.archive.org/web/20220504144459/https://digitalfirst.bfwpub.com/stats_applet/asset/14_signif/index.html#" id="u_button">UPDATE</a>
+                        </p>
+                        <p class="inputForm" style="margin-left:12px">
+                            <a href="https://web.archive.org/web/20220504144459/https://digitalfirst.bfwpub.com/stats_applet/asset/14_signif/index.html#" id="c_button">RESET</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div id="notepad"><svg height="460" version="1.1" width="525" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#666666" d="M50,360L475,360"></path><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#e13f3f" d="M50,360L50.5,360L51.5,360L52.5,360L53.5,360L53.5,360L54.5,360L55.5,360L56.5,360L57.5,360L58.5,360L59.5,360L60.5,360L61.5,360L62.5,360L63.5,360L64.5,360L65.5,360L66.5,360L67.5,360L68.5,360L69.5,360L70.5,360L71.5,360L72.5,360L73.5,360L74.5,359L75.5,359L76.5,359L77.5,359L78.5,359L79.5,359L80.5,359L81.5,359L82.5,359L83.5,359L84.5,359L85.5,359L86.5,359L87.5,359L88.5,359L89.5,359L90.5,359L91.5,358L92.5,358L93.5,358L94.5,358L95.5,358L96.5,358L97.5,358L98.5,358L99.5,358L100.5,357L101.5,357L102.5,357L103.5,357L104.5,357L105.5,357L106.5,356L107.5,356L108.5,356L109.5,356L110.5,356L111.5,355L112.5,355L113.5,355L114.5,354L115.5,354L116.5,354L117.5,354L118.5,353L119.5,353L120.5,353L121.5,352L122.5,352L123.5,351L124.5,351L125.5,350L126.5,350L127.5,349L128.5,349L129.5,348L130.5,348L131.5,347L132.5,347L133.5,346L134.5,345L135.5,345L136.5,344L137.5,343L138.5,343L139.5,342L140.5,341L141.5,340L142.5,339L143.5,338L144.5,337L145.5,337L146.5,336L147.5,335L148.5,333L149.5,332L150.5,331L151.5,330L152.5,329L153.5,328L154.5,326L155.5,325L156.5,324L157.5,322L158.5,321L159.5,320L160.5,318L161.5,317L162.5,315L163.5,313L164.5,312L165.5,310L166.5,308L167.5,307L168.5,305L169.5,303L170.5,301L171.5,299L172.5,297L173.5,295L174.5,293L175.5,291L176.5,289L177.5,287L178.5,284L179.5,282L180.5,280L181.5,278L182.5,275L183.5,273L184.5,270L185.5,268L186.5,265L187.5,263L188.5,260L189.5,258L190.5,255L191.5,252L192.5,250L193.5,247L194.5,244L195.5,241L196.5,238L197.5,236L198.5,233L199.5,230L200.5,227L201.5,224L202.5,221L203.5,218L204.5,215L205.5,212L206.5,209L207.5,206L208.5,203L209.5,200L210.5,197L211.5,195L212.5,192L213.5,189L214.5,186L215.5,183L216.5,180L217.5,177L218.5,174L219.5,171L220.5,168L221.5,166L222.5,163L223.5,160L224.5,157L225.5,155L226.5,152L227.5,149L228.5,147L229.5,144L230.5,142L231.5,140L232.5,137L233.5,135L234.5,133L235.5,130L236.5,128L237.5,126L238.5,124L239.5,122L240.5,120L241.5,119L242.5,117L243.5,115L244.5,114L245.5,112L246.5,111L247.5,110L248.5,108L249.5,107L250.5,106L251.5,105L252.5,104L253.5,103L254.5,103L255.5,102L256.5,101L257.5,101L258.5,101L259.5,100L260.5,100L261.5,100L262.5,100L263.5,100L264.5,100L265.5,101L266.5,101L267.5,101L268.5,102L269.5,103L270.5,103L271.5,104L272.5,105L273.5,106L274.5,107L275.5,108L276.5,110L277.5,111L278.5,112L279.5,114L280.5,115L281.5,117L282.5,119L283.5,120L284.5,122L285.5,124L286.5,126L287.5,128L288.5,130L289.5,133L290.5,135L291.5,137L292.5,140L293.5,142L294.5,144L295.5,147L296.5,149L297.5,152L298.5,155L299.5,157L300.5,160L301.5,163L302.5,166L303.5,168L304.5,171L305.5,174L306.5,177L307.5,180L308.5,183L309.5,186L310.5,189L311.5,192L312.5,195L313.5,197L314.5,200L315.5,203L316.5,206L317.5,209L318.5,212L319.5,215L320.5,218L321.5,221L322.5,224L323.5,227L324.5,230L325.5,233L326.5,236L327.5,238L328.5,241L329.5,244L330.5,247L331.5,250L332.5,252L333.5,255L334.5,258L335.5,260L336.5,263L337.5,265L338.5,268L339.5,270L340.5,273L341.5,275L342.5,278L343.5,280L344.5,282L345.5,284L346.5,287L347.5,289L348.5,291L349.5,360"></path><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#e13f3f" d="M0,0"></path><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="#ffba00" stroke="#e13f3f" d="M349.5,360L349.5,293L349.5,293L350.5,295L351.5,297L352.5,299L353.5,301L354.5,303L355.5,305L356.5,306L357.5,308L358.5,310L359.5,312L360.5,313L361.5,315L362.5,316L363.5,318L364.5,319L365.5,321L366.5,322L367.5,324L368.5,325L369.5,326L370.5,328L371.5,329L372.5,330L373.5,331L374.5,332L375.5,333L376.5,334L377.5,335L378.5,336L379.5,337L380.5,338L381.5,339L382.5,340L383.5,341L384.5,342L385.5,342L386.5,343L387.5,344L388.5,345L389.5,345L390.5,346L391.5,347L392.5,347L393.5,348L394.5,348L395.5,349L396.5,349L397.5,350L398.5,350L399.5,351L400.5,351L401.5,352L402.5,352L403.5,352L404.5,353L405.5,353L406.5,354L407.5,354L408.5,354L409.5,354L410.5,355L411.5,355L412.5,355L413.5,356L414.5,356L415.5,356L416.5,356L417.5,356L418.5,357L419.5,357L420.5,357L421.5,357L422.5,357L423.5,357L424.5,358L425.5,358L426.5,358L427.5,358L428.5,358L429.5,358L430.5,358L431.5,358L432.5,358L433.5,359L434.5,359L435.5,359L436.5,359L437.5,359L438.5,359L439.5,359L440.5,359L441.5,359L442.5,359L443.5,359L444.5,359L445.5,359L446.5,359L447.5,359L448.5,359L449.5,359L450.5,360L451.5,360L452.5,360L453.5,360L454.5,360L455.5,360L456.5,360L457.5,360L458.5,360L459.5,360L460.5,360L461.5,360L462.5,360L463.5,360L464.5,360L465.5,360L466.5,360L467.5,360L468.5,360L469.5,360L470.5,360L471.5,360L472.5,360L473.5,360L474.5,360"></path><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#3b60ff" d="M262.5,360L262.5,70" stroke-width="3"></path><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 14px Verdana;" x="262.5" y="410" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="14px" font-family="Verdana"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">Not significant at level 0.05</tspan></text><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 14px Verdana;" x="262.5" y="50" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="14px" font-family="Verdana"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">P-value = 0.5000</tspan></text><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 14px Verdana;" x="262.5" y="30" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="14px" font-family="Verdana"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">Mean = 0</tspan></text><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#666666" d="M50,365L50,355"></path><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 14px Verdana;" x="50" y="375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="14px" font-family="Verdana"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">-1.265</tspan></text><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#666666" d="M156,365L156,355"></path><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 14px Verdana;" x="156" y="375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="14px" font-family="Verdana"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">-0.632</tspan></text><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#666666" d="M263,365L263,355"></path><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 14px Verdana;" x="263" y="375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="14px" font-family="Verdana"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">0.000</tspan></text><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#666666" d="M369,365L369,355"></path><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 14px Verdana;" x="369" y="375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="14px" font-family="Verdana"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">0.632</tspan></text><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" fill="none" stroke="#666666" d="M475,365L475,355"></path><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 14px Verdana;" x="475" y="375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="14px" font-family="Verdana"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">1.265</tspan></text></svg> 
+            </div>
+        </div>
+    
+
+
+</body></html>

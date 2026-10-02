@@ -1,0 +1,65 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+function receive_applet_action(action) {
+	var a = player.activity;
+	
+	if (a.quiz_completed) {
+		return;
+	}
+	
+	// for questions 1 through 3...
+	if (a.current_question >= 1 && a.current_question <= 3) {
+		// get a reference to the query
+		var q = a.questions[a.current_question].queries[0];
+		
+		// and get the correct answer
+		var answer = Math.round(action.hits) + "";
+		
+		// if the user has shot the correct number of times, set the correct answer
+		if (a.current_question == 1) {
+			if (action.n >= 5) {
+				q.answers[0] = q.correct_answer = answer;
+			}
+		} else if (a.current_question == 2) {
+			if (action.n >= 15) {
+				q.answers[0] = q.correct_answer = answer;
+			}
+		} else if (a.current_question == 3) {
+			if (action.n >= 50) {
+				q.answers[0] = q.correct_answer = answer;
+			}
+		}
+	}
+}
+
+}
+/*
+     FILE ARCHIVED ON 05:32:04 May 02, 2021 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 19:15:49 Nov 02, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.45
+  exclusion.robots: 0.015
+  exclusion.robots.policy: 0.007
+  esindex: 0.009
+  cdx.remote: 26.515
+  LoadShardBlock: 57.246 (3)
+  PetaboxLoader3.datanode: 138.376 (4)
+  load_resource: 524.495
+  PetaboxLoader3.resolve: 318.769
+*/

@@ -1,0 +1,109 @@
+body {
+	background-color:#fff;
+	margin-top:0px;
+}
+
+[data-type="chapter"] {
+	max-width:950px;
+	margin-top:0px;
+	border-width:0px;
+}
+
+#top_banner {
+	background:#fff;
+	color:#006;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -khtml-border-radius: 0px;
+    border-radius: 0px;
+    border-width:0 0 1px 0;
+    border-color:#006;
+    padding-bottom:5px;
+    padding-top:10px;
+}
+
+#banner_activity_type {
+	/*padding-top:8px;*/
+}
+
+#banner_thumbnail {
+	margin:0 8px 0 0;
+	border-color:#006;
+}
+
+
+
+[data-block_type=activity_title] {
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+[data-block_type=instructions] {
+	float:right;
+	width:320px;
+	border: 1px solid #006;
+	background-color:#006;
+	color:#fff;
+	padding:10px;
+	margin:0 -235px 10px 20px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+    font-size:.9em;
+}
+
+#start_quiz_link {
+	float:right;
+	margin-left:10px;
+}
+
+/* Border above the questions block */
+[data-block_type=questions] {
+	border-top:3px solid #009;
+	border-left-width:0px;
+	border-right-width:0px;
+	border-bottom-width:0px;
+	background-color:inherit;
+	padding:10px 0 0 10px;
+	display: none;
+	clear:both;
+}
+
+[data-type=question] {
+	border-left:0px;
+	border-bottom:1px solid #666;
+	margin-bottom:5px;
+	padding-bottom:10px;
+	display:none;
+
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -khtml-border-radius: 0px;
+    border-radius: 0px;
+}
+
+[data-type=question] h3 {
+	float:left;
+	font-size:1em;
+	line-height:1.3em;
+	padding-right:0px;
+	margin:0px 0 0 -45px;
+	width:40px;
+	text-align:right;
+}
+
+#quiz_header {
+	font-size:14px;
+	font-weight:bold;
+	border-bottom:1px solid #666;
+	padding-bottom:10px;
+	margin-bottom:10px;
+}
+
+#total_score_div {
+	margin-top:10px;
+	font-size:14px;
+	color:red;
+	font-weight:bold;
+}

@@ -1,0 +1,165 @@
+/* PW: no margin or padding */
+body {
+	margin:0px;
+	padding:0px;
+}
+
+root { 
+    display: block;
+}
+
+#info {
+    width: 220px;
+    height: 290px;
+}
+#left_panel {
+    width: 220px;
+    height: 525px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    border-right: none;
+    margin-bottom: 0px;
+    float: left;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-size:12px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.setting_wrapper {
+	clear:both;
+}
+
+.input_box {
+    float : left;
+    margin-left: 10px;
+    margin-top:3px;
+}
+
+.label_box {
+    margin-left: 32px;
+    line-height: 25px;
+}
+
+#notepad {
+    margin-top: 0px;
+    width: 525px;
+    height: 525px;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    float: left;
+    
+    background-image: -webkit-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: -moz-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: -o-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: -ms-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: linear-gradient(top, #fafbfc, #f2f3f4);
+
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+
+#c_button {
+    background-color: #d11717;
+    border: 2px solid #eee;
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border-color: #aa1313;
+    border-width: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    background-image: -webkit-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -moz-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -o-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -ms-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: linear-gradient(top, #c23737, #ad2b2b);
+
+    -webkit-transition: All 0.5s ease;
+    -moz-transition: All 0.5s ease;
+    -o-transition: All 0.5s ease;
+    -ms-transition: All 0.5s ease;
+    transition: All 0.5s ease;
+}
+
+#c_button:hover {
+    background-color: #ff3434;
+    background-image: -webkit-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: -moz-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: -o-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: -ms-linear-gradient(top, #e25757, #ad2b2b);
+    background-image: linear-gradient(top, #e25757, #ad2b2b);
+}
+
+/* PW: remove padding */
+#fone {
+    background: #fff;
+}
+
+#enter{
+    color: #fff;
+}
+#settings {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+#settings label {
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    color: #292929;
+    -webkit-transition: All 0.5s ease;
+    -moz-transition: All 0.5s ease;
+    -o-transition: All 0.5s ease;
+    -ms-transition: All 0.5s ease;
+    transition: All 0.5s ease;
+}
+
+/*#settings label:hover{
+    color: #ff3434;
+}*/
+/*
+     FILE ARCHIVED ON 04:44:08 Oct 05, 2022 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 19:15:38 Nov 02, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.512
+  exclusion.robots: 0.017
+  exclusion.robots.policy: 0.008
+  esindex: 0.011
+  cdx.remote: 23.318
+  LoadShardBlock: 81.08 (3)
+  PetaboxLoader3.datanode: 75.558 (4)
+  load_resource: 164.234
+  PetaboxLoader3.resolve: 87.509
+*/

@@ -1,0 +1,15 @@
+{
+  "name": "statistical-applets",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Self-hosted restoration of the W. H. Freeman / BFW \"Statistical Applets\" (digitalfirst.bfwpub.com/stats_applet) from Wayback Machine captures.",
+  "type": "module",
+  "scripts": {
+    "start": "node tools/server.mjs",
+    "dev": "node --watch tools/server.mjs",
+    "fetch": "node tools/fetch-wayback.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

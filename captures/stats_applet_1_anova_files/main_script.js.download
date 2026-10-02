@@ -1,0 +1,438 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+
+function Sample(paper, position, desirable_mean, dot_color){
+    this.position = position;
+    this.generate_sample = function(){
+        this.values = new Array();
+        var mean = -1;
+        while(!((mean > (desirable_mean - 0.25) && mean < (desirable_mean + 0.25)))){
+            for(var i = 0; i < module_main.sample_size; i++){
+                this.values[i] = RN_Normal(desirable_mean, module_main.sigma);
+            } 
+            mean = get_mean(this.values);
+        }
+		
+		// now calculate delta_values for use with pooled error slider,
+		// and re-calculate values based on delta_values.
+		// (PW: not sure exactly how the math works out here, but it makes the activity work!)
+        this.delta_values = new Array();
+        for (var i = 0; i < module_main.sample_size; i++){
+            this.delta_values[i] = (mean - this.values[i])*module_main.coeff_y;
+			var y = module_main.plot_y + (10-mean)*module_main.coeff_y + this.delta_values[i] * (1/3) * Math.exp(Math.log(3));	//  * slider_value /0.5);
+			var value = (y - module_main.plot_y)/module_main.coeff_y;
+			this.values[i] = value;
+        }
+
+        this.sample_dots = new Array();
+        for (var i = 0; i < module_main.sample_size; i++){
+			var y = module_main.plot_y + (this.values[i])*module_main.coeff_y;
+			
+			if (y < module_main.plot_y || y > module_main.plot_y + module_main.distance_btwn_lines * 5)
+				var x = 800;
+			else
+				var x = this.position;
+
+            var circle = paper.circle(x, y, 1);
+            circle.attr('fill', dot_color);
+            circle.attr('stroke', dot_color);            
+            this.sample_dots[i] = circle;
+        }
+        this.sd_label = paper.text(position - 10, module_main.plot_y + (10-mean)*module_main.coeff_y, "Std. Dev. = " + this.get_sd().toFixed(2));
+        this.sd_label.attr('font-size', 11);
+        this.sd_label.attr('text-anchor', "end");
+        this.sd_label.attr("font-family", "Arial");
+
+        this.mean_label = paper.text(position + 10,  module_main.plot_y + (10-mean)*module_main.coeff_y, "Mean = " + mean.toFixed(2));
+        this.mean_label.attr('font-size', 11);
+        this.mean_label.attr('text-anchor', "start");
+        this.mean_label.attr("font-family", "Arial");
+
+        this.mean_point = paper.circle(position, module_main.plot_y + (10-mean)*module_main.coeff_y, 5);
+        this.mean_point.attr("fill", "#000000");
+        this.mean_point.data('value', mean);
+        this.mean_point.obj = this;
+        this.mean_point.drag(function(dx, dy, x, y, event){
+            var offset = $("#notepad").offset();
+            var y1 = y - offset.top - module_main.border;
+            if (y1 < module_main.plot_y)
+                y1 = module_main.plot_y;
+            if (y1 > module_main.plot_y + module_main.distance_btwn_lines * 5)
+                y1 = module_main.plot_y + module_main.distance_btwn_lines * 5;
+            this.attr("cy", y1 + this.delta_y);
+            var new_mean = 10 - (y1 + this.delta_y - module_main.plot_y)/module_main.coeff_y;
+            this.obj.mean_label.attr("text", "Mean = " + new_mean.toFixed(2));
+            this.obj.mean_label.attr("y", y1 + this.delta_y_mean);
+            this.data('value', new_mean);
+            this.obj.sd_label.attr("y", y1 + this.delta_y_sd);
+            for(var i = 0; i < module_main.sample_size; i++){
+                var sample_dot = this.obj.sample_dots[i];                         
+                var y2 = y1 + this.delta_y_samples[i];
+                if (y2 < module_main.plot_y || y2 > module_main.plot_y + module_main.distance_btwn_lines * 5)
+                    var x = 800;
+                else
+                    var x = position;
+                sample_dot.attr("cx", x);
+                sample_dot.attr("cy", y2);   
+                var value = 10 - (y2 - module_main.plot_y)/module_main.coeff_y;
+                this.obj.values[i] = value;
+                
+            }
+
+		    module_main.draw_f_value()
+        },
+        
+        function(x, y, event){  
+            var offset = $("#notepad").offset();
+            var y1 = y - offset.top - 3;
+            var y = this.attr("cy"); 
+            this.delta_y = y - y1;
+            this.delta_y_samples = new Array();
+            for(var i = 0; i < module_main.sample_size; i++){
+                y = this.obj.sample_dots[i].attr("cy");
+                this.delta_y_samples[i] = y - y1;
+            }
+            y = this.obj.mean_label.attr("y");
+            this.delta_y_mean = y - y1;
+            y = this.obj.sd_label.attr("y");
+            this.delta_y_sd = y - y1;
+        },function(event){                
+            });    
+    }    
+    this.get_sd = function(){
+        return get_standart_deviation(this.values);
+    }
+    this.get_mean = function(){
+        return this.mean_point.data('value');
+    }
+}
+var module_main = new Object();
+module_main.draw_f_value = function() {
+    var F = this.calculate_F();    
+	var p = this.calculate_p();
+	var position = this.get_position_on_axis(p);
+	var p_circle_x = this.plot_x + position*this.line_length;
+	if (p_circle_x > this.plot_x + this.line_length)
+		p_circle_x = this.plot_x + this.line_length;
+	if (p_circle_x < this.plot_x)
+		p_circle_x = this.plot_x;
+	
+	var f_label_x = p_circle_x - 25;
+	var f_label_y = this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y + 20;
+    
+    F = F.toFixed(2);
+    p = p.toFixed(4);
+	
+	var s1, s2, s3, s4;
+	s1 = "F"
+	s2 = " = " + F;
+	s3 = "p";
+    if (p < .0001) {
+    	s4 = " < .0001";
+    } else {
+    	s4 = " = " + p;
+    }
+	
+	if (this.p_circle != null) {
+		this.p_circle.attr('cx', p_circle_x);
+
+		this.F_label1.attr('x', f_label_x);
+		this.F_label2.attr('x', f_label_x + 12);
+		this.F_label3.attr('x', f_label_x);
+		this.F_label4.attr('x', f_label_x + 12);
+
+        this.F_label1.attr('text', s1);
+        this.F_label2.attr('text', s2);
+        this.F_label3.attr('text', s3);
+        this.F_label4.attr('text', s4);
+        
+	} else {
+	    this.p_circle = this.paper.circle(p_circle_x, this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y, 4);
+		this.p_circle.attr('stroke', "#FF0000");
+		this.p_circle.attr('fill', "#FF0000");
+
+	    this.F_label1 = this.paper.text(f_label_x + 3, f_label_y, s1);   
+	    this.F_label2 = this.paper.text(f_label_x + 14, f_label_y, s2);   
+	    this.F_label3 = this.paper.text(f_label_x - 3, f_label_y + 18, s3);   
+	    this.F_label4 = this.paper.text(f_label_x - 3 + 12, f_label_y + 18, s4);   
+
+	    this.F_label1.attr('stroke', "#FF0000");
+	    this.F_label2.attr('stroke', "#FF0000");
+	    this.F_label3.attr('stroke', "#FF0000");
+	    this.F_label4.attr('stroke', "#FF0000");
+
+	    this.F_label1.attr('font-size', "12");
+	    this.F_label2.attr('font-size', "12");
+	    this.F_label3.attr('font-size', "12");
+	    this.F_label4.attr('font-size', "12");
+		
+		// left-align everything and make s1 and s3 italic
+        this.F_label1.attr('text-anchor', "start");
+        this.F_label2.attr('text-anchor', "start");
+        this.F_label3.attr('text-anchor', "start");
+        this.F_label4.attr('text-anchor', "start");
+
+        this.F_label1.attr('font-style', "italic");
+        this.F_label3.attr('font-style', "italic");
+
+	}
+}
+
+module_main.initialize = function(){
+	// PW: get sample_size from url string if there
+	if (location.search.substr(1).search(/sample_size=(\d+)/) > -1) {
+		this.sample_size = RegExp.$1 * 1;
+	} else {
+		this.sample_size = 20;
+	}
+
+	this.min_n = 5;
+	this.max_n = 100;
+	
+	this.sigma = 2;
+	
+    this.width = $("#notepad").width();
+    this.height = $("#notepad").height();     
+    this.plot_y = 25;
+    this.plot_x = 30;
+    this.axis_offset_y = 55;
+    this.distance_btwn_lines = 68;
+    this.coeff_y = this.distance_btwn_lines * 5 / 10;
+    this.line_length = 527;
+    this.paper = Raphael(document.getElementById("notepad"), this.width, this.height);     
+    var offset = $("#notepad").offset();      
+    this.border = $("#notepad").css("borderTopWidth");
+    this.border = parseInt(this.border);
+
+	$(function() {
+		$( "#n_slider" ).slider({
+			range: "min",
+			value: module_main.sample_size,
+			min: module_main.min_n,
+			max: module_main.max_n,
+			slide: function( event, ui ) {
+				$( "#n" ).val( ui.value );
+				module_main.sample_size = ui.value;                                 
+			},
+			change: function() {
+				module_main.reset();
+			}
+		});
+		$( "#n" ).val($( "#n_slider" ).slider( "value" ) );
+		module_main.sample_size = $( "#n_slider" ).slider( "value" );
+
+		$( "#sd_slider" ).slider({
+			range: "min",
+			value: 50,
+			min: 0,
+			max: 100,
+			slide: function( event, ui ) {
+				//$( "#sd" ).val( ui.value );
+				//module_main.sigma = ui.value;
+				var slider_value = ui.value / 100;
+				
+				for (var j = 0; j < 3;j++){
+					for(var i = 0; i < module_main.sample_size; i++){
+						var y = module_main.plot_y + (10-module_main.samples[j].get_mean())*module_main.coeff_y + module_main.samples[j].delta_values[i] * (1/3) * Math.exp(Math.log(3) * slider_value /0.5);
+						var value = (y - module_main.plot_y)/module_main.coeff_y;
+						module_main.samples[j].values[i] = value;
+						if (y < module_main.plot_y || y > module_main.plot_y + module_main.distance_btwn_lines * 5)
+							var x = 800;
+						else
+							var x = module_main.samples[j].position;
+						module_main.samples[j].sample_dots[i].attr('cy', y) ;   
+						module_main.samples[j].sample_dots[i].attr('cx', x) ; 
+					}
+					
+					// recalculate std dev
+					module_main.samples[j].sd_label.attr("text", "Std. Dev. = " + module_main.samples[j].get_sd().toFixed(2));
+					
+					// recalculate f and p
+					module_main.draw_f_value();
+				}
+			},
+			change: function() {
+				// module_main.reset();
+			}
+		});
+
+	});
+
+    $("#reset").click(function(){
+    	module_main.reset();
+    });
+    
+    this.reset();
+}
+
+module_main.reset = function() {
+	this.p_circle = null;
+	this.paper.clear();
+    this.draw_static_objects();
+    this.create_samples(); 
+    this.draw_axis();
+    $( "#sd_slider" ).slider( "value", 50 );
+    this.draw_f_value()
+}
+
+module_main.create_samples = function(){
+    var sample_1 = new Sample(this.paper, this.plot_x + 60, 6, '#FF0000');
+    sample_1.generate_sample();
+    var sample_2 = new Sample(this.paper, (this.plot_x + this.line_length)/2, 4, '#990066');
+    sample_2.generate_sample();
+    var sample_3 = new Sample(this.paper, this.plot_x + this.line_length - 60, 5, '#00FF33');
+    sample_3.generate_sample();
+    this.samples = new Array();
+    this.samples[0] = sample_1;
+    this.samples[1] = sample_2;
+    this.samples[2] = sample_3;        
+}
+module_main.draw_static_objects = function(){
+    var first_line = this.paper.path("M" + this.plot_x + " " + this.plot_y + "L" + (this.plot_x + this.line_length)  + " " + this.plot_y);
+    first_line.attr("stroke-width", 3);    
+    var second_line = this.paper.path("M" + this.plot_x + " " + (this.plot_y + this.distance_btwn_lines) + this.dis + "L" + (this.plot_x + this.line_length)  + " " + (this.plot_y + this.distance_btwn_lines));
+    second_line.attr("stroke-width", 3);
+    second_line.attr("stroke", '#d7d7d7');
+    var third_line = this.paper.path("M" + this.plot_x + " " + (this.plot_y + 2*this.distance_btwn_lines) + this.dis + "L" + (this.plot_x + this.line_length)  + " " + (this.plot_y + 2*this.distance_btwn_lines));
+    third_line.attr("stroke-width", 3);
+    third_line.attr("stroke", '#d7d7d7');
+    var fourth_line = this.paper.path("M" + this.plot_x + " " + (this.plot_y + 3*this.distance_btwn_lines) + this.dis + "L" + (this.plot_x + this.line_length)  + " " + (this.plot_y + 3*this.distance_btwn_lines));
+    fourth_line.attr("stroke-width", 3);
+    fourth_line.attr("stroke", '#d7d7d7');
+    var fifth_line = this.paper.path("M" + this.plot_x + " " + (this.plot_y + 4*this.distance_btwn_lines) + this.dis + "L" + (this.plot_x + this.line_length)  + " " + (this.plot_y + 4*this.distance_btwn_lines));
+    fifth_line.attr("stroke-width", 3);
+    fifth_line.attr("stroke", '#d7d7d7');
+    var sixth_line = this.paper.path("M" + this.plot_x + " " + (this.plot_y + 5*this.distance_btwn_lines) + this.dis + "L" + (this.plot_x + this.line_length)  + " " + (this.plot_y + 5*this.distance_btwn_lines));
+    sixth_line.attr("stroke-width", 3);
+    for(var i = 0; i < 6; i++){
+        var text = this.paper.text((this.plot_x + this.line_length + 30),(this.plot_y + i*this.distance_btwn_lines), (10-i*2));
+        text.attr("font-size", 18);
+    }    
+}
+module_main.calculate_F = function(){
+    var means = new Array();
+    var mean_of_all = 0;
+    var msg = 0;
+    var mse = 0;
+    for (var i = 0; i < 3; i++){
+        means[i] = this.samples[i].get_mean();
+        mean_of_all += means[i];
+    }
+    mean_of_all /= 3;
+    
+    for (var i = 0; i < 3; i++){
+        msg += this.sample_size * Math.pow((mean_of_all - means[i]), 2);
+        mse += (this.sample_size - 1) * Math.pow(this.samples[i].get_sd(), 2);
+    }
+    msg /= 2;
+    mse /= (this.sample_size * 3 - 2)
+    return msg/mse;   
+}
+module_main.calculate_p = function(){
+    var F = this.calculate_F();
+    // PW: check this
+    return FishF(F, 2, this.sample_size * 3 - 2);
+}
+module_main.draw_axis = function(){
+    var label = this.paper.text(this.plot_x, this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 20, 'p = ');
+    label.attr('stroke', '#0000FF');
+    // make this italic
+    var line = this.paper.path("M" + this.plot_x + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y) + "L" + (this.plot_x + this.line_length) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line = this.paper.path("M" + this.plot_x + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 5) + "L" + this.plot_x + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line = this.paper.path("M" + (this.plot_x + this.line_length) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 5) + "L" + (this.plot_x + this.line_length) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    var position = this.get_position_on_axis(0.5);
+    line = this.paper.path("M" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 5) + "L" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line.attr('stroke', '#0000FF');
+    var text = this.paper.text(this.plot_x + Math.floor(this.line_length*position), this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 15, 0.5);
+    text.attr("stroke", '#0000FF');
+    text.attr("font-family", "Arial");  
+    var position = this.get_position_on_axis(0.25);     
+    line = this.paper.path("M" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 15) + "L" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line.attr('stroke', '#0000FF');    
+    var text = this.paper.text(this.plot_x + Math.floor(this.line_length*position), this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 25, 0.25);
+    text.attr("stroke", '#0000FF');
+    text.attr("font-family", "Arial"); 
+    var position = this.get_position_on_axis(0.15);   
+    line = this.paper.path("M" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 5) + "L" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line.attr('stroke', '#0000FF');
+    var text = this.paper.text(this.plot_x + Math.floor(this.line_length*position), this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 15, 0.15);
+    text.attr("stroke", '#0000FF');
+    text.attr("font-family", "Arial"); 
+    var position = this.get_position_on_axis(0.1);   
+    line = this.paper.path("M" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 15) + "L" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line.attr('stroke', '#0000FF');
+    var text = this.paper.text(this.plot_x + Math.floor(this.line_length*position), this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 25, 0.1);
+    text.attr("stroke", '#0000FF');
+    text.attr("font-family", "Arial"); 
+    var position = this.get_position_on_axis(0.05);
+    line = this.paper.path("M" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 5) + "L" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line.attr('stroke', '#0000FF');
+    var text = this.paper.text(this.plot_x + Math.floor(this.line_length*position), this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 15, 0.05);
+    text.attr("stroke", '#0000FF');
+    text.attr("font-family", "Arial"); 
+    var position = this.get_position_on_axis(0.025);
+    line = this.paper.path("M" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 15) + "L" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line.attr('stroke', '#0000FF');
+    var text = this.paper.text(this.plot_x + Math.floor(this.line_length*position), this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 25, 0.025);
+    text.attr("stroke", '#0000FF');
+    text.attr("font-family", "Arial"); 
+    var position = this.get_position_on_axis(0.01);
+    line = this.paper.path("M" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 5) + "L" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line.attr('stroke', '#0000FF');
+    var text = this.paper.text(this.plot_x + Math.floor(this.line_length*position), this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 15, 0.01);
+    text.attr("stroke", '#0000FF');
+    text.attr("font-family", "Arial"); 
+    var position = this.get_position_on_axis(0.005);
+    line = this.paper.path("M" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 15) + "L" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line.attr('stroke', '#0000FF');
+    var text = this.paper.text(this.plot_x + Math.floor(this.line_length*position), this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 25, 0.005);
+    text.attr("stroke", '#0000FF');
+    text.attr("font-family", "Arial"); 
+    var position = this.get_position_on_axis(0.001);
+    line = this.paper.path("M" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 5) + "L" + (this.plot_x + Math.floor(this.line_length*position)) + " " + (this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y));
+    line.attr('stroke', '#0000FF');
+    var text = this.paper.text(this.plot_x + Math.floor(this.line_length*position), this.plot_y + 5*this.distance_btwn_lines + this.axis_offset_y - 15, 0.001);
+    text.attr("stroke", '#0000FF');
+    text.attr("font-family", "Arial");    
+}
+module_main.get_position_on_axis = function(number){
+    return -Math.log(number)*0.25/Math.log(10);    
+}
+
+$(window).load(function(){
+    module_main.initialize();
+});
+
+
+
+}
+/*
+     FILE ARCHIVED ON 18:51:01 Jul 21, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 19:15:48 Nov 02, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.511
+  exclusion.robots: 0.018
+  exclusion.robots.policy: 0.009
+  esindex: 0.011
+  cdx.remote: 35.533
+  LoadShardBlock: 79.632 (3)
+  PetaboxLoader3.datanode: 108.337 (4)
+  load_resource: 194.86
+  PetaboxLoader3.resolve: 122.731
+*/

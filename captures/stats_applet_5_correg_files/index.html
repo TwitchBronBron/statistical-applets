@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- saved from url=(0112)https://web.archive.org/web/20161025094620/http://digitalfirst.bfwpub.com/stats_applet/asset/5_correg/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./bundle-playback.js.download" charset="utf-8"></script>
+<script type="text/javascript" src="./wombat.js.download" charset="utf-8"></script>
+<script>window.RufflePlayer=window.RufflePlayer||{};window.RufflePlayer.config={"autoplay":"on","unmuteOverlay":"hidden","showSwfDownload":true};</script>
+<script type="text/javascript" src="./ruffle.js.download"></script>
+<script type="text/javascript">
+    __wm.init("https://web.archive.org/web");
+  __wm.wombat("http://digitalfirst.bfwpub.com:80/stats_applet/asset/5_correg/index.html","20161025094620","https://web.archive.org/","web","https://web-static.archive.org/_static/",
+	      "1477388780");
+</script>
+<link rel="stylesheet" type="text/css" href="./banner-styles.css">
+<link rel="stylesheet" type="text/css" href="./iconochive.css">
+<!-- End Wayback Rewrite JS Include -->
+
+        <title>Correlation and Regression</title>
+        
+        <link rel="stylesheet" href="./style.css" type="text/css" media="screen">
+        <script src="./jquery.min.js.download"></script>
+        <script src="./raphael-min.js.download"></script>
+        <script src="./math_script.js.download"></script>
+        <script src="./main_script.js.download"></script>
+    </head>
+    <body>
+        <div id="fone">
+            <div id="left_panel">
+                <div id="info"><svg height="290" version="1.1" width="220" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font: 14px Arial;" x="20" y="20" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="14px" font-family="Arial"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">Points:</tspan></text><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font: bold 30px Arial;" x="20" y="50" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="30px" font-weight="bold" font-family="Arial"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="10.25">2</tspan></text><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font: 14px Arial;" x="20" y="95" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="14px" font-family="Arial"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="4.75">Correlation coefficient:</tspan></text><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font: bold 30px Arial;" x="20" y="125" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#292929" font-size="30px" font-weight="bold" font-family="Arial"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="10.25">-1.0000</tspan></text></svg> </div>
+                <div id="enter">
+                    <form action="https://web.archive.org/web/20161025094620/http://digitalfirst.bfwpub.com/stats_applet/asset/5_correg/index.html" method="get" id="enter_form">
+                        <div id="settings">
+                        	<div class="setting_wrapper">
+								<div class="input_box">
+									<input name="click_action" id="add_points" value="add_points" type="radio" checked="">
+								</div>    
+								<div class="label_box">
+									<label for="add_points">Add data points</label>
+								</div>
+							</div>
+
+                        	<div class="setting_wrapper">
+								<div class="input_box">
+									<input name="click_action" id="draw_line" value="draw_line" type="radio">
+								</div>    
+								<div class="label_box">
+									<label for="draw_line">Draw your own line</label>
+								</div>
+							</div>
+
+                        	<div id="user_line_stats" class="setting_wrapper" style="visibility:hidden; margin-bottom:20px; margin-left:45px; color:#000; font-size:14px">
+								Relative SS: <span id="user_line_ss" style="font-weight:bold">—</span> &nbsp; <a href="javascript:user_line_ss_help()"><b>[?]</b></a>
+							</div>							
+
+                        	<div class="setting_wrapper">
+								<div class="input_box">
+									<input name="least_squares_line" id="lsLine" type="checkbox">
+								</div>    
+								<div class="label_box">
+									<label for="lsLine">Show least-squares line</label>
+								</div>
+							</div>
+                        	<div class="setting_wrapper">
+								<div class="input_box">
+									<input name="mX_mY_line" id="xyLine" type="checkbox">
+								</div>
+								<div class="label_box">
+									<label for="xyLine">Show mean X &amp; Y lines</label>
+								</div>
+							</div>
+                        	<div class="setting_wrapper">
+								<div class="input_box">
+									<input name="residuals_line" id="rLine" type="checkbox">
+								</div>
+								<div class="label_box">
+									<label for="rLine">Show residuals</label>
+								</div>
+							</div>
+                        </div>
+                        <p class="inputForm">
+                            <a href="https://web.archive.org/web/20161025094620/http://digitalfirst.bfwpub.com/stats_applet/asset/5_correg/index.html#" id="c_button">CLEAR</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div id="notepad"><svg height="525" version="1.1" width="525" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;"><rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); display: none;" x="40" y="40" width="445" height="50" r="5" rx="5" ry="5" fill="#ebebed" stroke="#ebebed"></rect><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 0; stroke-opacity: 0;" x="2" y="2" width="521" height="521" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000" fill-opacity="0" stroke-opacity="0"></rect><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); display: none;" fill="none" stroke="#c5c5c5" d="M0,0L0,0" stroke-width="2"></path><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); display: none;" fill="none" stroke="#c5c5c5" d="M0,0L0,0" stroke-width="2"></path><path style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); display: none;" fill="none" stroke="#3b60ff" d="M0,0L0,0" stroke-width="2"></path><text style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font: 18px Arial; display: none;" x="262.5" y="65" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#3d3d3d" font-size="18px" font-family="Arial"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6.25">Add at least two points to this graphing area</tspan></text><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" cx="175" cy="150" r="6" fill="#e13f3f" stroke="#e13f3f"></circle><circle style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" cx="285" cy="307" r="6" fill="#e13f3f" stroke="#e13f3f"></circle></svg> 
+            </div>
+        </div>
+    
+
+
+</body></html>

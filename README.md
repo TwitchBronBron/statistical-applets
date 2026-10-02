@@ -1,0 +1,42 @@
+# Statistical Applets (restored)
+
+Self-hosted restoration of the BFW / W. H. Freeman "Statistical Applets" that used to live at
+`digitalfirst.bfwpub.com/stats_applet/`. They are HTML5 (jQuery + jQuery UI + Raphaël SVG); no Flash or Java.
+
+```
+npm start        # http://localhost:8081/
+```
+
+`public/` is a static site with no build step, so any static host can serve it as-is.
+
+## Publishing (GitHub Pages)
+
+`.github/workflows/pages.yml` publishes `public/` on every push to `main`. One-time setup: in the repo's
+**Settings → Pages**, set **Source** to **GitHub Actions**. All site paths are relative, so it works at
+`https://<user>.github.io/<repo>/`. To test that locally, run `BASE=/statistical-applets npm start` and open
+`http://localhost:8081/statistical-applets/` (in Git Bash, prefix the command with `MSYS_NO_PATHCONV=1`).
+
+## Layout
+
+- `captures/` holds the original "Save Page As" captures of the Wayback pages. They're kept for reference only:
+  they aren't published, and they contain Wayback's own rewritten copies of the files.
+- `public/stats_applet/` mirrors the original site tree: wrapper pages (`stats_applet_*.html`), shared
+  `css/` and `js/` (the BFW "digfir" quiz player), and `asset/<applet>/` (the interactive applet each wrapper iframes).
+- `public/vendor/mathjax/` is a trimmed MathJax 2.7.9, replacing the retired `cdn.mathjax.org`.
+- `tools/server.mjs` is the zero-dependency dev server behind `npm start` (`PORT` and `BASE` env vars are optional).
+- `tools/fetch-wayback.mjs` downloads original files from the Wayback Machine in raw `id_` mode (no toolbar or
+  URL rewriting), and follows relative `src`/`href`/`url()` references:
+  `npm run fetch -- stats_applet/stats_applet_1_anova.html`
+
+## Local patches
+
+Changes to the archived files are marked with `LOCAL PATCH` comments where the file type allows it.
+
+- `js/stats_applet.js`: loads the vendored MathJax with a real `<script>` tag; guards `MathJax.Hub.Queue`;
+  shows the "Quiz Me" button by default (it used to need an LMS or `?quiz_me=true`; `?quiz_me=false` now hides it).
+- Wrapper pages: removed the dead `admin.brightcove.com` script tag (used only for video figures).
+- `asset/common/css/ui-lightness/images/`: stock jQuery UI 1.8.20 theme images missing from the archive,
+  taken from `code.jquery.com`.
+
+The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
+scored client-side in the browser.

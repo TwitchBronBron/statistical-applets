@@ -1,0 +1,85 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+function receive_applet_action(action) {
+	var a = player.activity;
+	
+	if (a.quiz_completed) {
+		return;
+	}
+
+	// The hopper value for red needs to be filled in as the correct answer 
+	// for question 1, unless we're already past question 1
+	if (a.current_question == null || a.current_question == 1) {
+		var red = (action.hopper_frequencies.red * 100).toFixed(1) + "";
+		var q = a.questions[1].queries[0];
+		q.answers[0] = q.correct_answer = red;
+	} else {
+		var q = a.questions[a.current_question].queries[0];
+		if (a.current_question == 3) {
+			if (action.n != 20) {
+				alert("You must draw bags of 20 candies for this question.")
+			} else {
+				if (window.applet_action_tests_run_3 == null) {
+					window.applet_action_tests_run_3 = 1;
+				} else {
+					++window.applet_action_tests_run_3;
+				}
+			}
+			if (window.applet_action_tests_run_3 >= 5) {
+				q.setUserAnswer("complete");
+				$("#query_answer_" + q.query_index).val("complete");
+				a.submit_question(a.current_question);
+				setTimeout("$(window).scrollTo({top:2000, left:0}, {duration:500});", 1500);
+			}
+	
+		} else if (a.current_question == 4) {
+			if (action.n != 200) {
+				alert("You must draw bags of 200 candies for this question.")
+			} else {
+				if (window.applet_action_tests_run_4 == null) {
+					window.applet_action_tests_run_4 = 1;
+				} else {
+					++window.applet_action_tests_run_4;
+				}
+			}
+			if (window.applet_action_tests_run_4 >= 5) {
+				q.setUserAnswer("complete");
+				$("#query_answer_" + q.query_index).val("complete");
+				a.submit_question(a.current_question);
+				setTimeout("$(window).scrollTo({top:2000, left:0}, {duration:500});", 1500);
+			}
+		}
+	}
+}
+
+}
+/*
+     FILE ARCHIVED ON 20:06:21 May 01, 2021 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 19:15:53 Nov 02, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.943
+  exclusion.robots: 0.031
+  exclusion.robots.policy: 0.015
+  esindex: 0.014
+  cdx.remote: 16.828
+  LoadShardBlock: 87.562 (3)
+  PetaboxLoader3.datanode: 109.33 (4)
+  load_resource: 83.01
+  PetaboxLoader3.resolve: 54.711
+*/

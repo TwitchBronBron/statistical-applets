@@ -1,0 +1,553 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+$(document).ready(function() {
+    module_main.initialize();
+});
+module_main = new function(){
+	// # of samples to show on the screen
+	this.samples_showing = 25;
+	
+    this.plot_x = 50;
+    this.plot_width = 400;
+    this.plot_y = 40;
+    this.plot_height = 500;
+    //Coordinates and parameters for place where lines are drawn
+    this.image_x = this.plot_x;
+    this.image_y = this.plot_y + 20;
+    this.image_height = this.plot_height - 15;
+    this.image_width = this.plot_width;
+
+    this.line_spacing = this.image_height / this.samples_showing;
+	
+	this.min_p = 0.01;
+	this.max_p = 0.99;
+	this.p = 0.5;
+	
+    //Parameters for gaussian
+    this.sigma = 1;
+    this.mu = 0;
+    
+    this.animation_time = 250;
+    
+    this.default_conf_lvl = 95;
+    this.conf_lvl = this.default_conf_lvl;
+    
+    this.min_sample_size = 5;
+    this.max_sample_size = 250;
+    this.default_sample_size = 20;
+    
+    this.samples = new Array();
+
+    this.sample_size = this.default_sample_size;
+    
+    this.expanded_line = null;
+    this.expanded_line_label = null;
+
+    var Applet_Communication = function (){
+		return {
+			report_action : function report_action(action) {
+		    	try {
+					var f = null;
+					if (!(window.receive_applet_action === undefined)){
+						f = window.receive_applet_action;
+					} else if(window.parent) {
+						if(!(window.parent.receive_applet_action === undefined)) {
+							f = window.parent.receive_applet_action;
+						}
+					} else if(window.opener) {
+						if(!(window.opener.receive_applet_action === undefined)) {
+							f = window.opener.receive_applet_action;
+						}
+					}
+	
+					if (f) {
+						f(action);
+					}
+				} catch(e) {}
+			}
+		}
+    };
+       
+    //Draw gaussian and green line
+    this.draw_axis = function(){
+    	// one axis on top
+		var path = "M" + this.plot_x + " " + this.plot_y
+			+ "L" + (this.plot_x + this.plot_width) + " " + this.plot_y
+			;
+		var line = this.paper.path(path);
+		line.attr("stroke", "#666666");
+		
+		// and one on bottom
+		var path = "M" + this.plot_x + " " + (this.plot_y + this.plot_height)
+			+ "L" + (this.plot_x + this.plot_width) + " " + (this.plot_y + this.plot_height)
+			;
+		var line = this.paper.path(path);
+		line.attr("stroke", "#666666");
+		
+		// now tick marks and labels
+		var ttop = this.plot_y - 5;
+		var tbottom = this.plot_y + 5;
+		var btop = (this.plot_y + this.plot_height) - 5;
+		var bbottom = (this.plot_y + this.plot_height) + 5;
+		for (var i = 0; i <= 10; ++i) {
+			var x = (this.plot_x + (this.plot_width * i / 10));
+			var line = this.paper.path("M" + x + " " + tbottom + "L" + x + " " + btop)
+			line.attr("stroke", "#cccccc");
+			
+			line = this.paper.path("M" + x + " " + ttop + "L" + x + " " + tbottom)
+			line.attr("stroke", "#666666");
+			
+			line = this.paper.path("M" + x + " " + btop + "L" + x + " " + bbottom)
+			line.attr("stroke", "#666666");
+			
+			var labeltext = "." + i + "0";
+			if (i == 10) labeltext = "1.0";
+			
+			var label = this.paper.text(x, ttop-10, labeltext);
+			label.attr("font-family", "Verdana");
+			label.attr("font-size", "12px");
+
+			label = this.paper.text(x, bbottom+10, labeltext);
+			label.attr("font-family", "Verdana");
+			label.attr("font-size", "12px");
+		}
+		
+		// green line for population proportion
+		var top = this.plot_y;
+		var bottom = this.plot_y + this.plot_height;
+		var x = this.plot_x + this.p * this.plot_width;
+        var green_line = this.paper.path("M" + x + " " + top + "L" + x + " " + bottom);
+        green_line.attr("stroke", "#00CC33");        
+    }
+    
+    this.get_ci = function(sample) {
+        var z;
+        switch (parseInt(this.conf_lvl)){
+            case 80:
+                z = 1.282;
+                break
+            case 95:
+                z = 1.96;
+                break
+            case 99:
+                z = 2.576;
+                break
+            default:	// (90)
+                z = 1.645;
+        }
+        sample.margin_err = z * sample.se;
+        sample.upper_limit = sample.p + sample.margin_err;
+        sample.lower_limit = sample.p - sample.margin_err;
+        
+        if (sample.upper_limit > 1) {
+        	sample.upper_limit = 1;
+        }
+        if (sample.lower_limit < 0) {
+        	sample.lower_limit = 0;
+        }
+        
+		if (sample.upper_limit >= this.p && sample.lower_limit <= this.p) {
+			sample.hit = 1;
+		} else {
+			sample.hit = 0;
+		}
+    }
+        
+    //Draw interval. If redraw == false we take into account increasing hit number.
+    //If redraw = true it means that this function is used for redrawing existing intervals
+    this.draw_interval = function(sample, y) {
+        var arr = new Array();
+
+        var left_x = this.image_x + sample.lower_limit * this.plot_width;
+        var right_x = this.image_x + sample.upper_limit * this.plot_width;
+
+        if (left_x < this.image_x)
+            left_x = this.image_x;
+        if (right_x < this.image_x)
+            return new Array();
+        if (right_x > this.width - this.image_x)
+            right_x = this.width - this.image_x;
+        if (left_x > this.width - this.image_x)
+            return new Array();
+		
+		// if y is not sent in...
+		if (y == null) {
+			// if the number of samples is < samples_showing, set y based on the number of samples
+			if (this.total < this.samples_showing) {
+				y = (this.image_y + this.total * this.line_spacing);
+				
+			// otherwise it goes at the bottom; others should have already been moved up
+			} else {
+				y = (this.image_y + (this.samples_showing-1) * this.line_spacing);
+			}
+		}
+            
+        var line = this.paper.path("M" + left_x + " " + y + "L" + right_x + " " + y);
+        var colour = "#555555";
+        line.attr("stroke", colour);
+        line.attr("stroke-width", 2);                     
+        if (!(sample.upper_limit >= this.p && sample.lower_limit <= this.p)){
+            colour = "#e13f3f";
+            line.attr("stroke", colour);                     
+        }
+
+        arr[0] = line;
+        var point_x = this.image_x + sample.p * this.plot_width;
+        if (point_x >= this.image_x && point_x <= this.image_x + this.image_width){
+            var point = this.paper.circle(point_x, y, 3);
+            point.attr("fill", colour);  
+            point.attr("stroke", colour); 
+            point.data("y", y);
+            point.data("left_x", left_x);
+            point.data("right_x", right_x);
+            point.data("point_x", point_x);
+            point.data("line_color", colour);            
+			// point.attr("title", "p = " + sample.p + " +/- ");
+            
+            arr[1] = point;
+        }
+        return arr;
+    }
+    
+    this.remove_line = function(so) {
+		for (key in so.draw_object){
+			so.draw_object[key].remove();                    
+		}
+		so.draw_object = null;
+    }
+
+    this.hide_expanded_line = function() {
+    	if (this.expanded_line != null) {
+			this.expanded_line_label.remove();                
+			this.expanded_line = null;
+		}
+    }
+    
+    // this function can receive an event or an index
+    this.show_ci_stats = function(arg) {
+    	var index = null;
+    	if (typeof(arg) == "object") {
+			// we only do something if the click is within the CI area
+			if (arg.pageY >= this.notepad_y + this.image_y - 4) {
+				index = Math.floor((arg.pageY - (this.notepad_y + this.image_y) + 4)/this.line_spacing);
+				
+				// index can't be greater than or equal to this.samples_showing
+				if (index >= this.samples_showing) {
+					index = this.samples_showing - 1;
+				}
+	
+				// if index is > the number of lines showing, do the last line
+				if (index > module_main.total) {
+					index = module_main.total -1 ;
+				}
+    		} else {
+    			return;
+    		}
+    		
+    		// if we've taken more than samples_showing samples, we have to adjust the index
+    		if (this.total > this.samples_showing) {
+    			index = this.total - (this.samples_showing - index);
+    		}
+    		
+    	} else {
+    		index = arg;
+    	}
+    	
+		// if we didn't just re-click on the line that was last expanded, expand the clicked line
+		if (this.expanded_line != index) {
+			// remove any item that was expanded previously
+			// (have to do this inside the conditional because hide_expanded_line sets this.expanded_line to null)
+			this.hide_expanded_line();
+
+			var s = this.samples[index];
+			
+			var label_text = s.p.toFixed(3);
+			
+			var me = Math.round(s.margin_err * 100);
+			if (me < 10) {
+				me = ".0" + me;
+			} else {
+				me = "." + me;
+			}
+			
+			label_text += " ±" + me;
+			
+			label_text = "CI: " + label_text;
+
+			var x = this.plot_x + s.p * this.plot_width;
+			var y = s.draw_object[1].data("y") - 8;
+			
+			var label = this.paper.text(x, y, label_text);
+			label.attr("font-family", "Verdana");
+			label.attr("font-size", "9px");
+			label.attr("font-weight", "bold");
+			this.expanded_line_label = label;
+			this.expanded_line = index;
+		
+		// else we did just re-click, so just hide previously-expanded points
+		} else {
+			this.hide_expanded_line();
+    	}
+    }
+    
+    //Generate practical value of population proportion
+    this.generate_samples = function(number_of_samples) {
+    	// hide expanded line if showing
+		this.hide_expanded_line();
+		
+    	// clear out all existing ci's if number_of_samples > 1
+    	if (number_of_samples > 1) {
+    		for (var i = 0; i < this.samples.length; ++i) {
+    			var so = this.samples[i];
+				this.remove_line(so);
+    		}
+    	}
+    	
+    	var this_y = null;
+        for (var i = 0; i < number_of_samples; i++) {
+        	var s = new Object();
+        	s.p = get_population_proportion(this.sample_size, this.p);
+        	s.se = Math.sqrt(s.p*(1 - s.p)/this.sample_size);
+            
+            // if number_of_samples is 1, ...
+            if (number_of_samples == 1) {
+				// if we've already shown more than this.samples_showing lines, push previous ones up
+				if (this.total >= this.samples_showing) {
+					for (var j = 1; j < this.samples_showing; ++j) {
+						var so = this.samples[this.total - j];
+						var y = so.draw_object[1].data("y") - this.line_spacing;
+						this.remove_line(so);
+						so.draw_object = this.draw_interval(so, y);
+					}
+					
+					// now remove the next-previous one altogether
+					var so = this.samples[this.total - j];
+					this.remove_line(so);
+				}
+			
+			// else determine where this one should be
+        	} else {
+	    		this_y = this.image_y + i * this.line_spacing;
+        	}
+        	
+			// draw new interval
+			this.get_ci(s);
+            s.draw_object = this.draw_interval(s, this_y);
+			
+			this.samples.push(s);
+
+            this.total++;
+            this.hit += s.hit;
+
+			// if we added one, show the points for it
+            if (number_of_samples == 1) {
+	            this.show_ci_stats(this.total-1);
+	        }
+        }
+		// show stats
+		this.show_stats();
+    }
+    
+    this.show_stats = function() {
+        $("#hit").val(this.hit);
+        $("#total").val(this.total);
+        var p = "–";
+        if (this.total > 0) {
+        	p = Math.round(1000*this.hit/this.total)/1000;
+        }
+        $("#percent").val(p);
+
+        Applet_Communication().report_action({
+        	p: this.p,
+        	alpha: this.conf_lvl,
+        	sample_size: this.sample_size,
+            samples: this.samples,
+            hit: this.hit,
+            total: this.total
+        });
+    }
+    
+    // Redraw the ci's and recalculate the stats after changing the confidence level
+    this.redraw_objects = function() {
+    	this.hit = 0;
+        for (var key = 0; key < this.samples.length; key++) {
+        	var so = this.samples[key];
+        	// recalculate ci
+        	this.get_ci(so);
+        	this.hit += so.hit;
+        	
+        	// redraw if necessary
+			if (so.draw_object != null) {
+				var y = so.draw_object[1].data("y");
+				this.remove_line(so);
+				so.draw_object = this.draw_interval(so, y);
+			}
+        }
+		// show stats
+		this.show_stats();
+    }
+    
+    //Set default value
+    this.set_defaults = function(){
+	    this.samples = new Array();
+        this.hit = 0;
+        this.total = 0;
+        this.mu = this.p;
+        this.coeff_x = this.plot_width;
+    }
+    
+    this.reset = function() {
+		module_main.paper.clear();
+		module_main.set_defaults();           
+		module_main.draw_axis();
+		this.show_stats();
+    }
+    
+    //Define callbacks and paper object
+    this.initialize = function(){
+        this.width = $("#notepad").width();
+        this.height = $("#notepad").height();
+        this.paper = Raphael(document.getElementById("notepad"), this.width, this.height);
+        var offset = $("#notepad").offset();
+        this.notepad_x = offset.left;
+        this.notepad_y = offset.top + 3; 
+        this.expansion = false;
+
+        this.set_defaults();
+        this.draw_axis();
+
+        $(function() {
+            $( "#p_slider" ).slider({
+                range: "min",
+                value: module_main.p*100,
+                min: module_main.min_p*100,
+                max: module_main.max_p*100,
+                slide: function( event, ui ) {
+                    $( "#p" ).val( ui.value / 100 );
+                    module_main.p = ui.value / 100;
+		            // module_main.update_graph();
+                },
+                change: function(event, ui) {
+                	module_main.reset();
+                }
+            });
+            $( "#p" ).val($( "#p_slider" ).slider( "value" ) / 100 );
+            module_main.p = $( "#p_slider" ).slider( "value" ) / 100;
+        });
+
+        $(function() {
+            $( "#conf_lvl_slider" ).slider({
+                range: "min",
+                value: 3,
+                min: 1,
+                max: 4,
+                slide: function( event, ui ) {
+                    if(ui.value == 1)
+                        $( "#conf_lvl" ).val(80);
+                    if(ui.value == 2)
+                        $( "#conf_lvl" ).val(90);
+                    if(ui.value == 3)
+                        $( "#conf_lvl" ).val(95);
+                    if(ui.value == 4)
+                        $( "#conf_lvl" ).val(99);
+                    module_main.conf_lvl = $( "#conf_lvl" ).val();
+                    module_main.redraw_objects();                    
+                }                
+            });
+            $("#conf_lvl").val(module_main.default_conf_lvl);
+        });
+        
+        $(function() {
+            $( "#sample_size_slider" ).slider({
+                range: "min",
+                value: 4,
+                min: 1,
+                max: 12,
+                slide: function( event, ui ) {
+                    if(ui.value == 1) $( "#sample_size" ).val(5);
+                    if(ui.value == 2) $( "#sample_size" ).val(10);
+                    if(ui.value == 3) $( "#sample_size" ).val(20);
+                    if(ui.value == 4) $( "#sample_size" ).val(30);
+                    if(ui.value == 5) $( "#sample_size" ).val(50);
+                    if(ui.value == 6) $( "#sample_size" ).val(75);
+                    if(ui.value == 7) $( "#sample_size" ).val(100);
+                    if(ui.value == 8) $( "#sample_size" ).val(150);
+                    if(ui.value == 9) $( "#sample_size" ).val(200);
+                    if(ui.value == 10) $( "#sample_size" ).val(250);
+                    if(ui.value == 11) $( "#sample_size" ).val(500);
+                    if(ui.value == 12) $( "#sample_size" ).val(1000);
+                    module_main.sample_size = $( "#sample_size" ).val();
+                },
+                change: function(event, ui) {
+                	module_main.reset();
+                }
+            });
+            $("#sample_size").val(module_main.default_sample_size);
+        });
+        
+        this.show_stats();
+
+        $("#sample_1").click(function(event){            
+            if(module_main.total < 9900) {
+				if (module_main.expansion == false) {
+						module_main.generate_samples(1);    
+				} else {
+					module_main.narrowing_animation(event);
+					setTimeout('module_main.generate_samples(1)', this.animation_time);
+				}
+			}
+        });
+
+        $("#sample_more").click(function(event){            
+            if(module_main.total < 9900) {
+                if (module_main.expansion == false) {
+                    module_main.generate_samples(module_main.samples_showing);    
+            	} else {
+					module_main.narrowing_animation(event);
+					setTimeout('module_main.generate_samples(module_main.samples_showing)', this.animation_time);
+				}
+            }
+        });
+
+        $("#reset").click(function(){
+        	module_main.reset();
+        });
+
+        $("#notepad").click(function(event) {
+            module_main.show_ci_stats(event);
+        });
+    }    
+}
+
+
+}
+/*
+     FILE ARCHIVED ON 16:37:58 Feb 09, 2023 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 19:15:57 Nov 02, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.497
+  exclusion.robots: 0.02
+  exclusion.robots.policy: 0.009
+  esindex: 0.011
+  cdx.remote: 14.63
+  LoadShardBlock: 69.301 (3)
+  PetaboxLoader3.datanode: 77.85 (4)
+  load_resource: 99.915
+  PetaboxLoader3.resolve: 80.633
+*/

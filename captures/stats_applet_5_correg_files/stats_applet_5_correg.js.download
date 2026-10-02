@@ -1,0 +1,53 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+function receive_applet_action(action) {
+	var a = player.activity;
+	
+	if (a.quiz_completed || a.current_question != 1) {
+		return;
+	}
+
+	var correct = false;
+	if (a.current_question == 1) {
+		correct = (action.n >= 8 && action.r > 0.5 && action.r < 0.7)
+	}
+	
+	if (correct) {
+		var q = a.questions[a.current_question].queries[0];
+		q.setUserAnswer("complete");
+		$("#query_answer_" + q.query_index).val("complete");
+		a.submit_question(a.current_question);
+	}
+}
+
+}
+/*
+     FILE ARCHIVED ON 12:01:55 Jun 06, 2019 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 19:15:35 Nov 02, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 1.019
+  exclusion.robots: 0.021
+  exclusion.robots.policy: 0.009
+  esindex: 0.014
+  cdx.remote: 13.72
+  LoadShardBlock: 53.002 (3)
+  PetaboxLoader3.datanode: 79.956 (4)
+  load_resource: 94.811
+  PetaboxLoader3.resolve: 40.162
+*/

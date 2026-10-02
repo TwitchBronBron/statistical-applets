@@ -1,0 +1,307 @@
+/* base font size and color -- some fonts will be scaled from here */
+body, #manuscript, .ui-widget, .ui-widget-content {
+	font-size:14px;
+	color:#222;
+}
+
+/* link color */
+a, a:hover, a:visited, a:active, .ui-widget-content a {
+	color: #003;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+/* font family */
+body, #manuscript, .ui-widget, .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { 
+	font-family: Arial, Verdana, Arial, sans-serif; 
+}
+
+/* border color for the entire activity, the tab banner, tabs, and buttons */
+/* This should be dark */
+.ui-widget-content, .ui-widget-header, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+	border: 1px solid #009;
+}
+
+/* text color of buttons and tabs */
+/* Suggestion: use the same color as the border */
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited, .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-state-hover a, .ui-state-hover a:hover, .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+	color:#009;
+}
+
+[data-block_type=pHead1] {
+	color:#6d6e70;
+	font-weight:bold; 
+        font-family: 'DinLightAlternate';
+        font-size: 22px;
+}
+
+/* background color of normal state for buttons and inactive tabs */
+/* Suggestion: use a very light version of the border */
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	background-color:#bdbdff;
+}
+
+/* background color of hover state for buttons and tabs */
+/* Suggestion: use something darker than the normal state, but still light */
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+	background:#a3a9ff;
+}
+
+/* background color of active state for buttons and tabs */
+/* Suggestion: use white */
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+	background:#fff;
+}
+
+/* slide banner */
+/* Suggestion: Use border color and hover state color */
+.ui-widget-header, #top_banner {
+	border: 1px solid #009;
+	background-color:#099;	/* if the gradient below doesn't work */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a3a9ff', endColorstr='#6b6bff'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#a3a9ff), to(#6b6bff)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #a3a9ff,  #6b6bff); /* for firefox 3.6+ */ 
+}
+
+/* end of jquery-ui overwrites */
+
+
+/* Other commonly-changed colors/styles */
+[data-type=question] {
+    border-left:5px solid #009;
+}
+
+[data-type=question] h3 {
+	color:#009;
+}
+
+.question_feedback {
+	border-top:2px solid #009; 
+}
+
+.question_feedback_head {
+	color:#009;
+}
+
+/* Give body a background-color of #ccc and contents a background-color of #fff */
+body {
+	background-color:#ccc;
+}
+
+[data-type=chapter] {
+	background-color:#fff;
+}
+
+[data-block_type=activity_report] {
+    border: 1px solid #009;
+	background-color:#bdbdff;
+}
+
+/* End of commonly-changed styles */
+
+#manuscript {
+	margin:0px;
+}
+
+[data-type=chapter] {
+	background:#fff;
+	max-width:850px;
+	min-height:550px;
+	/*border:1px solid #009;*/
+	font-family:Arial, sans-serif;
+	font-size:16px;
+	margin-top:10px;
+	margin-bottom:10px;
+	margin-left:auto;
+	margin-right:auto;
+	padding:0;
+}
+
+[data-type=section] {
+	margin-left:0px;
+	margin-top:15px;
+	padding:0 0 10px 30px !important;
+	font-size:14px;
+	max-width:550px;
+	width:auto;
+}
+
+[data-block_type=activity_title] {
+	font-size:2em;
+	font-weight:bold;
+}
+
+[data-block_type=author] {
+	font-size:1.5em;
+}
+
+[data-block_type=copyright] {
+	margin-top:3em;
+}
+
+/* Hide chapter and section titles */
+h1, h2 {
+	display:none;
+}
+
+#top_banner {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+    margin:2px;
+	color:#fff;
+	height:60px;
+}
+
+#banner_thumbnail {
+	float:left;
+	height:48px;
+	margin:5px 8px 5px 10px;
+	border:1px solid #333;
+}
+
+#banner_activity_type {
+	font-size:16px;
+	font-weight:bold;
+	margin:5px 0 0 10px;
+}
+
+#banner_activity_title {
+	font-size:20px;
+	font-weight:bold;
+	margin:5px 0 0 10px;
+}
+
+#toolbar {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+	background-color:#009;
+	color:#fff;
+	min-height:35px;
+	margin:0 2px;
+}
+
+#slide_title {
+	font-size:16px;
+	font-weight:bold;
+	padding-top:8px;
+	padding-left:10px;
+	padding-bottom:5px;
+}
+
+#controls {
+	float:right;
+	margin-top:5px;
+	margin-right:10px;
+}
+
+#controls table {
+	border-collapse:collapse;
+}
+
+#controls td {
+	padding-left:5px;
+	border-width:0px;
+}
+
+.toolbar_button {
+	font-size:11px !important;
+}
+
+.prev_next_buttons {
+	width:92px;
+}
+
+/*
+#slide_number {
+	background-color:#fff;
+}
+*/
+
+[data-type=figure][data-layout-align=right] {
+	margin-right:-240px;
+}
+
+[data-block_type="click_box"] {
+	background-color:inherit;
+	border-width:0px;
+	padding:0px;
+	clear:left;
+}
+
+[data-onclick_trigger=true] {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+	border:#009 2px solid;
+	background-color:#bdbdff;
+	color:#000;
+	font-weight:bold;
+	padding:5px;
+	float:left;
+	margin-bottom:10px;
+}
+
+[data-onclick=show] {
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+	border:#009 2px solid;
+	background-color:#009;
+	color:#fff;
+	padding:10px 5px 5px 5px;
+	clear:left;
+	margin-top:-20px;
+}
+
+[data-type=question] {
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+[data-block_type=activity_report] {
+	display:none;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+	width:450px;
+	font-size:14px;
+	padding:5px;
+	margin:15px 0 20px 0px;
+}
+
+#total_score_message {
+	margin-top:5px;
+}
+
+#grade_submitted_message {
+	display:none;
+	margin-top:5px;
+}
+
+#toc_head {
+	padding-bottom:10px;
+}
+
+.toc_section_title {
+	margin-top:-1px;
+	border:1px solid black;
+	padding:3px 5px;
+	cursor:pointer;
+	font-size: 12px;
+}
+
+.toc_section_not_available {
+	background-color:#ccc;
+}
+
+#step_button {
+	margin-left:30px;
+	margin-bottom:20px;
+}

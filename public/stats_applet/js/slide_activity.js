@@ -1,0 +1,289 @@
+var Activity_manuscript_type = Activity.extend({
+	get_question_number: function(q) {
+		// always use q.index here
+		return q.index;
+	},
+
+	submit_question: function(question_index) {
+		this._super(question_index);
+		
+		var s = player.get_current_section();
+		
+		// if all questions are answered and all sequences are complete
+		// (these are set by _super)
+		if (s.all_questions_answered && s.all_question_sequences_completed) {
+			// if we're not on the final step
+			if (s.index < player.sections.length - 1) {
+				// then show the buttona
+				UI_Elements.toggle_button("step_button", true);
+			
+			// otherwise we're done!
+			} else {
+				player.show_completion_message();
+			}
+		}
+	},
+
+	show_grade_saved_message: function() {
+		// if activity is complete, 
+		// show the completion div (this overrides the default function from player.js,
+		// which shows an alert)
+		if (player.activity.answered_all_queries) {
+			player.user_has_received_completion_alert = true;
+			$("#grade_submitted_message").show();
+		}
+	}
+
+});
+
+var Player_manuscript_type = Player.extend({
+	activity_title: null,
+	activity_thumbnail_src: null,
+
+	// metadata
+	md: new Object(),
+	
+	grade_save_complete: false,
+
+	show_section_animate: function(section_to_show, direction) {
+		// make sure modal window is closed
+		$("#toc_dialog").dialog("close");
+		
+		// slide in using parent function
+		//this._super(section_to_show, direction);
+
+		// hide currently showing section
+		if (this.section_currently_showing != null) {
+			this.get_current_section_jq().hide();
+		}
+		this.section_currently_showing = section_to_show;
+		
+		this.get_current_section_jq().fadeIn(300);
+		
+		// update slide_number and title
+		$("#slide_title").html(this.get_current_section().title);
+		UI_Elements.update_button_label("slide_number", (section_to_show+1) + " of " + this.sections.length + " ");
+		
+		// if this is the first/last section, dim the previous/next button
+		if (this.section_currently_showing == 0) {
+			$("#previous_button").addClass("button_dimmed");
+		} else {
+			$("#previous_button").removeClass("button_dimmed");
+		}
+
+		if (this.section_currently_showing == (this.sections.length - 1)) {
+			$("#next_button").addClass("button_dimmed");
+		} else {
+			$("#next_button").removeClass("button_dimmed");
+		}
+		
+		// scroll to top
+		window.scrollTo(0,0);
+	},
+
+	show_navigation: function() {
+		var html = "<div id='top_banner'>";
+		
+		if (this.activity_thumbnail_src != null) {
+			html += "<img id='banner_thumbnail' src='" + this.activity_thumbnail_src + "' />";
+		}
+		
+		html += "<div id='banner_activity_type'>" + this.md.activity_type_title + "</div>"
+			+ "<div id='banner_activity_title'>" + this.activity_title + "</div>"
+			+ "</div>"	// top_banner
+			;
+		
+		if (this.sections.length > 1 && this.md.hide_toolbar != "true") {
+			html += "<div id='toolbar'>"
+				
+				+ "<div id='controls'><table><tr>"
+				
+				/*
+				+ "<td>" + UI_Elements.get_button_html({
+					id: "contents_button",
+					extra_class: "toolbar_button",
+					label: "Contents", 
+					fn: 'player.show_toc()'
+				}) + "</td>"
+				*/
+				
+				+ "<td>"+ UI_Elements.get_button_html({
+					id: "previous_button",
+					extra_class: "toolbar_button prev_next_buttons",
+					label: "Previous", 
+					fn: 'player.show_section("previous")'
+				}) + "</td>"
+				
+	
+				+ "<td>"+ UI_Elements.get_button_html({
+					id: "slide_number",
+					extra_class: "toolbar_button",
+					label: "1 of " + this.sections.length, 
+					fn: 'player.show_toc()'
+				}) + "</td>"
+				
+				+ "<td>"+ UI_Elements.get_button_html({
+					id: "next_button",
+					extra_class: "toolbar_button prev_next_buttons",
+					label: "Next", 
+					fn: 'player.show_section("next")'
+				}) + "</td>"
+				
+				+ "</tr></table></div>"	// controls
+				
+				+ "<div id='slide_title'></div>"
+	
+				+ "</div>"	// toolbar
+				;
+		}
+
+		$("[data-type=chapter]").prepend(html);
+
+		// button at the bottom of the manuscript to go on to the next step
+		$("[data-type=chapter]").append(UI_Elements.get_button_html({
+				id: "step_button",
+				label: "Next",
+				fn: 'player.show_section("next")'
+			}));
+		
+		// icons for toolbar and next buttons...
+		$('#previous_button').button({
+            icons: {
+                primary: "ui-icon-circle-triangle-w"
+            }
+        });
+		$('#next_button').button({
+            icons: {
+                secondary: "ui-icon-circle-triangle-e"
+            }
+        });
+		$('#slide_number').button({
+            icons: {
+                secondary: "ui-icon-circle-triangle-s"
+            }
+        });
+		$('#step_button').button({
+            icons: {
+                secondary: "ui-icon-circle-triangle-e"
+            }
+        });
+		
+		// activate all other buttons
+		UI_Elements.activate_buttons();
+	},
+
+	update_navigation: function() {
+		// show/hide the "next" button as appropriate
+		if (this.last_available_section > this.section_currently_showing && this.showing_last_section() == false) {
+			UI_Elements.toggle_button("step_button", true);
+		} else {
+			UI_Elements.toggle_button("step_button", false);
+		}
+		
+		if (this.showing_last_section() && player.activity.answered_all_queries) {
+			player.show_completion_message();
+		}
+	}, 
+
+	show_completion_message: function() {
+		// player.activity.grade_activity will always have been called before this fn
+		// so we'll have access to the properly-calculated activity properties below
+		
+		var html = "<i>You've completed this activity.</i>"
+			+ "<div id='total_score_message'>"
+			+ "Total Score: " + player.activity.total_points_earned 
+			+ " out of " + player.activity.total_points_possible
+			+ " points (" + player.activity.grade_percent + "%)"
+			+ "</div>"
+			+ "<div id='grade_submitted_message'>Your grade has been submitted to your instructor.</div>"
+			;
+		
+		// section should have a block_type=activity_report paragraph to receive this info
+		$("[data-block_type=activity_report]").html(html).show();
+		
+		// show the grade submitted message if user_has_received_completion_alert is true
+		if (player.user_has_received_completion_alert == true) {
+			$("#grade_submitted_message").show();
+		}
+	},
+	
+	extract_activity_metadata: function() {
+		this._super();
+		
+		this.required_metadata_val("activity_type_title", "Activity Type Title");
+
+		// by default we require students to go through slides in order,
+		// and we restore them to their last-viewed slide when they return.
+		this.required_metadata_val("sequenced_sections", "true");
+		this.required_metadata_val("restore_last_viewed_section", "true");
+		this.required_metadata_val("section_sequence_message", "You must read each slide, and complete any questions on the slide, in sequence.");
+	},
+	
+	show_toc: function() {
+		$("#toc_dialog").remove();
+		
+		var html = "";
+		for (var i = 0; i < this.sections.length; ++i) {
+			var s = this.sections[i];
+			var extra_style = "";
+			if (this.md.sequenced_sections == "true" && i > this.last_available_section) {
+				extra_style = "toc_section_not_available";
+			}
+			html += "<div class='toc_section_title " + extra_style + "'"
+				+ " onclick='player.show_section(" + i + ")'"
+				+ ">" 
+				+ (i+1) + ". " 
+				+ s.title 
+				+ "</div>"
+				;
+		}
+		
+		html = "<div id='toc_head'>Click on a slide to view it. Note: Grey slides are not accessible until preceding slides have been viewed or completed.</div>"
+			+ html
+		
+		html = "<div id='toc_dialog'>" + html + "</div>";
+		$("body").append(html);
+		$("#toc_dialog").dialog({title:"Table of Contents", width:450, modal:true, buttons: [ {text:"OK", click: function() {$("#toc_dialog").dialog("close");}}]});
+
+	},
+	
+	initialize: function() {
+		// hide section numbers and titles
+		$("h2").hide();
+		
+		// also get rid of chapter numbers in question numbers
+		$("[data-type=question]").find("h3").each(function(index, element) {
+			var html = $(this).html();
+			html = html.replace(/^Question/, "");
+			html = html.replace(/\d+\.(\d+)/, "$1.");
+			$(this).html(html);
+		});
+		
+		// activity title is data-type="title" inside h1
+		this.activity_title = $("h1").find("[data-type=title]").html();
+		
+		// extract thumbnail
+		var jq = $('[data-block_type="thumbnail"]');
+		this.activity_thumbnail_src = jq.find("img").attr("src");
+		jq.hide();
+		
+		// assign classes to chapter
+		$("[data-type='chapter']").addClass("ui-widget-content").addClass("ui-corner-all");
+
+		this._super();
+
+		// after we call this.super, re-initialize the activity to the custom
+		// activity type for this manuscript
+		this.activity = new Activity_manuscript_type();
+	},
+	
+	initialize2: function() {
+		this._super();
+	},
+	
+	init: function() {
+		this._super();
+	}
+});
+
+player = new Player_manuscript_type();

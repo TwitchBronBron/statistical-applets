@@ -1,0 +1,175 @@
+body {
+	margin:0px;
+}
+
+body, td {
+	font-family:Arial, sans-serif;
+	font-size:14px;
+}
+
+root { 
+    display: block;
+}
+
+#fone {
+    background: #fff;
+}
+#update, #sample_5, #sample_1000{
+    background-color: #11e911;
+    border: 2px solid;
+    height: 25px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 25px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border-color: #00d800;
+    border-width: 3px;
+    margin-left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    /*background-image: -webkit-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -moz-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -o-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -ms-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: linear-gradient(top, #c23737, #ad2b2b);*/
+
+    -webkit-transition: All 0.5s ease;
+    -moz-transition: All 0.5s ease;
+    -o-transition: All 0.5s ease;
+    -ms-transition: All 0.5s ease;
+    transition: All 0.5s ease;
+}
+
+#reset {
+    background-color: #d11717;
+    border: 2px solid #eee;
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border-color: #aa1313;
+    border-width: 3px;
+    margin-left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    background-image: -webkit-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -moz-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -o-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -ms-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: linear-gradient(top, #c23737, #ad2b2b);
+
+    -webkit-transition: All 0.5s ease;
+    -moz-transition: All 0.5s ease;
+    -o-transition: All 0.5s ease;
+    -ms-transition: All 0.5s ease;
+    transition: All 0.5s ease;
+}
+
+.controlButtons {
+	padding-top:10px;
+}
+
+#n_slider, #sd_slider{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+#sd {
+	display:none;
+}
+
+.label{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.input{
+   width: 35px;
+    margin-top: 10px;   
+    border: 0;
+    color: #f6931f; 
+    font-weight :bold;
+}
+
+
+#fit_normal{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+#label{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+#input_box{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.settings{
+    padding: 0 10px;
+}
+
+#left_panel {
+    width: 200px;
+    height: 490px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    border-right: none;
+    margin-bottom: 0px;
+    float: left;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#notepad{
+    margin-top: 0px;
+    width: 620px;
+    height: 490px;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    float: left;
+    
+    background-image: -webkit-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: -moz-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: -o-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: -ms-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: linear-gradient(top, #fafbfc, #f2f3f4);
+
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#first_graph, #second_graph{
+    margin-top: 75px;
+}
+
+
+

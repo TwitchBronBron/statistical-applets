@@ -1,0 +1,69 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+function receive_applet_action(action) {
+	var a = player.activity;
+	
+	if (a.quiz_completed) {
+		return;
+	}
+	
+	// for questions 3 through 5...
+	if (a.current_question >= 3 && a.current_question <= 5) {
+		// first check to see if parameters are correct
+		var msg = "";
+		if (action.pop_n != 10) {
+			msg += "Set the population size to 10. ";
+		}
+		if (action.sample_size != 3) {
+			msg += "Set the sample size to 3. ";
+		}
+		if (action.values.length != 3) {
+			msg += " ";
+		}
+		
+		// if there is a problem, tell them
+		if (msg != "") {
+			msg = "To answer this question, you need to first take a sample of 3 balls from a population of 10 balls. " + msg + "Then click \"RESET\" and take a new sample, then calculate the mean of that sample and enter it in the blank.";
+			alert(msg);
+			return;
+		}
+		
+		// if user has parameters set correctly, set the correct answer to the mean
+		var q = a.questions[a.current_question].queries[0];
+		var answer = action.mean.toFixed(1) + "";
+		q.answers[0] = answer;
+		q.correct_answer = answer;
+	}
+}
+
+}
+/*
+     FILE ARCHIVED ON 19:38:23 May 01, 2021 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 19:15:53 Nov 02, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.762
+  exclusion.robots: 0.027
+  exclusion.robots.policy: 0.011
+  esindex: 0.014
+  cdx.remote: 26.308
+  LoadShardBlock: 76.041 (3)
+  PetaboxLoader3.datanode: 88.37 (4)
+  load_resource: 87.137
+  PetaboxLoader3.resolve: 61.628
+*/

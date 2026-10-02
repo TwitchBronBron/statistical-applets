@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>One-Way ANOVA</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">    
+        <link rel="stylesheet" href="../common/css/ui-lightness/jquery-ui.css" type="text/css" media="screen">        
+        <script src="../common/jquery.min.js" type="text/javascript"></script>   
+        <script src="../common/jquery-ui.min.js" type="text/javascript"></script>   
+        <script src="../common/raphael-min.js"></script>
+        <script src="math_script.js"></script>
+        <script src="main_script.js"></script>
+    </head>
+    <body>
+        <div id="fone">
+            <div id="left_panel">
+                <div id="enter">
+                    <form action="" method="get" id="enter_form">
+                        <div class="settings">
+
+                            <p><label class="label" for="sd_slider">Standard deviation:</label>
+                            <input class ="input" type="text" id="sd" disabled></p> 
+                            <div id="sd_slider"></div>
+
+                            <p><label class="label" for="n_slider">Sample size (<i>n</i>):</label>
+                            <input class ="input" type="text" id="n" disabled></p> 
+                            <div id="n_slider"></div>
+
+                            <p class="controlButtons">
+                                <a href="#" id="reset" >NEW SAMPLES</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                
+                
+            </div>                
+            <div id="notepad"> 
+            </div>
+        </div>
+    </body>
+</html>

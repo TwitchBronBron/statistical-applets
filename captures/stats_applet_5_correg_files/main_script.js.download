@@ -1,0 +1,639 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+/***********************************
+*                                  *
+*  Delivery Date: March 20, 2012   *
+*  Author: Alexander               *
+*  Client: Macmillan               *
+***********************************/
+var module_main = function(){
+    //Place for points of data and lines.
+    var paper; 
+    var border;
+
+    //Place for information.
+    var info_paper; 
+    var info_border;
+
+    //#points text.
+    var count_text; 
+    var count_number;
+
+    //Correlation coefficient text.
+    var coeff_text; 
+    var coeff_number;
+
+    //least-squares line
+    var lsLine = 0; 
+
+    //mean X line
+    var xLine = 0;
+
+    //mean Y line
+    var yLine = 0; 
+
+    //Array of Residual lines
+    var rLines = new Array();
+    
+    var mode = "add_points";
+    
+    var user_line_start = {x:null, y:null, circle:null};
+    var user_line_end = {x:null, y:null, circle:null};
+    var user_line_line = null;
+
+    //Add at least two points to this graphing area
+    var message_box;
+    var message_text;
+    
+    var Applet_Communication = function (){
+		return {
+			report_action : function report_action(action) {
+		    	try {
+					var f = null;
+					if (!(window.receive_applet_action === undefined)){
+						f = window.receive_applet_action;
+					} else if(window.parent) {
+						if(!(window.parent.receive_applet_action === undefined)) {
+							f = window.parent.receive_applet_action;
+						}
+					} else if(window.opener) {
+						if(!(window.opener.receive_applet_action === undefined)) {
+							f = window.opener.receive_applet_action;
+						}
+					}
+	
+					if (f) {
+						f(action);
+					}
+				} catch(e) {}
+			}
+		}
+    };
+    
+    function find_point(x) {
+    
+    };
+
+    //Initialize the Raphael.js interface
+
+    function create_interface(){
+        border = paper.rect(2, 2, $("#notepad").width() - 4, $("#notepad").height() - 4);
+    
+        border.attr("fill", "#fff");
+        border.attr("fill-opacity", "0");
+        border.attr("stroke-opacity", "0");
+    
+        count_text = info_paper.text(20, 20, "Points:");
+        count_text.attr("font-size", "14");
+        count_text.attr("text-anchor", "start");
+        count_text.attr("fill", "#292929");
+        count_text.attr("font-family", "Arial");
+        count_text.hide();
+    
+        count_number = info_paper.text(20, 50, "0");
+        count_number.attr("font-size", "30");
+        count_number.attr("text-anchor", "start");
+        count_number.attr("fill", "#292929");
+        count_number.attr("font-weight", "bold");
+        count_number.attr("font-family", "Arial");
+        count_number.hide();
+    
+        coeff_text = info_paper.text(20, 95, "Correlation coefficient:");
+        coeff_text.attr("font-size", "14");
+        coeff_text.attr("text-anchor", "start");
+        coeff_text.attr("fill", "#292929");
+        coeff_text.attr("font-family", "Arial");
+        coeff_text.hide();
+    
+        coeff_number = info_paper.text(20, 125, "");
+        coeff_number.attr("font-size", "30");
+        coeff_number.attr("text-anchor", "start");
+        coeff_number.attr("fill", "#292929");
+        coeff_number.attr("font-weight", "bold");
+        coeff_number.attr("font-family", "Arial");
+        coeff_number.hide();
+    
+        xLine = paper.path("M0 0L0 0");
+        xLine.attr("stroke", "#c5c5c5");
+        xLine.attr("stroke-width", "2");
+        xLine.hide();
+    
+        yLine = paper.path("M0 0L0 0");
+        yLine.attr("stroke", "#c5c5c5");
+        yLine.attr("stroke-width", "2");
+        yLine.hide();
+    
+        lsLine = paper.path("M0 0L0 0");
+        lsLine.attr("stroke", "#3b60ff");
+        lsLine.attr("stroke-width", "2");
+    
+        //Show the info box when the cursor is on least-squares line.
+        lsLine.hide();
+    
+        message_box = paper.rect(40, 40, $("#notepad").width() - 80, 50, 5);
+        message_box.attr("fill", "#ebebed");
+        message_box.attr("stroke", "#ebebed");
+        message_box.toBack();
+        
+        message_text = paper.text($("#notepad").width() / 2, 65, "Add at least two points to this graphing area");
+        message_text.attr("font-size", "18");
+        message_text.attr("fill", "#3d3d3d");
+        message_text.attr("font-family", "Arial");
+    
+        // User has clicked in the graph area
+        border.click(function(e) {
+        	// "fix" event e using jquery so that pageX/pageY will work
+        	e = jQuery.event.fix(e);
+        	
+            var offset = $("#notepad").offset();
+                        
+            var x = e.pageX - offset.left;
+            var y = e.pageY - offset.top;
+            
+			//Draw data point
+            if (mode == "add_points") {
+				var circle = paper.circle(x, y, 6);
+				circle.attr("fill", "#e13f3f");
+				circle.attr("stroke", "#e13f3f");
+
+				//Show the coordinates of data point when the cursor is on data point.
+				// PW: not for now; we can do this later if we add axes
+				// circle.attr("title", "(" + x + ", " + y + ")");
+
+				// adjust y so that bottom of graph is 0
+				y = $("#notepad").height() - y;
+				
+				// Add to array of data
+				Xmas.push(x);
+				Ymas.push(y);
+				
+				// note index in circle object
+				circle.arr_index = Xmas.length - 1;
+				
+				update_info();
+				update_line();
+				Applet_Communication().report_action({
+					n : Xmas.length, // number of points
+					r : get_r(), // Correlation coefficient
+					s : get_Sx() + get_Sy() // Sum of squares
+				});
+				
+				circle.drag(
+					// move function
+					function(dx, dy, x, y, e) {
+						var cx = this.start_drag_x + dx;
+						var cy = this.start_drag_y + dy;
+						this.attr("cx", cx);
+						this.attr("cy", cy);
+						
+						// adjust y so that bottom of graph is 0
+						cy = $("#notepad").height() - cy;
+						
+						// update data
+						Xmas[this.arr_index] = cx;
+						Ymas[this.arr_index] = cy;
+
+						update_info();
+						update_line();
+						
+						this.dragging = true;
+					},
+					
+					// start function
+					function(x, y, e) {
+						this.start_drag_x = this.attr("cx");
+						this.start_drag_y = this.attr("cy");
+					},
+					
+					// end function
+					function(x, y, e) {
+						Applet_Communication().report_action({
+							n : Xmas.length, // number of points
+							r : get_r(), // Correlation coefficient
+							s : get_Sx() + get_Sy() // Sum of squares
+						});
+					}
+				);
+				
+				//Remove data point if click
+				circle.click(function(e){
+					// if user was dragging, cancel
+					if (this.dragging) {
+						this.dragging = false;
+						return;
+					}
+					
+					//Delete from array of data
+					Xmas.splice(this.arr_index, 1);
+					Ymas.splice(this.arr_index, 1);
+					//Remove point
+					this.remove();
+					update_info();
+					update_line();
+					Applet_Communication().report_action({
+						n : Xmas.length, // number of points
+						r : get_r(), // Correlation coefficient
+						s : get_Sx() + get_Sy() // Sum of squares
+					});
+				});
+
+			// draw line
+			} else {
+				// if line_start is null, start a new line
+				if (user_line_start.x == null) {
+					clear_user_line();
+					
+					// draw circle for new start
+					user_line_start.x = x;
+					user_line_start.y = y;
+					user_line_start.circle = paper.circle(x, y, 6);
+					user_line_start.circle.attr("fill", "#3f3fe1");
+					user_line_start.circle.attr("stroke", "#3fe13f");
+					user_line_start.circle.attr("stroke-width", "3");
+					
+					// reset line if user re-clicks on first point
+					user_line_start.circle.click(function(e){
+						// if user was dragging, cancel
+						if (this.dragging) {
+							this.dragging = false;
+							return;
+						}
+
+						clear_user_line();
+					});
+
+					user_line_start.circle.drag(
+						// move function
+						function(dx, dy, x, y, e) {
+							var cx = this.start_drag_x + dx;
+							var cy = this.start_drag_y + dy;
+							this.attr("cx", cx);
+							this.attr("cy", cy);
+							
+							// update data
+							user_line_start.x = cx;
+							user_line_start.y = cy;
+	
+							user_ss();			
+							
+							this.dragging = true;
+						},
+						
+						// start function
+						function(x, y, e) {
+							this.start_drag_x = this.attr("cx");
+							this.start_drag_y = this.attr("cy");
+						},
+						
+						// end function
+						function(x, y, e) {
+
+						}
+					);
+
+				// else finish line
+				} else {
+					// if there was an end, clear it first
+					if (user_line_end.circle != null) {
+						user_line_end.circle.remove();
+						user_line_line.remove();
+					}
+					// draw circle for end
+					user_line_end.x = x;
+					user_line_end.y = y;
+					user_line_end.circle = paper.circle(x, y, 6);
+					user_line_end.circle.attr("fill", "#3fe13f");
+					user_line_end.circle.attr("stroke", "#3fe13f");
+					user_line_end.circle.attr("stroke-width", "3");
+
+					// clear end point if user re-clicks on it
+					user_line_end.circle.click(function(e){
+						// if user was dragging, cancel
+						if (this.dragging) {
+							this.dragging = false;
+							return;
+						}
+
+						user_line_end.circle.remove();
+						user_line_end = {x:null, y:null, circle:null};
+						user_ss();			
+					});
+
+					user_line_end.circle.drag(
+						// move function
+						function(dx, dy, x, y, e) {
+							var cx = this.start_drag_x + dx;
+							var cy = this.start_drag_y + dy;
+							this.attr("cx", cx);
+							this.attr("cy", cy);
+							
+							// update data
+							user_line_end.x = cx;
+							user_line_end.y = cy;
+	
+							user_ss();			
+							
+							this.dragging = true;
+						},
+						
+						// start function
+						function(x, y, e) {
+							this.start_drag_x = this.attr("cx");
+							this.start_drag_y = this.attr("cy");
+						},
+						
+						// end function
+						function(x, y, e) {
+
+						}
+					);
+				}
+				
+				// calculate ss (and update line)
+				user_ss();			
+			}
+			
+        })
+    }
+    
+    function clear_user_line() {
+		// remove previous circles and line
+		if (user_line_start.circle != null) {
+			user_line_start.circle.remove();
+		}
+		if (user_line_end.circle != null) {
+			user_line_end.circle.remove();
+		}
+		if (user_line_line != null) {
+			user_line_line.remove();
+		}
+		
+		user_line_start = {x:null, y:null, circle:null};
+		user_line_end = {x:null, y:null, circle:null};
+		user_line_line = null;
+    }
+
+    //Updates the contents of info_border box (number of points, correlation coefficient and sum of squares).
+
+    function update_info(){
+        count_number.attr("text", Xmas.length);
+        coeff_number.attr("text", (Math.round(get_r() * 10000) / 10000).toFixed(4));
+        if(Xmas.length >= 2) {
+            count_text.show();
+            count_number.show();
+            coeff_text.show();
+            coeff_number.show();
+            message_box.hide();
+            message_text.hide();
+        } else {
+            count_text.hide();
+            count_number.hide();
+            coeff_text.hide();
+            coeff_number.hide();
+            message_box.show();
+            message_text.show();
+        }
+        
+        user_ss();
+    }
+
+	function user_ss() {
+		var display_value = "&mdash;";
+		
+		// clear and redraw the line, if we have both points
+		if (user_line_line != null) {
+			user_line_line.remove();
+		}
+		
+		if (user_line_start.x != null && user_line_end.x != null) {
+			var path = "M" + user_line_start.x + " " + user_line_start.y + "L" + user_line_end.x + " " + user_line_end.y;
+			user_line_line = paper.path(path);
+			user_line_line.attr("stroke", "#3fe13f");
+			user_line_line.attr("stroke-width", "2");
+			
+			// position circles in front
+			user_line_end.circle.toFront();
+			user_line_start.circle.toFront();
+		}
+		
+		if (user_line_start.x != null && user_line_end.x != null && Xmas.length >= 3) {
+			// get a and b for least squares line
+			var ls_b = get_b()
+			var ls_a = get_a(ls_b);
+			
+			// now get a and b for user-created line
+			// b = change in y divided by change in x
+			var ht = $("#notepad").height();
+			var ul_b = ((ht - user_line_end.y) - (ht - user_line_start.y)) / (user_line_end.x - user_line_start.x);
+			// a = y - b * x for first point (could do second point instead)
+			var ul_a = (ht - user_line_start.y) - (ul_b * user_line_start.x);
+
+			// console.log("user_ss");
+
+			// console.log("ls_b = " + ls_b);
+			// console.log("ls_a = " + ls_a);
+
+			// console.log(user_line_start.x + ", " + user_line_start.y);
+			// console.log(user_line_end.x + ", " + user_line_end.y);
+
+			// console.log("ul_b = " + ul_b);
+			// console.log("ul_a = " + ul_a);
+
+			
+			// get sums of squared residuals
+			var lss = 0;
+			var uss = 0;
+			for (var i = 0; i < Xmas.length; ++i) {
+				// ss for ls line
+				var yhat = ls_a + ls_b * Xmas[i];
+				lss += Math.pow((Ymas[i] - yhat), 2);
+
+				// ss for user line
+				var yhat = ul_a + ul_b * Xmas[i];
+				uss += Math.pow((Ymas[i] - yhat), 2);
+			}
+			
+			// console.log("* lss: " + lss);
+			// console.log("* uss: " + uss);
+			
+			display_value = Math.round(uss / lss * 100) / 100;
+		}
+		
+		$("#user_line_ss").html(display_value);
+	}
+	
+
+    //Redraw lines (least-squares line and mean X/Y lines)
+    function update_line(){
+        //$("#notepad").height() - y - invertion of Yaxis (standard veiw from bottom to top)
+        //Draw least squares line
+        if($("#lsLine").is(':checked')){
+            var b = get_b();
+            var a = get_a(b);
+            //Start point
+            var x0 = 0;
+            var y0 = $("#notepad").height() - Math.round(a + x0 * b);
+            //End point
+            var x1 = $("#notepad").width();
+            var y1 = $("#notepad").height() - Math.round(a + x1 * b);
+            //Draw line
+            lsLine.attr("path", "M" + x0 + " " + y0 + "L" + x1 + " " + y1);
+            // b = (Math.round(b * 1000) / 1000).toFixed(3);
+            // a = (Math.round(a * 1000) / 1000).toFixed(3);
+            // lsLine.attr("title", "y = " + b + ((a >= 0) ? ("x + "+ a) : ("x " + a)));
+            lsLine.show();
+        } else 
+            lsLine.hide();
+    
+        if($("#xyLine").is(':checked')){
+            x = Math.round(get_mean_X());
+            y = $("#notepad").height() - Math.round(get_mean_Y());
+            yLine.attr("path", "M0 " + y + "L" + $("#notepad").width() + " " + y);
+            var my = (Math.round(get_mean_Y() * 1000) / 1000).toFixed(3);
+            // yLine.attr("title", "y = " + my);
+            yLine.show();
+            xLine.attr("path","M" + x + " 0L" + x + " " + $("#notepad").height());
+            var mx = (Math.round(get_mean_X() * 1000) / 1000).toFixed(3);
+            // xLine.attr("title", "y = " + mx);
+            xLine.show();
+        } else {
+            xLine.hide();
+            yLine.hide();
+        }
+        //Delete all residuals lines
+        for(var i = 0; i < rLines.length; i++)
+            rLines[i].remove();
+        if(rLines.length != 0)
+            rLines = new Array();
+    
+        if($("#rLine").is(':checked')){
+            //For each data point draw residual line
+            for(i = 0; i < Xmas.length; i++){
+                //End point on least squares line
+                //var xf = Math.round(get_cross_x(Xmas[i], Ymas[i]));
+                var xf = Xmas[i];
+                b = get_b();
+                var yf = Math.round(b * xf + get_a(b));
+                //Draw line from data point to least squares line
+                var line = paper.path("M" + Xmas[i] + " " + ($("#notepad").height() - Ymas[i]) + "L" + xf + " " + ($("#notepad").height() - yf));
+                line.attr("stroke", "#434343");
+                line.toBack();
+                //Save pointer to the line to remove line
+                rLines.push(line);            
+            }
+        }
+    }
+    
+    return {
+        
+        //Initialize the HTML interface
+        
+        initialize : function() {
+            //Initialize place for points of data end lines.
+            paper = Raphael(document.getElementById("notepad"), $("#notepad").width(), $("#notepad").height());
+            //Initialize place for information
+            info_paper = Raphael(document.getElementById("info"), $("#info").width(), $("#info").height());
+            //Clear all data and redraw interface
+            $("#c_button").click(function(){
+                paper.clear();
+                info_paper.clear();
+				clear_user_line();
+				
+				// reset checkboxes
+				$("#lsLine").attr("checked",false);
+				$("#xyLine").attr("checked",false);
+				$("#rLine").attr("checked",false);
+				
+                //Redraw interface
+                create_interface();
+                //Clear data
+                Xmas = new Array();
+                Ymas = new Array();
+                Applet_Communication().report_action({
+                    n : Xmas.length,
+                    r : get_r(),
+                    s : get_Sx() + get_Sy()
+                });
+            });
+            
+            $("[name=click_action]").click(function(){
+            	mode = $('input:radio[name=click_action]:checked').val();
+            	if (mode == "draw_line") {
+            		$("#user_line_stats").css("visibility", "visible");
+				}
+            });
+        
+            $("#lsLine").click(function(){
+                if(!$("#lsLine").is(':checked'))
+                    $("#rLine").removeAttr("checked");
+                update_line();
+                Applet_Communication().report_action({
+                    n : Xmas.length,
+                    r : get_r(),
+                    s : get_Sx() + get_Sy()
+                });
+            });
+        
+            $("#xyLine").click(function(){
+                update_line();
+                Applet_Communication().report_action({
+                    n : Xmas.length,
+                    r : get_r(),
+                    s : get_Sx() + get_Sy()
+                });
+            });
+        
+            $("#rLine").click(function(){
+                if($("#rLine").is(':checked'))
+                    $("#lsLine").attr("checked", "");
+                update_line();
+                Applet_Communication().report_action({
+                    n : Xmas.length,
+                    r : get_r(),
+                    s : get_Sx() + get_Sy()
+                });
+            });
+            //Draw interface
+            create_interface();
+        }
+    };
+}
+
+function user_line_ss_help() {
+	var text = "This value (\"Relative SS\") indicates how close the line you've drawn is to the \"ideal\" least-squares regression line. A value of 1.0 indicates that the residual sum of squares for your line is exactly the same as the residual sum of squares for the least-squares line. The higher this value gets, the larger the residual SS for your line is relative to the least-square line.\n\n(Note: if your plot includes only 1 or 2 points, the least-squares residual SS is either not calculable or is 0, so \"Relative SS\" cannot be calculated. Add 3 or more points to calculate the Relative SS value.)";
+	alert(text);
+}
+
+$(window).load(module_main().initialize);
+
+}
+/*
+     FILE ARCHIVED ON 03:54:09 Apr 03, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 19:15:40 Nov 02, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.792
+  exclusion.robots: 0.027
+  exclusion.robots.policy: 0.012
+  esindex: 0.016
+  cdx.remote: 21.145
+  LoadShardBlock: 63.167 (3)
+  PetaboxLoader3.datanode: 153.603 (4)
+  load_resource: 683.802
+  PetaboxLoader3.resolve: 517.392
+*/

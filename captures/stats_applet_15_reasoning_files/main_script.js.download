@@ -1,0 +1,345 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+module_main = new function(){
+    
+    this.paper = new Object();
+    //Hits proportion line
+    this.proportion_line = new Object();
+    //Null hypothesis level
+    this.H0_line = new Object();
+    //True probability of shooter level
+    this.prob_line = new Object();
+    //Text for bound of X axis
+    this.xBound_text = new Object();
+    
+    this.width = 0;
+    this.height = 0;
+    //Count of shoots in set
+    this.count = 0;
+    //Number of shoots
+    this.len = 0;
+    
+    this.intervalID = 0;
+    this.plot_width = 325;
+    this.plot_height = 325;
+    this.plot_x = 50;
+    this.plot_y = 50;
+    //Upper value of X axis
+    this.Xscale = 10;
+    //Hits proportion array
+    this.hProp = new Array();
+    //True probability of shooter
+    this.prob = 0.5;
+    //Default parameter of shoots in set
+    this.shoots = 10;
+    //Default parameter of null hypothesis
+    this.H0 = 0.8;
+    this.intervalID = 0;
+    this.intervalID2 = 0;
+    //Delay between shoots
+    this.delay = 100;
+    this.images = new Array();
+    this.image_index = 1;
+    
+    var Applet_Communication = function (){
+		return {
+			report_action : function report_action(action) {
+		    	try {
+					var f = null;
+					if (!(window.receive_applet_action === undefined)){
+						f = window.receive_applet_action;
+					} else if(window.parent) {
+						if(!(window.parent.receive_applet_action === undefined)) {
+							f = window.parent.receive_applet_action;
+						}
+					} else if(window.opener) {
+						if(!(window.opener.receive_applet_action === undefined)) {
+							f = window.opener.receive_applet_action;
+						}
+					}
+	
+					if (f) {
+						f(action);
+					}
+				} catch(e) {}
+			}
+		}
+    };
+
+    //Initialize plot
+    this.create_plot = function(){
+        var axis = this.paper.path("M" + this.plot_x + " " + this.plot_y + "L" + this.plot_x + " " + (this.plot_y + this.plot_height));
+        axis.attr("stroke", "#d7d7d7");
+        axis = this.paper.path("M" + this.plot_x + " " + (this.plot_y + this.plot_height) + "L" + (this.plot_x + this.plot_width) + " " + (this.plot_y + this.plot_height));
+        axis.attr("stroke", "#d7d7d7");
+        
+        this.xBound_text = this.paper.text(this.plot_x + this.plot_width, this.plot_y + this.plot_height + 15, this.Xscale);
+        this.xBound_text.attr("font-size", "14");
+        this.xBound_text.attr("fill", "#292929");
+        this.xBound_text.attr("font-family", "Helvetica Neue");
+        
+        this.proportion_line = this.paper.path("M0 0L0 0");
+        this.proportion_line.attr("stroke", "#3b60ff");
+        this.proportion_line.hide();
+        
+        this.prob_line = this.paper.path("M0 0L0 0");
+        this.prob_line.attr("stroke", "#0f0");
+        this.prob_line.hide();
+        
+        var x1 = this.plot_x;
+        var y = this.plot_y + this.plot_height - Math.round(this.plot_height * this.H0);
+        var x2 = this.plot_x + this.plot_width;
+        
+        this.H0_line = this.paper.path("M" + x1 + " " + y + "L" + x2 + " " + y);
+        this.H0_line.attr("stroke", "#00f");
+        
+        this.prob_line = this.paper.path("M0 0L0 0");
+        this.prob_line.attr("stroke", "#0f0");
+        this.prob_line.hide();
+        //Draw makers fo X and Y axis
+        for(var i = 0; i <= 10; i++){
+            var x0 = this.plot_x - 5;
+            var x1 = this.plot_x + 5;
+            var y =  (this.plot_y + this.plot_height) - Math.round(this.plot_height * i / 10);
+            var line = this.paper.path("M" + x0 + " " + y + "L" + x1 + " " + y);
+            line.attr("stroke", "#d7d7d7");
+            var text = this.paper.text(x0 - 20, y, i * 10);
+            text.attr("font-size", "14");
+            text.attr("fill", "#292929");
+            text.attr("font-family", "Helvetica Neue");
+        }
+        for(i = 0; i <= 1; i++){
+            var y0 = this.plot_y + this.plot_height - 5;
+            var y1 = this.plot_y + this.plot_height + 5;
+            var x =  this.plot_x + Math.round(this.plot_width * i);
+            var line = this.paper.path("M" + x + " " + y0 + "L" + x + " " + y1);
+            line.attr("stroke", "#d7d7d7");
+        }
+
+    }
+    //Redraw true probability of shooter level
+    this.update_pline = function(){
+        if($("#trueProb").is(':checked')){
+            var y = this.plot_y + this.plot_height - Math.round(this.plot_height * this.prob);
+            this.prob_line.attr("path", "M" + this.plot_x + " " + y + "L" 
+                + (this.plot_x + this.plot_width) + " " + y);
+            this.prob_line.show();
+        } else 
+            this.prob_line.hide();
+    }
+    
+    this.update_bound_text = function(){
+        this.xBound_text.attr("text", this.Xscale);
+    }
+    this.change_image = function(){
+        $("#image").attr("src", this.images[this.image_index].src);
+        this.image_index++;
+        if(this.image_index == 8 || this.image_index == 14){
+            clearInterval(this.intervalID)
+            this.intervalID = 0;
+            $("#image").attr("src", this.images[1].src);
+        }
+        
+    } 
+    
+    this.animate = function(hit){
+        if(hit == true){
+            this.image_index = 2;
+            this.intervalID = setInterval("module_main.change_image()", module_main.delay);            
+        }else{
+            this.image_index = 9;
+            this.intervalID = setInterval("module_main.change_image()", module_main.delay);    
+        }       
+    }
+    //Function for timer
+    this.timer = function(){
+        if(this.count < this.shoots){
+            //Make shoot
+            
+            this.shoot();
+            this.update_plot();
+            //Update information about hits and misses
+            var text = "Hits = " + get_sum_X() + "/" + this.len + " = " + Math.round(get_mean_X() * 100) + "%";
+            $("#hits").html(text);
+            
+            text = "Misses = " + (this.len - get_sum_X()) + "/" + this.len + " = " + Math.round((this.len - get_sum_X()) / this.len * 100) + "%";
+            $("#misses").html(text);
+        } else {
+            //Stop timer
+            this.count = 0;
+            clearInterval(this.intervalID2);
+            this.intervalID2 = 0;
+        }
+    } 
+    //Make shoot
+    this.shoot = function(){
+        this.count++;
+        this.len++;
+        var r = Math.random();
+        if(r <= this.prob){
+            Xmas.push(1);
+            this.animate(true);
+        }else{ 
+            Xmas.push(0);
+            this.animate(false);
+        }
+        this.hProp.push(get_mean_X());
+        Applet_Communication().report_action({
+            n : Xmas.length, // number of shoots
+            tr: this.prob * 100, //True % value.
+            hits : get_mean_X() * 100, //Hits % value.
+            misses : 100 - get_mean_X() * 100, //Misses % value.
+            h0 : this.H0 //Null Hypothesis value
+        });
+        
+    }
+    
+    this.get_coeff_x  = function (){
+        return this.plot_width / this.Xscale;
+    };
+    //Redraw plot
+    this.update_plot = function(){
+        if(this.len > this.Xscale){
+            this.Xscale += Math.round(this.Xscale * 0.2);
+            this.update_bound_text();
+        }
+        var coeff = this.get_coeff_x();
+        var path;
+        if (this.hProp[0] == 1) {
+        	path = "M" + this.plot_x + " " + (this.plot_y);
+        } else {
+        	path = "M" + this.plot_x + " " + (this.plot_y + this.plot_height);
+        }
+
+        for(var i = 1; i < this.hProp.length; i++)
+            path += "L" + (this.plot_x + Math.round(i * coeff)) + " " + 
+            ((this.plot_y + this.plot_height) - Math.round(this.plot_height * this.hProp[i]));
+        this.proportion_line.attr("path", path);
+    }
+    //Reset all data
+    this.reset = function(){
+        this.Xscale = 10;
+        this.paper.clear();
+        this.create_plot();
+        this.update_pline();
+        this.hProp = new Array();
+        Xmas = new Array();
+        this.len = 0;
+        this.count = 0;
+        //remake true probability of shooter
+        for(;;){
+            this.prob = Math.round(Math.random() * 20) / 20;
+            if(this.prob >= .3 && this.prob <= .8)
+                break;
+        }
+		// but make sure it's exactly .8 about 1/5 times
+		if (Math.random() < .20) {
+			this.prob = .8;
+		}
+        this.prob_line.hide();
+        $("#hits").html("Hits = 0/0 = 0%");
+        $("#misses").html("Misses = 0/0 = 0%");
+    }
+    this.images_load = function(){
+    	// there are 14 images, numbered 1-14
+    	// 1, 8, and 14 are the same (the starting image)
+    	// for a hit we show 1-2-3-4-5-6-7-8 (8 images)
+    	// for a miss we show 8-9-10-11-12-13-14 (7 images)
+        for(var i = 1; i <= 14; i++){
+            this.images[i] = new Image;
+            this.images[i].src = "animation/Animation" + i + ".png"
+        }
+    }
+    
+    this.initialize = function(){
+        this.width = $("#notepad").width();
+        this.height = $("#notepad").height();
+        this.plot_width = this.width - 100;
+        this.plot_height = this.height - 100;
+        this.paper = Raphael(document.getElementById("notepad"), this.width, this.height);
+        this.create_plot();
+        this.images_load();
+        
+        module_main.reset();
+        
+        $("#shoots").val(this.shoots);
+        $("#s_button").click(function(){
+        	// don't do anything if timer is already going
+        	if (module_main.intervalID2 != 0) {
+        		return;
+        	}
+        	
+            module_main.timer();
+            module_main.proportion_line.show();
+        	if(module_main.intervalID2 == 0){
+                module_main.intervalID2 = setInterval('module_main.timer()', module_main.delay*7 + 50);
+                module_main.proportion_line.show();
+            }
+        });
+        $("#c_button").click(function(){
+            if(module_main.intervalID != 0){
+                clearInterval(module_main.intervalID);
+                module_main.intervalID = 0;
+            }
+            if(module_main.intervalID2 != 0){
+                clearInterval(module_main.intervalID2);
+                module_main.intervalID2 = 0;
+            }
+            $("#trueProb").removeAttr("checked");
+            module_main.reset();
+        });
+        $("#shoots").blur(function(){
+            if(parseInt($("#shoots").val()) && parseInt($("#shoots").val()) > module_main.count){
+                module_main.shoots = parseInt($("#shoots").val());
+                module_main.delay = 100;
+                if(module_main.shoots > 10)
+                    module_main.delay = 75;
+                if(module_main.shoots > 50)
+                    module_main.delay = 50;
+                
+            } else {
+                $("#tTimes").val(module_main.shoots);
+            }
+        });
+        $("#trueProb").click(function(){
+            module_main.update_pline();
+        });
+        
+    }
+}
+
+$(window).load(function(){
+    module_main.initialize();
+});
+
+}
+/*
+     FILE ARCHIVED ON 00:21:11 Oct 10, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 19:15:52 Nov 02, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.549
+  exclusion.robots: 0.019
+  exclusion.robots.policy: 0.009
+  esindex: 0.009
+  cdx.remote: 38.202
+  LoadShardBlock: 71.938 (3)
+  PetaboxLoader3.datanode: 86.236 (4)
+  load_resource: 103.507
+  PetaboxLoader3.resolve: 73.361
+*/
