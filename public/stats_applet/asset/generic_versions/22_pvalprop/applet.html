@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+    LOCAL RECONSTRUCTION. The original HTML5 code for this applet was never archived. This rebuild follows
+    the surviving page text and quiz, and the sibling applet for means, 12_pvalue (P-Value of a Test of
+    Significance), for layout, style, libraries, and behavior.
+-->
+<html>
+    <head>
+        <title>P-Value for a Test of One Proportion</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+        <script src="../../common/jquery.min.js" type="text/javascript"></script>
+        <script src="../../common/raphael-min.js"></script>
+        <script src="math_script.js"></script>
+        <script src="main_script.js"></script>
+    </head>
+    <body>
+        <div id="fone">
+            <div id="left_panel">
+                <div id="enter">
+                    <form action="" method="get" id="enter_form">
+                        <div class="settings">
+                            <table id='hypotheses_table' border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style='vertical-align:middle'>H<sub>0</sub>:</td>
+                                <td><label for="p0"><i>p</i> = </label><input class='input_box' id="p0" type="text"/></td>
+                            </tr>
+                            <tr>
+                                <td style='padding-right:10px;'><label>H<sub>a</sub>:</label></td>
+                                <td>
+                                    <div class="ha_box">
+                                        <input name="ha" id="ha1" type="radio" checked/>
+                                        <label for="ha1" id="lha1"><i>p</i> &gt;</label>
+                                    </div>
+                                    <div class="ha_box">
+                                        <input name="ha" id="ha2" type="radio"/>
+                                        <label for="ha2" id="lha2"><i>p</i> &lt;</label>
+                                    </div>
+                                    <div class="ha_box">
+                                        <input name="ha" id="ha3" type="radio"/>
+                                        <label for="ha3" id="lha3"><i>p</i> &ne;</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            </table>
+
+                            <div class="label_box">
+                                <label for="n"><i>n</i> = </label><input class='input_box' id="n" type="text"/>
+                            </div>
+                        </div>
+                        <div id='advanced_settings'>
+                            <div class="settings">
+                                <div class="radio_box">
+                                    <input name="options" type="radio" id="opt1" checked>&nbsp;
+                                </div>
+                                <div class="label_box">
+                                    <label for="opt1" style='line-height:1.35em'>I have data, and the number of successes <i>X</i> = </label><input class='input_box' id="opt_field1" type="text"/>
+                                </div>
+                            </div>
+                            <div class="settings">
+                                <div class="radio_box">
+                                    <input name="options" type="radio" id="opt2">&nbsp;
+                                </div>
+                                <div class="label_box">
+                                    <label for="opt2">The truth about the population is <i>p</i> = </label><input class='input_box' id="opt_field2" type="text"/>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="inputForm" style='margin-left:12px'>
+                            <a href="#" id="u_button" >UPDATE</a>
+                        </p>
+                        <p class="inputForm" style='margin-left:12px'>
+                            <a href="#" id="c_button" >RESET</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div id="notepad">
+            </div>
+        </div>
+    </body>
+</html>

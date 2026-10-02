@@ -164,5 +164,19 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
 - **Verified:** P-values match the answer key to 4 decimals, about 10% of simulated samples are significant at
   α = 0.10 when H₀ is true, and a full quiz run scores 10/10.
 
+### P-Value for a Test of One Proportion (`asset/generic_versions/22_pvalprop/`)
+
+- **From the originals:** the page text and quiz with its answer key. Like the One Proportion significance applet
+  (which shares its math), this is a later "generic" applet with no Java ancestor. It's modeled on the surviving
+  P-Value applet for means (`12_pvalue`): a thin blue line at the observed value (mirrored for a two-sided test),
+  the P-value shaded yellow, and a thick blue arrow below the axis pointing in the direction(s) of Hₐ. The answer
+  key fixes the method: the same z test as the significance applet, with p₀ = 0.67 as the question says
+  ("about 67%"); the exact two-thirds would not match the key.
+- **Designed for the rebuild:** the code, layout, and labels ("Sample proportion" for p̂, plus "X = … of n = …").
+- **Original quiz error:** question 3 ("Which sample size will give more certain results?") has n = 20 as the
+  correct answer in the publisher's own key; n = 1000 is the right answer. The quiz is the original encrypted
+  content and isn't changed here; the page's notice mentions it.
+- **Verified:** P-values match the answer key (0.251, 0.022, 0.223), and a full quiz run scores 4/4.
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.

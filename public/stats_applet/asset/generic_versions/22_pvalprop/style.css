@@ -1,0 +1,134 @@
+/* LOCAL RECONSTRUCTION: copied from 14_signif/style.css, resized for this applet's 900x650 frame. */
+
+body {
+	margin:0px;
+	padding:0px;
+}
+
+#fone {
+    background: #fff;
+}
+
+#c_button {
+    background-color: #d11717;
+    border: 2px solid #eee;
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border-color: #aa1313;
+    border-width: 3px;
+    margin-left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    background-image: linear-gradient(to bottom, #c23737, #ad2b2b);
+    transition: All 0.5s ease;
+}
+
+#c_button:hover {
+    background-color: #ff3434;
+    background-image: linear-gradient(to bottom, #e25757, #ad2b2b);
+}
+
+#u_button {
+    background-color: #11e911;
+    border: 2px solid;
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border-color: #00d800;
+    border-width: 3px;
+    margin-left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    transition: All 0.5s ease;
+}
+
+#notepad {
+    margin-top: 0px;
+    width: 691px;
+    height: 640px;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    float: left;
+
+    background-image: linear-gradient(to bottom, #fafbfc, #f2f3f4);
+
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#left_panel {
+    width: 200px;
+    height: 640px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    border-right: none;
+    margin-bottom: 0px;
+    float: left;
+    font-family: Arial, sans-serif;
+    font-size:16px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.input_box {
+	width:40px;
+	font-size:14px;
+}
+
+#hypotheses_table td {
+	vertical-align:top;
+	padding-bottom:5px;
+	padding-top:5px;
+	padding-left:10px;
+}
+
+.label_box {
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.ha_box {
+    margin-bottom: 5px;
+}
+
+.inputForm {
+    margin-top: 18px;
+}
+
+/* from 14_signif/style.css */
+.radio_box {
+    float: left;
+    margin-left: 10px;
+}
+
+#advanced_settings {
+	font-size:14px;
+	padding-top:5px;
+}
+
+#advanced_settings .input_box {
+    width: 55px;
+}

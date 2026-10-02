@@ -1,0 +1,191 @@
+// LOCAL RECONSTRUCTION (see applet.html). Mirrors 12_pvalue (P-Value of a Test of Significance) for a
+// proportion: the curve is the sampling distribution of p-hat when H0 is true, N(p0, sqrt(p0(1-p0)/n)); the
+// thin blue line marks the observed p-hat (and its mirror image for a two-sided test); the yellow area is the
+// P-value; the thick blue arrow below the axis points in the direction(s) that count as evidence against H0.
+
+module_main = new function(){
+    this.paper = null;
+    this.max_n = 30000;
+    this.defaults = { p0: 0.5, n: 100, x: 50, p_true: 0.5 };
+    this.p0 = 0.5;
+    this.n = 100;
+    this.x = 50;              // successes: typed (opt1) or simulated (opt2)
+    this.p_true = 0.5;
+    this.simulated_x = null;
+
+    var text_attrs = { "font-size": "14", "fill": "#292929", "font-family": "Verdana" };
+
+    this.tail = function(){
+        if ($("#ha2").is(":checked")) return "lt";
+        if ($("#ha3").is(":checked")) return "ne";
+        return "gt";
+    };
+    this.simulating = function(){ return $("#opt2").is(":checked"); };
+
+    this.px = function(v){ return this.plot_x + this.plot_width / 2 + (v - this.p0) / this.se * (this.plot_width / 8); };
+    this.lo = function(){ return this.p0 - 4 * this.se; };
+    this.hi = function(){ return this.p0 + 4 * this.se; };
+    this.py = function(v){
+        var z = (v - this.p0) / this.se;
+        return this.plot_y - this.plot_height * Math.exp(-0.5 * z * z);
+    };
+    this.clamp_x = function(x){ return Math.max(this.plot_x, Math.min(this.plot_x + this.plot_width, x)); };
+
+    this.area = function(from, to){
+        from = Math.max(from, this.lo());
+        to = Math.min(to, this.hi());
+        if (to <= from) return;
+        var steps = Math.max(2, Math.round(this.px(to) - this.px(from)));
+        var path = "M" + this.px(from).toFixed(1) + " " + this.plot_y;
+        for (var i = 0; i <= steps; i++) {
+            var v = from + (to - from) * i / steps;
+            path += "L" + this.px(v).toFixed(1) + " " + this.py(v).toFixed(1);
+        }
+        path += "L" + this.px(to).toFixed(1) + " " + this.plot_y + "Z";
+        this.paper.path(path).attr({ fill: "#ffba00", stroke: "none" });
+    };
+
+    this.marker_line = function(v){
+        var x = this.clamp_x(this.px(v));
+        this.paper.path("M" + x + " " + this.plot_y + "L" + x + " " + (this.plot_y - this.plot_height - 10)).attr({ stroke: "#3b60ff" });
+    };
+
+    this.arrow = function(dir){
+        var mid = this.plot_x + this.plot_width / 2, y = this.plot_y + 50;
+        var from = mid + dir * 7, to = dir > 0 ? this.plot_x + this.plot_width : this.plot_x;
+        this.paper.path("M" + Math.round(from) + " " + y + "L" + to + " " + y)
+            .attr({ stroke: "#0000cc", "stroke-width": 4, "arrow-end": "block" });
+    };
+
+    this.redraw = function(){
+        var p = this.paper;
+        p.clear();
+        this.se = Math.sqrt(this.p0 * (1 - this.p0) / this.n);
+        var x = this.simulating() ? this.simulated_x : this.x;
+        var tail = this.tail();
+        var r = proportion_test(this.p0, x, this.n, 0.05, tail);
+        var d = Math.abs(r.phat - this.p0);
+
+        // the P-value area
+        if (tail == "gt") this.area(r.phat, Infinity);
+        else if (tail == "lt") this.area(-Infinity, r.phat);
+        else { this.area(-Infinity, this.p0 - d); this.area(this.p0 + d, Infinity); }
+
+        var path = "", steps = this.plot_width;
+        for (var i = 0; i <= steps; i++) {
+            var v = this.lo() + (this.hi() - this.lo()) * i / steps;
+            path += (i ? "L" : "M") + this.px(v).toFixed(1) + " " + this.py(v).toFixed(1);
+        }
+        p.path(path).attr({ stroke: "#e13f3f", "stroke-width": 1.5 });
+
+        // axis, ticks at p0 +/- 2 and 4 standard errors
+        p.path("M" + this.plot_x + " " + this.plot_y + "L" + (this.plot_x + this.plot_width) + " " + this.plot_y).attr("stroke", "#666666");
+        for (var k = -4; k <= 4; k += 2) {
+            var tv = this.p0 + k * this.se;
+            var tx = Math.round(this.px(tv)) + 0.5;
+            p.path("M" + tx + " " + (this.plot_y + 5) + "L" + tx + " " + (this.plot_y - 5)).attr("stroke", "#666666");
+            p.text(tx, this.plot_y + 15, (Math.round(tv * 10000) / 10000).toFixed(3)).attr(text_attrs);
+        }
+
+        // observed p-hat (mirrored for two-sided), and the direction arrow(s)
+        this.marker_line(r.phat);
+        if (tail == "ne") this.marker_line(2 * this.p0 - r.phat);
+        if (tail != "lt") this.arrow(1);
+        if (tail != "gt") this.arrow(-1);
+
+        var label_x = Math.max(this.plot_x + 110, Math.min(this.plot_x + this.plot_width - 110, this.px(r.phat)));
+        var top = this.plot_y - this.plot_height - 75;
+        p.text(label_x, top, "X = " + x + " of n = " + this.n).attr(text_attrs);
+        p.text(label_x, top + 20, "Sample proportion = " + r.phat.toFixed(4)).attr(text_attrs);
+        p.text(label_x, top + 40, "P-value = " + r.p_value.toFixed(4)).attr(text_attrs);
+        this.result = r;
+    };
+
+    this.update_ha_labels = function(){
+        $("#lha1").html("<i>p</i> &gt; " + this.p0);
+        $("#lha2").html("<i>p</i> &lt; " + this.p0);
+        $("#lha3").html("<i>p</i> &ne; " + this.p0);
+    };
+
+    var fields = {
+        p0: { key: "p0", parse: parseFloat, ok: function(v){ return v > 0 && v < 1; } },
+        n: { key: "n", parse: function(s){ return parseInt(s, 10); }, ok: function(v){ return v >= 1; } },
+        opt_field1: { key: "x", parse: function(s){ return parseInt(s, 10); }, ok: function(v){ return v >= 0; } },
+        opt_field2: { key: "p_true", parse: parseFloat, ok: function(v){ return v >= 0 && v <= 1; } }
+    };
+
+    this.read_field = function(id){
+        var f = fields[id];
+        var v = f.parse($("#" + id).val());
+        if (!isNaN(v) && f.ok(v)) {
+            this[f.key] = (id == "n") ? Math.min(v, this.max_n) : v;
+        }
+        if (this.x > this.n) this.x = this.n;    // X can't exceed n
+        $("#" + id).val(this[f.key]);
+        $("#opt_field1").val(this.x);
+        if (id == "p0") this.update_ha_labels();
+    };
+
+    this.write_inputs = function(){
+        for (var id in fields) $("#" + id).val(this[fields[id].key]);
+        this.update_ha_labels();
+    };
+
+    this.new_sample = function(){
+        this.simulated_x = binomial_sample(this.n, this.p_true);
+    };
+
+    this.apply = function(id){
+        var old_n = this.n, old_p = this.p_true;
+        if (id) {
+            this.read_field(id);
+        } else {
+            for (var k in fields) this.read_field(k);
+        }
+        if (this.simulating() && (!id || this.n != old_n || this.p_true != old_p || this.simulated_x === null)) {
+            this.new_sample();
+        }
+        this.redraw();
+    };
+
+    this.set_mode = function(){
+        $("#u_button").html(this.simulating() ? "NEW SAMPLE" : "UPDATE");
+        if (this.simulating() && this.simulated_x === null) this.new_sample();
+        this.redraw();
+    };
+
+    this.reset = function(){
+        for (var k in this.defaults) this[k] = this.defaults[k];
+        this.simulated_x = null;
+        $("#ha1").prop("checked", true);
+        this.write_inputs();
+        if (this.simulating()) this.new_sample();
+        this.redraw();
+    };
+
+    this.initialize = function(){
+        var self = this;
+        this.width = $("#notepad").width();
+        this.height = $("#notepad").height();
+        this.plot_x = 50;
+        this.plot_width = this.width - 100;
+        this.plot_y = this.height - 100;
+        this.plot_height = this.height - 260;
+        this.paper = Raphael(document.getElementById("notepad"), this.width, this.height);
+
+        $("#p0, #n, #opt_field1, #opt_field2")
+            .blur(function(){ self.apply(this.id); })
+            .keydown(function(e){
+                if (e.which == 13) { e.preventDefault(); self.apply(this.id); }
+            });
+        $("#ha1, #ha2, #ha3").click(function(){ self.redraw(); });
+        $("#opt1, #opt2").click(function(){ self.set_mode(); });
+        $("#u_button").click(function(e){ e.preventDefault(); self.apply(); });
+        $("#c_button").click(function(e){ e.preventDefault(); self.reset(); });
+        this.reset();
+    };
+}
+
+$(window).load(function(){
+    module_main.initialize();
+});
