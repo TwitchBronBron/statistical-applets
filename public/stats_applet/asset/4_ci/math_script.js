@@ -1,0 +1,392 @@
+//arrays of data
+var Xmas = new Array();
+var Ymas = new Array();
+var Rmas = new Array();
+
+
+//calculate mean X
+function get_mean_X(){
+    var sum = 0;
+    for(var i = 0; i < Xmas.length; i++)
+        sum += Xmas[i];
+    return sum / Xmas.length;
+}
+
+
+//calculate mean Y
+function get_mean_Y(){
+    var sum = 0;
+    for(var i = 0; i < Ymas.length; i++)
+        sum += Ymas[i];
+    return sum / Ymas.length;
+}
+
+
+//calculate standart deviation for X
+function get_Sx(){
+    var sum = 0;
+    var mX = get_mean_X();
+    for(var i = 0; i < Xmas.length; i++)
+        sum += Math.pow(Xmas[i] - mX, 2);
+    return sum / (Xmas.length - 1);
+}
+
+
+//calculate standart deviation for Y
+function get_Sy(){
+    var sum = 0;
+    var mY = get_mean_Y();
+    for(var i = 0; i < Ymas.length; i++)
+        sum += Math.pow(Ymas[i] - mY, 2);
+    return sum / (Ymas.length - 1);
+}
+
+
+//calculate correlation
+function get_r(){
+    var Sx = Math.sqrt(get_Sx());
+    var mX = get_mean_X();
+    var Sy = Math.sqrt(get_Sy());
+    var mY = get_mean_Y();
+    var sum = 0;
+    for(var i = 0; i < Xmas.length; i++)
+        sum += ((Xmas[i] - mX) / Sx) * ((Ymas[i] - mY) / Sy);
+    return sum / (Xmas.length - 1);
+}
+
+
+//calculate b-coefficient of least-squares line
+function get_b(){
+    return get_r() * Math.sqrt(get_Sy()) / Math.sqrt(get_Sx());
+}
+
+
+//calculate a-coefficient of least-squares line
+function get_a(b){
+    return get_mean_Y() - b * get_mean_X();
+}
+
+
+//calculete a-coefficient of residual line from point (x, y)
+function get_res_line_a(b, x, y){
+    return y - b * x;
+}
+
+
+//calculete X coordinate of cross-point of least-squares line and residual line from point (x, y)
+function get_cross_x(x, y){
+    var b = get_b();
+    var a = get_a(b);
+    var an = get_res_line_a(-1 / b, x, y);
+    return (an - a) / (b + 1 / b);
+}
+
+
+function get_border_x(){
+    var tmax = Xmas[0];
+    var tmin = Xmas[0];
+    for(var i = 0; i < Xmas.length; i++){
+        if(Xmas[i] > tmax)
+            tmax = Xmas[i];
+        if(Xmas[i] < tmin)
+            tmin = Xmas[i];
+    }
+    return {
+        min : tmin,
+        max : tmax
+    }
+}
+
+function get_border_y(){
+    var tmax = Ymas[0];
+    var tmin = Ymas[0];
+    for(var i = 0; i < Ymas.length; i++){
+        if(Ymas[i] > tmax)
+            tmax = Ymas[i];
+        if(Ymas[i] < tmin)
+            tmin = Ymas[i];
+    }
+    return {
+        min : tmin,
+        max : tmax
+    }
+}
+
+
+function calculate_res_x(){
+    Rmas = new Array();
+    var b = get_b();
+    var a = get_a(b);
+    for(var i = 0; i < Xmas.length; i++){
+        var y = b * Xmas[i] + a;
+        var r = Ymas[i] - y;
+        Rmas.push(r);
+    }
+}
+
+
+function get_border_r(){
+    var tmin = Rmas[0];
+    var tmax = Rmas[0];
+    for(var i = 0; i < Rmas.length; i++){
+        if(Rmas[i] > tmax)
+            tmax = Rmas[i];
+        if(Rmas[i] < tmin)
+            tmin = Rmas[i];
+    }
+    return {
+        min : tmin,
+        max : tmax
+    }
+}
+
+
+function get_sum_X(){
+    var sum = 0;
+    for(var i = 0; i < Xmas.length; i++)
+        sum+= Xmas[i];
+    return sum;
+}
+
+
+function get_median_X(){
+    var mas = Xmas.slice(0);
+    var i;
+    for(i = mas.length - 1; i > 0; i--)
+        for(var j = 0; j < i; j++)
+            if(mas[j] > mas[j + 1]){
+                var tmp = mas[j];
+                mas[j] = mas[j + 1];
+                mas[j + 1] = tmp;
+            }
+    if(mas.length % 2) {
+        i = Math.floor(mas.length / 2);
+        return mas[i];
+    } else {
+        i = mas.length / 2;
+        return (mas[i] + mas[i - 1]) / 2;
+    }
+}
+
+function get_quartiles_X(){
+    var mas = Xmas.slice(0);
+    var i;
+    var j;
+    for(i = mas.length - 1; i > 0; i--)
+        for(j = 0; j < i; j++)
+            if(mas[j] > mas[j + 1]){
+                var tmp = mas[j];
+                mas[j] = mas[j + 1];
+                mas[j + 1] = tmp;
+            }
+    if(mas.length % 2) {
+        i = Math.floor(mas.length / 2);
+    } else {
+        i = mas.length / 2;
+    }
+    var tmp = mas.slice(0, i);
+    var q1;
+    if(tmp.length % 2) {
+        j = Math.floor(tmp.length / 2);
+        q1 = tmp[j];
+    } else {
+        j = tmp.length / 2;
+        q1 = (tmp[j] + tmp[j - 1]) / 2;
+    }
+    tmp = mas.slice(i, mas.length);
+    var q3;
+    if(tmp.length % 2) {
+        j = Math.floor(tmp.length / 2);
+        q3 = tmp[j];
+    } else {
+        j = tmp.length / 2;
+        q3 = (tmp[j] + tmp[j - 1]) / 2;
+    }
+    return {
+        Q1 : q1,
+        Q3 : q3
+    };
+}
+
+
+function gaussian(sigma, mitt, x){
+    return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(- Math.pow(x - mitt, 2) / (2 * Math.pow(sigma, 2)));
+}
+
+
+function sampling_dist(x, n, mu, sigma) {
+    return (1 / (sigma / Math.sqrt(n)) * Math.sqrt(2 * Math.PI)) * Math.exp(- Math.pow(x - mu, 2) / (2 * (Math.pow(sigma / Math.sqrt(n), 2))));
+    //return 0;
+}
+
+
+function factorial(n) {
+    return !n ? 1 : n * factorial(n - 1);
+}
+
+
+function erf(z){
+    var res = 0;
+    for(var i = 0; i < 20; i++)
+        res += Math.pow(-1, i) * Math.pow(z, 2 * i + 1) / ((2 * i + 1) * factorial(i))
+    return res * 2 / Math.sqrt(Math.PI);
+}
+
+
+function get_pvalue(sigma, mitt, x){
+    return 0.5 * (1 + erf((x - mitt) / Math.sqrt(Math.pow(sigma, 2) * 2)))
+}
+
+
+function RN_Normal (mean, sd) {			
+    var v1, v2, s;
+    do {
+        v1 = 2 * Math.random() - 1;
+        v2 = 2 * Math.random() - 1;
+    } while ((s = v1 * v1 + v2 * v2) >= 1);
+    s = Math.sqrt ((-2 * Math.log(s)) / s);
+    return v1 * s * sd + mean * 1.0;
+}
+
+
+function get_histogram_X(min, max, n_classes){
+    var step = (max - min) / n_classes; 
+    var histogram = new Array();
+    for(var j = 0; j < n_classes; j++) {
+        var count = 0;
+        for(var i = 0; i < Xmas.length; i++)
+            if(Xmas[i] >= min + j * step && Xmas[i] < min + (j + 1) * step)
+                count++
+        histogram.push(count);
+    }
+    return histogram;
+}
+
+
+// Get older digit from mean X value
+function get_basic_digit(){
+    var mean_X = Math.abs(get_mean_X());    
+    var digit = -6;
+    do{
+        digit++;
+        var d = mean_X/Math.pow(10, digit)  ;      
+    }while(d >= 10);  
+    return digit;    
+}
+
+
+//Get basic digit value from number
+function get_basic_digit_value(num, basic_digit){
+    var value = parseInt(num/Math.pow(10, basic_digit));
+    return value;
+    
+}
+
+
+//Get second after basic digit value from number
+function get_second_digit_value(num, basic_digit){
+    var basic_digit_value = get_basic_digit_value(num, basic_digit);
+    var remainder = num - basic_digit_value*Math.pow(10, basic_digit);
+    return get_basic_digit_value(remainder, basic_digit-1);
+}
+
+
+//Get int random value between min and max
+function getRandomInt(min, max)
+{
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+//Get mean value from all array values
+function get_mean(arr){
+    var sum = 0;
+    for(var i = 0; i < arr.length; i++)
+        sum += arr[i];
+    return sum / arr.length;
+}
+
+
+//Get practiacal value of Population Proportion from binomial distribution with given p and n
+function get_population_proportion(n, p){
+    var successes = 0;
+    for(var i = 0; i < n; i++){
+        var rand = Math.random();
+        if (rand < p)
+            successes++;            
+    }
+    return successes/n;
+}
+
+
+//Get standard error for the sample
+function get_standard_error(arr){
+    var mean = get_mean(arr);
+    var sum = 0;
+    var n = arr.length;
+    for(var i = 0; i < n; i++){
+        sum += Math.pow((mean - arr[i]), 2);
+    }
+    var sd = Math.sqrt(sum/(n - 1));
+    return sd/Math.sqrt(n);
+}
+
+
+// Norm: converts z-score to probability value (one-tailed).
+// Adapted from "LiveScript" code at http://members.aol.com/johnp71/pdfs.html ("JavaStat")
+function Norm(z) {
+	z = Math.abs (z);
+	var p = 1 + z * (0.04986735 + z * (0.02114101 + z * (0.00327763 + z * (0.0000380036 + z * (0.0000488906 + z * 0.000005383)))));
+	p = p * p;
+    p = p * p;
+    p = p * p;
+	return 1 / (2 * p * p);
+}
+
+
+// ANorm: converts from probability value (one-tailed) to z-score
+// Adapted from "LiveScript" code at http://members.aol.com/johnp71/pdfs.html ("JavaStat")
+function ANorm(p) {
+	var v = 0.5;
+	var dv = 0.5;
+	var z = 0;
+	while (dv > 1e-6) { 
+		z = 1 / v - 1; 
+		dv = dv / 2; 
+		if (Norm(z) > p) {v = v - dv;}
+		else {v = v + dv;}
+	}
+	return z;
+}
+
+
+// convert a confidence level (80% - 99% and 99.5%) to a z-score.
+function CIToZScore(ci) {
+    
+    var z;
+    
+    if (ci == 80) {z = 1.281;}
+    else if (ci == 81) {z = 1.311;}
+    else if (ci == 82) {z = 1.341;}
+    else if (ci == 83) {z = 1.372;}
+    else if (ci == 84) {z = 1.405;}
+    else if (ci == 85) {z = 1.44;}
+    else if (ci == 86) {z = 1.476;}
+    else if (ci == 87) {z = 1.514;}
+    else if (ci == 88) {z = 1.555;}
+    else if (ci == 89) {z = 1.598;}
+    else if (ci == 90) {z = 1.645;}
+    else if (ci == 91) {z = 1.695;}
+    else if (ci == 92) {z = 1.751;}
+    else if (ci == 93) {z = 1.811;}
+    else if (ci == 94) {z = 1.88;}
+    else if (ci == 95) {z = 1.96;}
+    else if (ci == 96) {z = 2.054;}
+    else if (ci == 97) {z = 2.17;}
+    else if (ci == 98) {z = 2.326;}
+    else if (ci == 99) {z = 2.576;}
+    else if (ci == 99.5) {z = 2.5776;}
+    
+    return z;
+
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <title>stats_applet_4_ci</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link href="css/boilerplate.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/jquery-ui-custom.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/manuscript.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/slide_activity.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/stats_applet.css" media="screen" rel="stylesheet" type="text/css" >    
+    
+    </head>
+<body>
+<div id="manuscript" data-chapter-number="1">
+    <div data-type="chapter" id="id51849009">
+<h1 class="section-title">
+				Chapter
+				<span data-type="number">1</span>. <span data-type="title" data-title-for="id51849009">Confidence Intervals</span>
+</h1>
+    <div data-type="section" id="id51849017" level="1">
+<h2 class="section-title"><span data-type="title" data-title-for="id51849017">Introduction</span></h2>
+      <div data-type="metadata" data-block_type="activity_config">
+        <div data-type="field" key="activity_type_title">Statistical Applets</div>
+      </div>
+      <div data-type="figure" data-figure-id="id51849084" data-block_type="thumbnail" data-layout-align="center" data-layout-width="small" data-layout-border="false">
+        
+        <img id="idm931376" src="asset/applet_thumbnail.png" data-figure-id="id51849084" data-layout-width="small" data-mmtype="image" data-autoplay="false" width="50" height="50">
+        <div data-type="asset_source"></div>
+      </div>
+      <div data-type="box" data-block_type="instructions" id="id51836196"><div data-type="box_inner">
+        <p id="id51400365">Set the desired confidence level and sample size with the sliders, then click SAMPLE to take a sample. On the right you'll see the sampled values as small yellow dots; the large dot will show the sample mean, and the lines on each side of this dot span the confidence interval.  Click SAMPLE 25 take 25 samples all at once.  Intervals that contain the population mean µ ("hits") will be colored gray; "misses" will be colored red. Click on any confidence interval to show the sample data that the interval is based on.</p>
+        <p id="id51427493">Click the "Quiz Me" button to complete the activity.</p>
+      </div></div>
+      <p id="id51427502">A level <em>C</em> confidence interval for a parameter is an interval computed from sample data by a method that has probability <em>C</em> of producing an interval containing the true value of the parameter. In this applet we construct confidence intervals for the mean (µ) of a Normal population distribution.  Each interval is based on a SRS of size <em>n</em>.  The dot marks the sample mean, which is the center of the interval.  The lines on each side of the dot span the confidence interval.  The total number of SRSs, the number that “hit” (i.e., the confidence interval contained µ), and the percent hit are tallied for you.</p>
+      <div data-type="figure" data-figure-id="id51836784" data-block_type="" data-layout-align="center" data-layout-width="xlarge" data-layout-border="false" data-expandable="true">
+        
+        <img id="idm2154256" src="../figure_placeholder.jpg" data-figure-id="id51836784" data-layout-width="xlarge" data-mmtype="iframe" data-mmsrc="asset/4_ci/applet.html" width="850" height="600" alt="" title="">
+        <div data-type="figure_text"><span data-type="caption"></span></div>
+      </div>
+      <div data-type="box" data-block_type="questions" id="id51840805"><div data-type="box_inner">
+        <div data-type="question" id="id51839838">
+<h3>Question
+			    <span data-type="number">1.1 </span><span data-type="title"></span>
+</h3>
+          <p id="id51426950">Reset the applet, set the sample size to 50 and the confidence level to 80, and click the "SAMPLE 25" button four times, so that you've taken 100 total samples.  Now raise the confidence level to 90, 95, and 99.  As the confidence level rises, the confidence intervals in the graph get <span data-type="query_display" id="idp400825088"></span><span data-type="query" data-encrypted="true">TkfECndWwoc+Jwmwxd0llBmpmi4=</span>, while the "Percent hit"—the number of samples whose intervals include the true population mean—<span data-type="query_display" id="idp400825776"></span><span data-type="query" data-encrypted="true">Gf3V/TN28dP11g8ozjnmmmCtZE0exjSd26s+e7tAdKW2UsQPaG8lVPFo8H7uYcrB</span>.</p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">Try again.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. See above for the correct answers.</div>
+            <div data-type="field" key="feedback_correct">Great job.</div>
+          </div>
+        </div>
+        <div data-type="question" id="id51582267">
+<h3>Question
+			    <span data-type="number">1.2 </span><span data-type="title"></span>
+</h3>
+          <p id="id51400345">Now set the confidence level to 95 and take 25 samples each with sample sizes of 10, 40, and 200.  As the sample size increases, the confidence intervals in the graph get <span data-type="query_display" id="idp400827360"></span><span data-type="query" data-encrypted="true">oUSIS7ffBFuMpcKjb/7M9TgXkok=</span>, while the "Percent hit"—the number of samples whose intervals include the true population mean—<span data-type="query_display" id="idp400828048"></span><span data-type="query" data-encrypted="true">tiYL449dXmNPEx9WsUD3Uz4/TMVvy4nr+ivuNlpRQOHK//gJTPSTjLhbUotJP8oK</span>.</p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">Try again.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. See above for the correct answers.</div>
+            <div data-type="field" key="feedback_correct">Great job.</div>
+          </div>
+        </div>
+        <div data-type="question" id="id51582952">
+<h3>Question
+			    <span data-type="number">1.3 </span><span data-type="title"></span>
+</h3>
+          <span data-type="query_display" id="idp400832928"></span><span data-type="query" data-encrypted="true">9260f6aWlppEVr4BWsCxAELb9/Tg4+y6h0RpWCLo3Sn6RYRii/KDTUBJl2P+nMvNN1PnF1QE4MmULhV25eJwbKaHrF1Oln2n8L+kjsTelwrUBxsetaXZW/MPDdQ251PR0DGCIeQe6kX/yLLlYgIHx2dNyD/5nFNLHjqTqbr35ItkN4P2HOeksdpMvTcUhbZLGuTQ3X6wepvLiqhPAp4ngkSnMp73oecq3chW5hKEy5ixbmUMt/J5oQPFC0Sa470HsSQO7iLwhdyp4DTDJGS+Hhe2k59t/bBpeoEf4Nn2LLjHW83MnOBZa6HutBF56KTboordhA5ivZOfE6hLbriI7mmpyHoyfUyfo/3EpMTxXsUyVm288f9RVnsw6csBRzjQbCKhm5smdVvm8SRZmnT8m/E023SHYN9hbVWLIduxrEDt4v3QEAPL4dzmqEtb1FZKpFv/HL0hh4dcg2LIHqM7MvbmadILtmYuVXnn6A==</span>
+          <div data-type="metadata">
+            <div data-type="field" key="feedback">A 95% confidence interval is constructed specifically so that there is a 95% chance that the interval includes the true population mean.  The central limit theorem guarantees that the sample mean is more likely to be closer to the true population mean with a larger sample than with a smaller sample, so the confidence interval is narrower the larger the sample size. But the 95% confidence interval will be equally likely to include the population mean regardless of the sample size.</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+<!-- #x-digfir-subsection-insertion-point --></div><!-- /#manuscript -->
+<br class="clear" />
+<!-- end of material in original view -->
+
+	<!--[if IE]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
+    
+<script type="text/javascript" src="js/utilities.js"></script>
+<script type="text/javascript" src="js/query_types.js"></script>
+<script type="text/javascript" src="js/player.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery_extensions.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript" src="js/slide_activity.js"></script>
+<script type="text/javascript" src="js/stats_applet.js"></script>
+<script type="text/javascript">
+    //<!--
+    
+$(window).ready(function () {
+	player.initialize('50192f48b11c0f9965000000');
+});
+    //-->
+</script>
+</body>
+</html>
+

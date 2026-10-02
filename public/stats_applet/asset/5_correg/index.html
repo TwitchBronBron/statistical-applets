@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Correlation and Regression</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+        <script src="../common/jquery.min.js"></script>
+        <script src="../common/raphael-min.js"></script>
+        <script src="math_script.js"></script>
+        <script src="main_script.js"></script>
+    </head>
+    <body>
+        <div id="fone">
+            <div id="left_panel">
+                <div id="info"> </div>
+                <div id="enter">
+                    <form action="" method="get" id="enter_form">
+                        <div id="settings">
+                        	<div class='setting_wrapper'>
+								<div class="input_box">
+									<input name="click_action" id="add_points" value="add_points" type="radio" checked/>
+								</div>    
+								<div class="label_box">
+									<label for="add_points">Add data points</label>
+								</div>
+							</div>
+
+                        	<div class='setting_wrapper'>
+								<div class="input_box">
+									<input name="click_action" id="draw_line" value="draw_line" type="radio"/>
+								</div>    
+								<div class="label_box">
+									<label for="draw_line">Draw your own line</label>
+								</div>
+							</div>
+
+                        	<div id="user_line_stats" class='setting_wrapper' style='visibility:hidden; margin-bottom:20px; margin-left:45px; color:#000; font-size:14px'>
+								Relative SS: <span id='user_line_ss' style='font-weight:bold'>&mdash;</span> &nbsp; <a href='javascript:user_line_ss_help()'><b>[?]</b></a>
+							</div>							
+
+                        	<div class='setting_wrapper'>
+								<div class="input_box">
+									<input name="least_squares_line" id="lsLine" type="checkbox"/>
+								</div>    
+								<div class="label_box">
+									<label for="lsLine">Show least-squares line</label>
+								</div>
+							</div>
+                        	<div class='setting_wrapper'>
+								<div class="input_box">
+									<input name="mX_mY_line" id="xyLine" type="checkbox"/>
+								</div>
+								<div class="label_box">
+									<label for="xyLine">Show mean X & Y lines</label>
+								</div>
+							</div>
+                        	<div class='setting_wrapper'>
+								<div class="input_box">
+									<input name="residuals_line" id="rLine" type="checkbox"/>
+								</div>
+								<div class="label_box">
+									<label for="rLine">Show residuals</label>
+								</div>
+							</div>
+                        </div>
+                        <p class="inputForm">
+                            <a href="#" id="c_button">CLEAR</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div id="notepad"> 
+            </div>
+        </div>
+    </body>
+</html>

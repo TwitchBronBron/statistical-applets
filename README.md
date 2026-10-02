@@ -3,6 +3,10 @@
 Self-hosted restoration of the BFW / W. H. Freeman "Statistical Applets" that used to live at
 `digitalfirst.bfwpub.com/stats_applet/`. They are HTML5 (jQuery + jQuery UI + Raphaël SVG); no Flash or Java.
 
+> **Why this exists:** the original website was taken down, and the Wayback Machine copies don't work. This
+> repository exists only to keep the applets usable. If the original site is ever restored, I'm happy to take
+> this one down.
+
 ```
 npm start        # http://localhost:8081/
 ```
@@ -11,7 +15,7 @@ npm start        # http://localhost:8081/
 
 ## Publishing (GitHub Pages)
 
-`.github/workflows/pages.yml` publishes `public/` on every push to `main`. One-time setup: in the repo's
+`.github/workflows/pages.yml` publishes `public/` on every push to `master`. One-time setup: in the repo's
 **Settings → Pages**, set **Source** to **GitHub Actions**. All site paths are relative, so it works at
 `https://<user>.github.io/<repo>/`. To test that locally, run `BASE=/statistical-applets npm start` and open
 `http://localhost:8081/statistical-applets/` (in Git Bash, prefix the command with `MSYS_NO_PATHCONV=1`).
@@ -35,6 +39,9 @@ Changes to the archived files are marked with `LOCAL PATCH` comments where the f
 - `js/stats_applet.js`: loads the vendored MathJax with a real `<script>` tag; guards `MathJax.Hub.Queue`;
   shows the "Quiz Me" button by default (it used to need an LMS or `?quiz_me=true`; `?quiz_me=false` now hides it).
 - Wrapper pages: removed the dead `admin.brightcove.com` script tag (used only for video figures).
+- `asset/common/jquery.ui.touch-punch.min.js` and `asset/common/css/styleMain.css`: the original server never had
+  these (Wayback only captured its default page in their place). Touch Punch is the stock 0.2.3 release from
+  cdnjs, and `styleMain.css` is an empty placeholder.
 - `asset/common/css/ui-lightness/images/`: stock jQuery UI 1.8.20 theme images missing from the archive,
   taken from `code.jquery.com`.
 

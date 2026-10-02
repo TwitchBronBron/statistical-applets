@@ -41,6 +41,11 @@ async function fetchWithRetry(url, tries = 4) {
             if (buf.includes('Internet Archive: Temporarily Offline')) {
                 throw new Error('archive temporarily offline');
             }
+            // The origin served its default page for files it didn't have, and Wayback
+            // archived that as a 200, so treat it as missing.
+            if (buf.includes('Digital First subtypes on staging server')) {
+                return null;
+            }
             return buf;
         } catch (e) {
             if (i >= tries) {
@@ -73,7 +78,8 @@ function findRefs(rel, text) {
         const resolved = ref.startsWith('/')
             ? ref.slice(1)
             : path.posix.normalize(path.posix.join(path.posix.dirname(rel), ref));
-        if (!resolved.startsWith('..')) {
+        // vendor/ is ours (not on the original server); its refs live in patched files
+        if (!resolved.startsWith('..') && !resolved.includes('vendor/')) {
             out.push(resolved);
         }
     }
@@ -83,6 +89,8 @@ function findRefs(rel, text) {
 // Root-absolute refs ("/figure_placeholder.jpg") break when the site is served from a
 // subpath (e.g. GitHub Pages project sites), so make them relative to the file.
 function relativizeRootRefs(rel, html) {
+    // also drop the dead Brightcove video loader (no applet uses video)
+    html = html.replace(/<script[^>]*admin\.brightcove\.com[^>]*><\/script>\r?\n?/g, '');
     return html.replace(/\b(src|href)=(["'])\/(?!\/)([^"']*)\2/g, (m, attr, q, target) => {
         const relTarget = path.posix.relative(path.posix.dirname(rel), target);
         return `${attr}=${q}${relTarget}${q}`;

@@ -1,0 +1,190 @@
+body {
+	margin:0px;
+}
+
+body, td {
+	font-family:Arial, sans-serif;
+	font-size:14px;
+}
+
+root { 
+    display: block;
+}
+
+#fone {
+   position:relative;
+    background: #fff;
+    margin-left:auto;
+    margin-right:auto;
+    width:740px;
+}
+
+#sample_1, #sample_more {
+    background-color: #11E911;
+    border: 2px solid;
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border-color: #00D800;
+    border-width: 3px;
+    margin-left:auto;
+    margin-right:auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    /*background-image: -webkit-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -moz-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -o-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -ms-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: linear-gradient(top, #c23737, #ad2b2b);*/
+
+    -webkit-transition: All 0.5s ease;
+    -moz-transition: All 0.5s ease;
+    -o-transition: All 0.5s ease;
+    -ms-transition: All 0.5s ease;
+    transition: All 0.5s ease;
+}
+
+.stats {
+	width:180px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+#reset{
+    background-color: #D11717;
+    border: 2px solid;
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border-color: #e7ae00;
+    border-width: 3px;
+    margin-left:auto;
+    margin-right:auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    /*background-image: -webkit-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -moz-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -o-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: -ms-linear-gradient(top, #c23737, #ad2b2b);
+    background-image: linear-gradient(top, #c23737, #ad2b2b);*/
+
+    -webkit-transition: All 0.5s ease;
+    -moz-transition: All 0.5s ease;
+    -o-transition: All 0.5s ease;
+    -ms-transition: All 0.5s ease;
+    transition: All 0.5s ease;
+}
+#mean{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+#totals{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.label{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.input{
+	width: 40px;
+    margin-top: 10px;   
+    border: 0;
+    color: #960; 
+    font-weight :bold;
+    font-size:12px;
+}
+.settings{
+    padding: 15px;
+}
+#left_panel {
+    padding: 0px;
+    width: 230px;
+    height: 580px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    border-right: none;
+    margin-bottom: 0px;
+    float: left;
+    font-family: Helvetica Neue, Arial, sans-serif;
+	text-align: left;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#notepad {
+    margin-top: 0px;
+    width: 500px;
+    height: 580px;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    float: left;
+    
+    background-image: -webkit-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: -moz-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: -o-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: -ms-linear-gradient(top, #fafbfc, #f2f3f4);
+    background-image: linear-gradient(top, #fafbfc, #f2f3f4);
+
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#population_label {
+	position:absolute;
+	top:20px;
+	left: 280px;
+	color:#666;
+	font-size:12px;
+}
+
+#sampling_label {
+	position:absolute;
+	top:40px;
+	left: 280px;
+	color:#990000;
+	font-size:12px;
+}
+
+#mu_label {
+	position:absolute;
+	text-align:center;
+	left:476px;
+	top:146px;
+	width:20px;
+	height:20px;
+	background-color:#f9f9f9;
+	z-index:5000;
+}
