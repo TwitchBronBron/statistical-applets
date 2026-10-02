@@ -178,5 +178,19 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
   content and isn't changed here; the page's notice mentions it.
 - **Verified:** P-values match the answer key (0.251, 0.022, 0.223), and a full quiz run scores 4/4.
 
+### Sampling Distribution of a Proportion (`asset/generic_versions/24_sampdistprop/`)
+
+- **From the originals:** the page text (p from 0 to 1, n from 20 to 2000, GENERATE ONE SAMPLE, GENERATE SAMPLES
+  for 10,000 at once, "Show Normal Curve") and the 16-question quiz. A later "generic" applet with no Java
+  ancestor. Layout follows the Central Limit Theorem rebuild, its closest sibling.
+- **Designed for the rebuild:** the code and layout, the histogram (bars aligned to the possible values X/n, on a
+  scale of p ± 4.5 standard deviations clipped to 0 to 1, so skew against 0 or 1 shows), highlighting the most
+  recent single sample, and the summary of the simulated distribution's mean and standard deviation (which
+  questions 13, 15 and 16 ask about). The theoretical standard deviation is deliberately not displayed, since
+  question 14 asks students to compute it. Changing p or n starts over.
+- **Verified:** the simulated mean and SD match p and √(p(1−p)/n); the quiz's shapes appear as described
+  (right-skewed for p = .05, n = 75; left-skewed for p = .95, n = 75; symmetric for p = .95, n = 750); 10,000
+  samples at n = 2000 take under half a second; a full quiz run scores 16/16.
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.
