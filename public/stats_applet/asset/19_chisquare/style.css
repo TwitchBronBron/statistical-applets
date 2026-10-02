@@ -1,0 +1,158 @@
+/* LOCAL RECONSTRUCTION: adapted from 4_ci/style.css (sliders, buttons, panels) for the 870x485 frame. */
+
+body {
+	margin:0px;
+}
+
+body, td, th {
+	font-family:Arial, sans-serif;
+	font-size:14px;
+}
+
+#fone {
+    position:relative;
+    background: #fff;
+    width:870px;
+}
+
+#pour, #show_hopper, #new_hopper {
+    border: 3px solid;
+    height: 38px;
+    width:  170px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 13px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    margin: 0 auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: All 0.5s ease;
+}
+
+#pour { background-color: #11E911; border-color: #00D800; }
+#show_hopper { background-color: #3b60ff; border-color: #1d3bb3; }
+#new_hopper { background-color: #D11717; border-color: #aa1313; }
+
+.controlButtons {
+    margin: 14px 0 0 0;
+}
+
+.label{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.input{
+	width: 50px;
+    margin-top: 10px;
+    border: 0;
+    color: #960;
+    font-weight :bold;
+    font-size:12px;
+    background: transparent;
+}
+
+.settings{
+    padding: 10px 15px 6px 15px;
+}
+
+#left_panel {
+    padding: 0px;
+    width: 200px;
+    height: 475px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    border-right: none;
+    margin-bottom: 0px;
+    float: left;
+    font-family: Helvetica Neue, Arial, sans-serif;
+	text-align: left;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#notepad {
+    position: relative;
+    margin-top: 0px;
+    width: 661px;
+    height: 475px;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    float: left;
+    background-image: linear-gradient(to bottom, #fafbfc, #f2f3f4);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#notepad svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* results table, to the right of the hopper and bag */
+#results {
+    position: absolute;
+    left: 330px;
+    top: 20px;
+    width: 315px;
+    z-index: 2;
+}
+
+#table {
+    border-collapse: collapse;
+    width: 100%;
+    background: #fff;
+}
+
+#table th, #table td {
+    border: 1px solid #ccc;
+    padding: 5px 8px;
+    text-align: center;
+}
+
+#table th {
+    background: #e9eaeb;
+    font-size: 13px;
+}
+
+#table td.color {
+    text-align: left;
+}
+
+.swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    border: 1px solid #555;
+    margin-right: 6px;
+    vertical-align: -1px;
+}
+
+#table tr.total td {
+    font-weight: bold;
+}
+
+#test {
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.6em;
+}
+
+#test .reject { color: #c00000; font-weight: bold; }
+#test .keep { color: #007a1f; font-weight: bold; }
+
+#tally {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #555;
+}

@@ -211,5 +211,19 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
 - **Verified:** with a Normal population the t statistics match the t curve (as theory says), and the shapes
   above were measured from the applet's own output.
 
+### Chi-square Goodness of Fit Test (`asset/19_chisquare/`)
+
+- **From the originals:** the page text (Bag Count and α sliders, POUR NEW BAG, SHOW HOPPER VALUES, NEW HOPPER,
+  a table of color counts with the test against equal proportions, five colors), the quiz, and the page's quiz
+  hook (`js/stats_applet_19_chisquare.js`), which takes the hopper's red share for question 1 and completes
+  questions 3 and 4 after five bags of 20 and of 200. No Java ancestor.
+- **Designed for the rebuild:** all code and layout: the hopper and bag drawings, the five colors (red, orange,
+  yellow, green, blue), slider steps (bags of 10–500; α of 0.01, 0.025, 0.05, 0.10), the results table, and a
+  tally of bags poured and rejected. New hoppers have proportions of 20% each jittered by up to about ±9 points
+  (rounded to 0.1%), so bags of 20 reject equal proportions about 10–15% of the time and bags of 200 usually do,
+  as question 5 expects. The applet reports to the quiz only on load, NEW HOPPER, and POUR NEW BAG, because the
+  hook counts every report as a bag.
+- **Verified:** χ² and P-values match hand calculations (df = 4), and a full quiz run scores 10/10.
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.
