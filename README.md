@@ -49,7 +49,8 @@ Changes to the archived files are marked with `LOCAL PATCH` comments where the f
 
 ## Reconstructed applets
 
-Some applets' own code wasn't archived (not in Wayback, archive.today, or Macmillan's rehosted copies). Those are
+Some applets' own code wasn't archived anywhere (not in Wayback, archive.today, Common Crawl, or Macmillan's
+rehosted copies). Those are
 rebuilt to work with the original page and quiz. They're marked "reconstructed" on the landing page, and their
 own page shows a notice above the applet. Treat them with more scrutiny than the restored originals.
 
@@ -67,6 +68,22 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
   version), because question 4's answer is n = 95.
 - **Verified:** power matches hand calculations for one- and two-sided tests, and a full quiz run using only the
   applet's displayed values scores 10/10.
+
+### The Central Limit Theorem (`asset/3_cltmean/`)
+
+- **From the originals:** the page text, quiz, and answer key (exponential means at n = 2 are skewed right and at
+  n = 50 roughly symmetric; uniform means at n = 3 are "too flat" against the Normal curve). The controls the
+  instructions name: population choice, sample size, a button that generates 10,000 samples, and "Show Normal
+  curve". From the earlier Java version of this applet: populations with mean 1 and SD 1, and the convention of
+  a blue sampling distribution with a red Normal curve. Style follows the sibling Confidence Intervals applet.
+- **Designed for the rebuild:** the whole layout, the small population picture at the top, the histogram (40
+  bins over µ ± 4σ/√n), the sample-size steps (1–5, 10, 15, 20, 25, 30, 40, 50, 75, 100), and the summary line
+  comparing the means' actual average and SD to the CLT's predictions.
+- **Note:** question 3's model answer says the exponential case at n = 100 "might still be very slightly skewed
+  to the left". That's the original text; any remaining skew is to the right. It's a free-response question, so
+  it doesn't affect grading.
+- **Verified:** the SD of the 10,000 means matches σ/√n for every population and n tried, the quiz's expected
+  shapes show up as described, and a full quiz run scores 10/10.
 
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.
