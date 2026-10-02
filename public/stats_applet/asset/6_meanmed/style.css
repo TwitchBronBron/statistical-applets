@@ -1,0 +1,118 @@
+/* LOCAL RECONSTRUCTION: this applet's index.html survived, but its style.css did not. Adapted from the
+   sibling 5_correg/style.css (same page structure), sized for the 850x440 frame. */
+
+body {
+	margin:0px;
+	padding:0px;
+}
+
+#fone {
+    position: relative;
+    background: #fff;
+}
+
+#mean_med_display {
+    position: absolute;
+    left: 226px;
+    top: 14px;
+    width: 615px;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    font-size: 17px;
+    color: #292929;
+    z-index: 10;
+    pointer-events: none;
+}
+
+#info {
+    width: 220px;
+    height: 60px;
+}
+
+#left_panel {
+    width: 220px;
+    height: 430px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    border-right: none;
+    margin-bottom: 0px;
+    float: left;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-size:12px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.label_box {
+    margin: 10px 0 0 18px;
+    line-height: 25px;
+}
+
+.label_box input {
+    width: 50px;
+    font-size: 14px;
+}
+
+#notepad {
+    margin-top: 0px;
+    width: 615px;
+    height: 430px;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    float: left;
+    background-image: linear-gradient(to bottom, #fafbfc, #f2f3f4);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.inputForm {
+    margin-top: 22px;
+}
+
+#u_button, #c_button {
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-weight: bold;
+    color: #fff;
+    border: 3px solid;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    transition: All 0.5s ease;
+}
+
+#u_button {
+    background-color: #11e911;
+    border-color: #00d800;
+}
+
+#c_button {
+    background-color: #d11717;
+    border-color: #aa1313;
+    background-image: linear-gradient(to bottom, #c23737, #ad2b2b);
+}
+
+#c_button:hover {
+    background-color: #ff3434;
+    background-image: linear-gradient(to bottom, #e25757, #ad2b2b);
+}
+
+#enter{
+    color: #fff;
+}
+
+#settings label {
+    font-size: 14px;
+    font-family: Helvetica Neue, Arial, sans-serif;
+    color: #292929;
+}

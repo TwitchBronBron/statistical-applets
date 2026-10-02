@@ -85,5 +85,21 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
 - **Verified:** the SD of the 10,000 means matches σ/√n for every population and n tried, the quiz's expected
   shapes show up as described, and a full quiz run scores 10/10.
 
+### Mean and Median (`asset/6_meanmed/`)
+
+- **From the originals:** more survived here than for the others: the applet's own `index.html` (its controls
+  and layout), the page's quiz hook (`js/stats_applet_6_meanmed.js`, which checks that n ≥ 5 and the mean exactly
+  equals the median), the page text, and the quiz. Behavior follows the page's instructions and the Java "Mean and
+  Median" applet it replaced (`meanmedian.jar`, decompiled): click below the line to add a point, points stack,
+  drag to move or onto the trash to remove, red median arrow, green mean arrow, one yellow arrow when equal.
+  Styling follows the sibling Correlation applet, which has the same page structure.
+- **Designed for the rebuild:** `style.css`, `math_script.js` and `main_script.js` (lost). Points snap to a grid
+  of about 100 steps across the range (0.1 for the default 0 to 10), which stands in for the Java version's
+  5-pixel snapping and makes "mean equals median" exactly reachable. Tick labels on the line, the trash icon's
+  look, and the "mean = … median = …" number formatting (up to 4 decimals). Clicking UPDATE with a new range
+  clears the points.
+- **Verified:** mean and median match hand calculations while adding, stacking, dragging, and trashing points,
+  and a full quiz run scores 10/10 (including question 2, which reads the applet's mean and median).
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.
