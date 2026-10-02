@@ -38,7 +38,9 @@ Changes to the archived files are marked with `LOCAL PATCH` comments where the f
 
 - `js/stats_applet.js`: loads the vendored MathJax with a real `<script>` tag; guards `MathJax.Hub.Queue`;
   shows the "Quiz Me" button by default (it used to need an LMS or `?quiz_me=true`; `?quiz_me=false` now hides it).
-- Wrapper pages: removed the dead `admin.brightcove.com` script tag (used only for video figures).
+- Wrapper pages: removed the dead `admin.brightcove.com` script tag (used only for video figures), and replaced
+  equation images from the dead `angel.bfwpub.com/intellipro/geteq.ashx` renderer with MathJax TeX. Wayback
+  captured that renderer only after it went down. The fetch script makes both changes automatically.
 - `asset/common/jquery.ui.touch-punch.min.js` and `asset/common/css/styleMain.css`: the original server never had
   these (Wayback only captured its default page in their place). Touch Punch is the stock 0.2.3 release from
   cdnjs, and `styleMain.css` is an empty placeholder.

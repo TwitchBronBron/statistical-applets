@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <title>stats_applet_12_pvalue</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link href="css/boilerplate.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/jquery-ui-custom.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/manuscript.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/slide_activity.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/stats_applet.css" media="screen" rel="stylesheet" type="text/css" >    
+    
+    </head>
+<body>
+<div id="manuscript" data-chapter-number="1">
+    <div data-type="chapter" id="id51849009">
+<h1 class="section-title">
+				Chapter
+				<span data-type="number">1</span>. <span data-type="title" data-title-for="id51849009">P-Value of a Test of Significance</span>
+</h1>
+    <div data-type="section" id="id51849017" level="1">
+<h2 class="section-title"><span data-type="title" data-title-for="id51849017">Introduction</span></h2>
+      <div data-type="metadata" data-block_type="activity_config">
+        <div data-type="field" key="activity_type_title">Statistical Applets</div>
+      </div>
+      <div data-type="figure" data-figure-id="id51849084" data-block_type="thumbnail" data-layout-align="center" data-layout-width="small" data-layout-border="false">
+        
+        <img id="" src="asset/applet_thumbnail.png" data-figure-id="id51849084" data-layout-width="small" data-mmtype="image" data-autoplay="false" width="50" height="50">
+        <div data-type="asset_source"></div>
+      </div>
+      <div data-type="box" data-block_type="instructions" id="id51836196"><div data-type="box_inner">
+        <p id="id51427485">To set up the test, fill in the boxes: What null hypothesis H<sub>0</sub> about the mean μ do you want to test? Which alternative hypothesis H<sub>a</sub> do you have in mind, and what level of significance α do you require? What value of the standard deviation <em>σ</em> is known to be true? How many observations <em>n</em> will you have (250 or fewer)?</p>
+        <p id="id51427513">If you already have a sample mean, enter this value and click UPDATE to display the sample mean on the graph and calculate the P-value. Or you can specify the true population mean μ and use the GENERATE SAMPLE button to create a random sample from the population, display the observations and sample mean (note that some of the points in the sample may be too far from μ to appear in the display), and calculate the P-value.</p>
+        <p id="id51443416">Click the "Quiz Me" button to complete the activity.</p>
+      </div></div>
+      <p id="id51427600">This applet illustrates the P-value of a test of significance. Here we're testing a hypothesis about the mean of a normal distribution whose standard deviation we know, but the concepts are essentially the same for any other type of significance test.</p>
+      <p id="id51427607">The normal curve shows the sampling distribution of the sample mean <!-- LOCAL PATCH: was a geteq.ashx image --><span class="tex">\(\bar{x}\)</span> when your null hypothesis is true. The blue arrow shows what kinds of values of <!-- LOCAL PATCH: was a geteq.ashx image --><span class="tex">\(\bar{x}\)</span> count as evidence against H<sub>0</sub> in favor of your alternative H<sub>a</sub>. Try changing H<sub>a</sub> to see how the arrow changes. Once you have a value of <!-- LOCAL PATCH: was a geteq.ashx image --><span class="tex">\(\bar{x}\)</span> from data, the graph will show you the P-value for this <!-- LOCAL PATCH: was a geteq.ashx image --><span class="tex">\(\bar{x}\)</span> : it is the probability—calculated taking H<sub>0</sub> to be true—of getting a value at least that far away from H<sub>0</sub> in the direction of the arrow.</p>
+      <div data-type="figure" data-figure-id="id51836784" data-block_type="" data-layout-align="center" data-layout-width="xlarge" data-layout-border="false" data-expandable="true">
+        
+        <img id="" src="../figure_placeholder.jpg" data-figure-id="id51836784" data-layout-width="xlarge" data-mmtype="iframe" data-mmsrc="asset/12_pvalue/index.html" width="750" height="480" alt="" title="">
+      </div>
+      <div data-type="box" data-block_type="questions" id="id51840805"><div data-type="box_inner">
+        <div data-type="question" id="id51839838">
+<h3>Question
+			    <span data-type="number">1.1 </span><span data-type="title"></span>
+</h3>
+          <p id="id51400318">Suppose you're planning to collect a set of data in an experiment where the null hypothesis states that the population mean will be 15.  You plan to collect 30 observations, and you expect the population standard deviation to be 6.5.</p>
+          <p id="id51400325">Use the applet to calculate the P-value for your final test of significance, considering the possibilities that your sample mean comes out to 12, 13, or 14, and considering the two possible alternative hypotheses µ &lt;  15 and µ ≠ 15.  Fill the P-values into the table below.  The P-value for one cell in the table—where the sample mean is 12 and H<sub>a</sub> is µ &lt; 15—is filled in for you.</p>
+          <div data-type="table" id="id51762835" data-layout-align="center" data-layout-width="xlarge" data-layout-border="false" data-mmsrc="" data-attr="">
+<table width="auto" height="auto"><tbody>
+              <tr>
+                <th align="center">
+                  <!-- LOCAL PATCH: was a geteq.ashx image --><span class="tex">\(\bar{x}\)</span>
+                </th>
+                <th align="center">H<sub>a: </sub>µ &lt; 15</th>
+                <th align="center">H<sub>a: </sub>µ ≠ 15</th>
+              </tr>
+              <tr>
+                <th align="right">12</th>
+                <td align="center">0.0057</td>
+                <td align="center">
+                  <span data-type="query_display" id="id51587993"></span><span data-type="query" data-encrypted="true">Q6tJlBQS88vvH3a3</span>
+                </td>
+              </tr>
+              <tr>
+                <th align="right">13</th>
+                <td align="center">
+                  <span data-type="query_display" id="id51588010"></span><span data-type="query" data-encrypted="true">iQt1UV70zqqG1Zlc</span>
+                </td>
+                <td align="center">
+                  <span data-type="query_display" id="id51588019"></span><span data-type="query" data-encrypted="true">w9QXOByLQcy4Opwz</span>
+                </td>
+              </tr>
+              <tr>
+                <th align="right">14</th>
+                <td align="center">
+                  <span data-type="query_display" id="id51588037"></span><span data-type="query" data-encrypted="true">h+b8FBy9QMnvvL9K</span>
+                </td>
+                <td align="center">
+                  <span data-type="query_display" id="id51588046"></span><span data-type="query" data-encrypted="true">VTXpwY5Rh9rfXZzO</span>
+                </td>
+              </tr>
+            </tbody></table>
+<div data-type="table_text">
+<span data-type="number">Table </span><span data-type="table_caption"></span>
+</div>
+</div>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">3</div>
+            <div data-type="field" key="feedback_hint">Try again.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. See above for the correct answers.</div>
+            <div data-type="field" key="feedback_correct">Great job.</div>
+          </div>
+        </div>
+        <div data-type="question" id="id51588735">
+<h3>Question
+			    <span data-type="number">1.2 </span><span data-type="title"></span>
+</h3>
+          <p id="id51427876">Considering these examples, you can conclude that:</p>
+          <ul>
+            <li>Your experiment is more likely to result in a statistically significant result the <span data-type="query_display" id="id51588156"></span><span data-type="query" data-encrypted="true">jFJecs3ptdJkIhQfxDDNog==</span> the value of your sample mean turns out to be. </li>
+            <li>Your experiment is more likely to result in a statistically significant result if you choose to test the alternative hypothesis that µ is <span data-type="query_display" id="id51588168"></span><span data-type="query" data-encrypted="true">OEJBTFZRqEZozhS4b8wtF51u7c5vTmYNILjVJg==</span> 15.</li>
+          </ul>
+          <div data-type="metadata">
+            <div data-type="field" key="feedback_incorrect">Incorrect. See above for the correct answers.</div>
+            <div data-type="field" key="feedback_correct">Great job.</div>
+          </div>
+        </div>
+        <div data-type="question" id="id51582230">
+<h3>Question
+			    <span data-type="number">1.3 </span><span data-type="title"></span>
+</h3>
+          <span data-type="query_display" id="id51588198"></span><span data-type="query" data-encrypted="true">sP9QGiqjAnnhzCYMxjFpALbgoDbxRi1bbzIcpfPr4HdamCScXMPB3MVM8j7C3lAx8orBoaAifJRpHKv+y/gl6RW60Jp6AQJxMxJGgO8hbn0T/4VBkOs028E9SN9DeMlgyFn9q7ey/Smc2fywcLHPDIeWqhukUqO+7PK2Z2YKsg3Y5iFcb78vJsCdUlXY/EmCB2CJrs+aGPTyknrEqeLQbn5+MmzT9y65KZQveaPzfZTxYyQqWBy7l30S82dakyvQE4g7fCHx0hvRGyC7ZiEVGo474gS6GU9wN98xihLr/cw=</span>
+          <div data-type="metadata">
+            <div data-type="field" key="feedback">Increasing the sample size, which an experimenter often has some control over, always increases the likelihood of a statistically significant result (assuming, of course, that the experimental manipulation actually has an effect!). This is because by taking a larger sample, your sample mean is more likely to be closer to the true population. Practically speaking, in terms of the numbers that go into tests of significance, because a larger sample size means a smaller standard error, and therefore a larger test statistic and a smaller P-value.</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+<!-- #x-digfir-subsection-insertion-point --></div><!-- /#manuscript -->
+<br class="clear" />
+<!-- end of material in original view -->
+
+	<!--[if IE]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
+    
+<script type="text/javascript" src="js/utilities.js"></script>
+<script type="text/javascript" src="js/query_types.js"></script>
+<script type="text/javascript" src="js/player.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery_extensions.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript" src="js/slide_activity.js"></script>
+<script type="text/javascript" src="js/stats_applet.js"></script>
+<script type="text/javascript">
+    //<!--
+    
+$(window).ready(function () {
+	player.initialize('5050ede5b11c0fab17000000');
+});
+    //-->
+</script>
+</body>
+</html>
+

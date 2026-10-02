@@ -7,7 +7,7 @@
 // Uses the `id_` capture mode so Wayback returns the raw bytes it archived (no
 // toolbar, no wombat URL rewriting). HTML/CSS/JS files are scanned for relative
 // references, which are fetched recursively. Existing files are skipped unless
-// --force is passed.
+// --force is passed, which only re-downloads the files named on the command line.
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -18,8 +18,10 @@ const TIMESTAMP = '2018';
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
 
 const args = process.argv.slice(2);
-const force = args.includes('--force');
 const queue = args.filter(a => !a.startsWith('--'));
+// --force re-downloads only the files named on the command line, never the files they
+// reference (shared files may carry local patches).
+const forced = new Set(args.includes('--force') ? queue : []);
 const seen = new Set();
 const missing = [];
 
@@ -88,9 +90,31 @@ function findRefs(rel, text) {
 
 // Root-absolute refs ("/figure_placeholder.jpg") break when the site is served from a
 // subpath (e.g. GitHub Pages project sites), so make them relative to the file.
+// Equation images were rendered by a BFW server (angel.bfwpub.com/intellipro/geteq.ashx)
+// that died before Wayback captured any of them. Swap in the TeX equivalent; the wrapper
+// pages already load MathJax.
+const EQUATIONS = {
+    '@OVERBAR{x}': '\\bar{x}',
+    '&sigma;/@RT{n}': '\\sigma/\\sqrt{n}',
+    '@RT{@DIV{p(1-p);n}}': '\\sqrt{\\frac{p(1-p)}{n}}',
+    '&sigma;=@RT{np(1-p)}': '\\sigma=\\sqrt{np(1-p)}'
+};
+
+function replaceEquationImages(rel, html) {
+    return html.replace(/<img[^>]*geteq\.ashx\?eqtext=([^&"]*)[^>]*>/g, (m, eq) => {
+        const tex = EQUATIONS[decodeURIComponent(eq)];
+        if (!tex) {
+            console.log(`WARNING  unknown equation image in ${rel}: ${decodeURIComponent(eq)}`);
+            return m;
+        }
+        return `<!-- LOCAL PATCH: was a geteq.ashx image --><span class="tex">\\(${tex}\\)</span>`;
+    });
+}
+
 function relativizeRootRefs(rel, html) {
     // also drop the dead Brightcove video loader (no applet uses video)
     html = html.replace(/<script[^>]*admin\.brightcove\.com[^>]*><\/script>\r?\n?/g, '');
+    html = replaceEquationImages(rel, html);
     return html.replace(/\b(src|href)=(["'])\/(?!\/)([^"']*)\2/g, (m, attr, q, target) => {
         const relTarget = path.posix.relative(path.posix.dirname(rel), target);
         return `${attr}=${q}${relTarget}${q}`;
@@ -105,7 +129,7 @@ async function mirror(rel) {
     const dest = path.join(ROOT, rel);
     let buf;
     try {
-        buf = force ? null : await fs.readFile(dest);
+        buf = forced.has(rel) ? null : await fs.readFile(dest);
     } catch { }
     if (!buf) {
         buf = await fetchWithRetry(waybackUrl(rel));
