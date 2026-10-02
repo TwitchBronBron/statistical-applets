@@ -225,5 +225,19 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
   hook counts every report as a bag.
 - **Verified:** χ² and P-values match hand calculations (df = 4), and a full quiz run scores 10/10.
 
+### Normal Approximation to Binomial Distributions (`asset/2_cltbinom/`)
+
+- **From the originals:** the applet's own `index.html` survived (n and p sliders with number boxes), along with
+  the page text and quiz. Behavior follows the Java "Normal Approximation to Binomial" applet it replaced
+  (`clt_binomial.jar`, decompiled), whose instructions match nearly word for word: n from 1 to 100 (default 10),
+  p from 0.01 to 0.99 in steps of 0.01 (default 0.7), yellow bars for the binomial probabilities on an axis from
+  −1 to n + 1, the red Normal curve with the same mean and standard deviation, a line at the mean labeled np, and
+  a "Probability" axis. The mean line is gray, as the HTML5 page text says (it was red in the Java version).
+- **Designed for the rebuild:** `style.css`, `math_script.js` and `main_script.js` (lost): layout, tick spacing,
+  and a tooltip giving each bar's exact probability on hover (an addition). The number boxes can be typed in as
+  well as set with the sliders.
+- **Verified:** probabilities match standard binomial values (P(X = 8) = 0.1964 for n = 16, p = 0.5), and a full
+  quiz run scores 10/10.
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.
