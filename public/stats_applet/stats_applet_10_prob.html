@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <title>stats_applet_10_prob</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link href="css/boilerplate.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/jquery-ui-custom.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/manuscript.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/slide_activity.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/stats_applet.css" media="screen" rel="stylesheet" type="text/css" >    
+    
+    </head>
+<body>
+<div id="manuscript" data-chapter-number="1">
+    <div data-type="chapter" id="id51849009">
+<h1 class="section-title">
+				Chapter
+				<span data-type="number">1</span>. <span data-type="title" data-title-for="id51849009">Probability</span>
+</h1>
+    <div data-type="section" id="id51849017" level="1">
+<h2 class="section-title"><span data-type="title" data-title-for="id51849017">Introduction</span></h2>
+      <div data-type="metadata" data-block_type="activity_config">
+        <div data-type="field" key="activity_type_title">Statistical Applets</div>
+      </div>
+      <div data-type="figure" data-figure-id="id51849084" data-block_type="thumbnail" data-layout-align="center" data-layout-width="small" data-layout-border="false">
+        
+        <img id="" src="asset/applet_thumbnail.png" data-figure-id="id51849084" data-layout-width="small" data-mmtype="image" data-autoplay="false" width="50" height="50">
+        <div data-type="asset_source"></div>
+      </div>
+      <div data-type="box" data-block_type="instructions" id="id51836196"><div data-type="box_inner">
+        <p id="id51428912">Set the probability of heads (between 0 and 1.0) and the number of tosses, then click "Toss". The outcomes of each toss will be reflected on the graph. Check the box to show a line with the true probability on the graph. Click "Reset" at any time to reset the graph.</p>
+        <p id="id51427822">Click the "Quiz Me" button to complete the activity.</p>
+      </div></div>
+      <p id="id51427827">When you toss a coin, there are only two possible outcomes, heads or tails. On any one toss, you will observe one outcome or another—heads or tails. Over a large number of tosses, though, the percentage of heads and tails will come to approximate the true probability of each outcome.</p>
+      <p id="id51427830">In this applet, you can set the true probability of heads for your virtual coin, then toss it any number of times. Notice how the proportion of tosses that produce heads can be quite variable at first, but will eventually settle down to the true probability.</p>
+      <div data-type="figure" data-figure-id="id51836784" data-block_type="" data-layout-align="center" data-layout-width="xlarge" data-layout-border="false" data-expandable="true">
+        
+        <img id="" src="../figure_placeholder.jpg" data-figure-id="id51836784" data-layout-width="xlarge" data-mmtype="iframe" data-mmsrc="asset/10_prob/index.html" width="850" height="535" alt="" title="">
+      </div>
+      <div data-type="metadata">
+        <div data-type="field" key="$ph">eval rand(.2,.8,1)</div>
+        <div data-type="field" key="$pt">eval round(1-$ph, 1)</div>
+        <div data-type="field" key="$toss10">eval round($ph*10,0)</div>
+        <div data-type="field" key="$toss50">eval round($ph*50,0)</div>
+        <div data-type="field" key="$toss500">eval round($ph*500,0)</div>
+      </div>
+      <div data-type="box" data-block_type="questions" id="id51840805"><div data-type="box_inner">
+        <div data-type="question" id="id51839838">
+<h3>Question
+			    <span data-type="number">1.1 </span><span data-type="title"></span>
+</h3>
+          <p id="id51434628">If you set the true probability of heads to $ph:</p>
+          <ul>
+            <li>What should be the true probability of tails? <span data-type="query_display" id="id51434640"></span><span data-type="query" data-encrypted="true">voljcClHuMI=</span>
+</li>
+            <li>How many heads would you expect to observe after 10 tosses? <span data-type="query_display" id="id51434647"></span><span data-type="query" data-encrypted="true">PPnexCYE7RiF+h29</span>
+</li>
+          </ul>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">The probability of tails will be 1 - the probability of heads. To calculate the predicted number of heads, multiply the probability of getting heads on any one toss by the total number of tosses. Try again.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. See above for the correct answer.</div>
+            <div data-type="field" key="feedback_correct">Great job.</div>
+          </div>
+        </div>
+        <div data-type="question" id="id51592756">
+<h3>Question
+			    <span data-type="number">1.2 </span><span data-type="title"></span>
+</h3>
+          <p id="id51427252">Perform this "experiment" yourself: set the probability of heads to $ph, then observe how many heads you've gotten after 10 tosses. Enter this number here: <span data-type="query_display" id="id51427257"></span><span data-type="query" data-encrypted="true">VI8Rxynw+GI=</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="feedback">Great.</div>
+          </div>
+        </div>
+        <div data-type="question" id="id51593384">
+<h3>Question
+			    <span data-type="number">1.3 </span><span data-type="title"></span>
+</h3>
+          <p id="id51400316">If the true probability of heads is $ph, how many heads would you expect to observe after 50 tosses? <span data-type="query_display" id="id51400320"></span><span data-type="query" data-encrypted="true">B2FCg8YCcoDmLNQd</span></p>
+          <p id="id51400323">After 500 tosses? <span data-type="query_display" id="id51400325"></span><span data-type="query" data-encrypted="true">DELel3IDPr5OUqfr</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_correct">Correct.</div>
+            <div data-type="field" key="feedback_hint">To calculate the predicted number of heads, multiply the probability of getting heads on any one toss by the total number of tosses. Try again.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect.</div>
+          </div>
+        </div>
+        <div data-type="question" id="id51582230">
+<h3>Question
+			    <span data-type="number">1.4 </span><span data-type="title"></span>
+</h3>
+          <span data-type="query_display" id="id51427880"></span><span data-type="query" data-encrypted="true">8S1R8+R8GAkoUXG1Twuhn4Tbft/0xdfjrzgjo/AiV1AhGdt4R5jYRHbpKdbzsqd5ERkbSsegTASvrS8IVxMg51xo/bQn5kVnu6KhrJWOsLul40bp7yJrOQzPrzcQYniMocl2Z0vjUYeKZD7NIYK6r8KHmGAIASSrjAr4pshNrM4jF175YmzZ73EovEj5x0nxJXc62r8bTaj40P7j9gpkMFaQyZ3SI+iC88tJkq8YoWbalw2SFzZmGZjkpTcGQZhfzQYX1A/QPQYuu/aNhoIFEEAvV6IQjc8tAOiJb6nDQu+kTvL50b07xpoudcbLs4FMlajyZf8IWJIy0buoMlztTPPRP0Z6/azAsrk9kvYZKX7TX1zXMUND34P7KNWhQl/Pt/CUbho3J7/ZO+LvAXSBtA==</span>
+          <div data-type="metadata">
+            <div data-type="field" key="feedback">In theory, the observed number of heads should match the predicted number of heads more closely the more tosses you perform. But random events are, well, random: you never know for sure what's going to happen.  So don't be surprised to see long "runs" of heads or tails in your experiment that defy the results predicted by the true probabilities.</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+<!-- #x-digfir-subsection-insertion-point --></div><!-- /#manuscript -->
+<br class="clear" />
+<!-- end of material in original view -->
+
+	<!--[if IE]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
+    
+<script type="text/javascript" src="js/utilities.js"></script>
+<script type="text/javascript" src="js/query_types.js"></script>
+<script type="text/javascript" src="js/player.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery_extensions.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript" src="js/slide_activity.js"></script>
+<script type="text/javascript" src="js/stats_applet.js"></script>
+<script type="text/javascript">
+    //<!--
+    
+$(window).ready(function () {
+	player.initialize('500c36bab11c0f4f2c000000');
+});
+    //-->
+</script>
+</body>
+</html>
+

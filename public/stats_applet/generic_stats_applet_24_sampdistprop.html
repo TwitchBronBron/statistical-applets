@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <title>generic_stats_applet_24_sampdistprop</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link href="css/boilerplate.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/jquery-ui-custom.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/manuscript.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/slide_activity.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/stats_applet.css" media="screen" rel="stylesheet" type="text/css" >    
+    
+    </head>
+<body>
+<div id="manuscript" data-chapter-number="1">
+    <div data-type="chapter" id="id51849009">
+<h1 class="section-title">
+				Chapter
+				<span data-type="number">1</span>. <span data-type="title" data-title-for="id51849009">Sampling Distribution of a Proportion</span>
+</h1>
+    <div data-type="section" id="id51849017" level="1">
+<h2 class="section-title"><span data-type="title" data-title-for="id51849017">Introduction</span></h2>
+      <div data-type="metadata" data-block_type="activity_config">
+        <div data-type="field" key="activity_type_title">Statistical Applets</div>
+      </div>
+      <div data-type="metadata">
+@possiblevalues:{25, 50, 75}
+$randomnumber: rand(0,2)
+$value: @possiblevalues[$randomnumber]
+
+@secondpossiblevalues:{25, 50, 75}
+$secondrandomnumber: rand(0,2)
+$secondvalue: @secondpossiblevalues[$randomnumber]
+
+@thirdpossiblevalues:{300, 500, 750, 1000}
+$thirdrandomnumber: rand(0,3)
+$thirdvalue: @thirdpossiblevalues[$randomnumber]
+
+$answertwo: 1.25*$value/25
+$answerfive: $secondvalue - 1.25*$secondvalue/25
+$answereight: eval(round(0.95*$thirdvalue, 1))
+$answernine: eval(round(0.05*$thirdvalue, 1))
+</div>
+      <div data-type="figure" data-figure-id="id51849084" data-block_type="thumbnail" data-layout-align="center" data-layout-width="small" data-layout-border="false">
+        
+        <img id="idp77526576" src="asset/applet_thumbnail.png" data-figure-id="id51849084" data-layout-width="small" data-mmtype="image" data-autoplay="false" width="50" height="50">
+        <div data-type="asset_source"></div>
+      </div>
+      <div data-type="box" data-block_type="instructions" id="id51836196"><div data-type="box_inner">
+        <p id="id51399638">Choose a population proportion of "successes" between 0 and 1 and a sample size, <em>n</em>,  between 20 and 2000.  Then                     click GENERATE ONE SAMPLE to generate samples one at  a time or click GENERATE SAMPLES to generate 10,000 samples.  Click  "Show Normal                     Curve" to compare the sampling distribution with the  Normal Distribution approximation.</p>
+        <p id="idm26158816">Click the "Quiz Me" button to complete the activity.</p>
+      </div></div>
+      <p id="id51399653">If the sample size, <em>n</em>, is "large" and both <em>np</em> and <em>n</em>(1 - <em>p</em>) are large enough, the                     sampling distribution of the sample proportion <em>p̂</em> = <em>X</em>/<em>n</em> will be approximately a Normal distribution                     with mean <em>μ</em> = <em>p</em> and standard deviation:</p>
+      <p id="idp906656">\(\sigma =\sqrt{\frac{p(1-p)}{n}}\)</p>
+      <p id="idm312624352">This applet illustrates that important fact by allowing you to generate  individual samples or thousands of samples with                     the specified parameters.  You can then compare the  distribution of sample proportion against the Normal distribution  predicted from the                     parameters.</p>
+      <div data-type="figure" data-figure-id="id51836784" data-block_type="" data-layout-align="center" data-layout-width="xlarge" data-layout-border="false" data-expandable="true">
+        
+        <img id="idp79509456" src="../figure_placeholder.jpg" data-figure-id="id51836784" data-layout-width="xlarge" data-mmtype="iframe" data-mmsrc="asset/generic_versions/24_sampdistprop/applet.html" width="900" height="500" alt="" title="">
+      </div>
+      <div data-type="box" data-block_type="questions" id="id51840805"><div data-type="box_inner">
+        <div data-type="question" id="id51839838">
+<h3>Question
+			    <span data-type="number">1.1 </span><span data-type="title"></span>
+</h3>
+          <p id="idm2138192">Set <em>p</em> to 0.05. Set n to $value. Then “Generate samples.” What is the shape of the distribution? <span data-type="query_display" id="idm2727008"></span><span data-type="query" data-encrypted="true">AfokwwDh6uMMu6yjKCOP5CCISSHYxvA3uIz2zY9jrFwppQRO1823ySVqqOk=</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">1</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. This distribution does not have that general shape. Recall that symmetric distributions are (almost) mirror images on either side of the center.</div>
+            <div data-type="field" key="feedback_correct">Correct. This distribution is right-skewed because the right-hand side is longer than the left. In particular 0 is a lower bound that cannot be breached because there can be no fewer than 0 “successes” in any set of trials.</div>
+          </div>
+        </div>
+        <div data-type="question" id="idm5302080">
+<h3>Question
+			    <span data-type="number">1.2 </span><span data-type="title"></span>
+</h3>
+          <p id="idm5300800">What is the value of <em>np</em>? (Answer to two decimal places)<br><span data-type="query_display" id="idm2721392"></span><span data-type="query" data-encrypted="true">XLFN0eEHfVsQFVrPeB6D3A==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">Multiply the number of trials (n) by the probability of a success. Enter your answer with two decimal places.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. Here, <em>np</em> = (formula: 1.25*$value/25)</div>
+            <div data-type="field" key="feedback_correct">Yes, here, <em>np</em> = (formula: 1.25*$value/25)</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp1428800">
+<h3>Question
+			    <span data-type="number">1.3 </span><span data-type="title"></span>
+</h3>
+          <p id="idp1430080">Does this fit the rule for a sample proportion to be approximately Normal? <span data-type="query_display" id="idp8880016"></span><span data-type="query" data-encrypted="true">7zVRuryDpphPQjDfxtKbZg==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">1</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. Recall, that <em>np</em> must be at least 10 in order for a sample proportion to be approximately Normal. When this value is small, the distribution tends to pile up close to 0.</div>
+            <div data-type="field" key="feedback_correct">Correct. Recall, that <em>np</em> must be at least 10 in order for a sample proportion to be approximately Normal. When this value is small, the distribution tends to pile up close to 0.</div>
+          </div>
+        </div>
+        <div data-type="question" id="idm1728976">
+<h3>Question
+			    <span data-type="number">1.4 </span><span data-type="title"></span>
+</h3>
+          <p id="idm1727696">Set <em>p</em> to 0.95. Set n to $secondvalue. Then “Generate samples.” What is the shape of the distribution? <span data-type="query_display" id="idp8886304"></span><span data-type="query" data-encrypted="true">lW2i+QO3mFHPkZd9FAx7XxqnX3jjI1IqsCUQWnEoJ2m21EkGZ/MNQG8G4PA=</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">1</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. This distribution does not have that general shape. Recall that symmetric distributions are (almost) mirror images on either side of the center.</div>
+            <div data-type="field" key="feedback_correct">Correct. This distribution is left-skewed because the left-hand side is longer than the right. In particular 1 is an upper bound that cannot be breached because there can be no more than <em>all</em> “successes” in any set of trials.</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp4321072">
+<h3>Question
+			    <span data-type="number">1.5 </span><span data-type="title"></span>
+</h3>
+          <p id="idp4322352">What is the value of <em>n</em> (1 - <em>p</em>)? (Answer to two decimal places)<br><span data-type="query_display" id="idp8892656"></span><span data-type="query" data-encrypted="true">P4Z+hrXnBRud91dkBBQr4g==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">Multiply the number of trials (<em>n</em>) by the probability of a success. Enter your answer with two decimal places.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. Here, np = (formula: 1.25*$secondvalue/25)</div>
+            <div data-type="field" key="feedback_correct">Yes, here, np = (formula: 1.25*$secondvalue/25)</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp4328848">
+<h3>Question
+			    <span data-type="number">1.6 </span><span data-type="title"></span>
+</h3>
+          <p id="idp4330128">Does this fit the rule for a sample proportion to be approximately Normal? <span data-type="query_display" id="idm396613696"></span><span data-type="query" data-encrypted="true">7zVRuryDpphPQjDfxtKbZg==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">1</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. Recall, that <em>n</em> (1 - <em>p</em>) must be at least 10 in order for a sample proportion to be approximately Normal. When <em>np</em> is large (so <em>n</em> (1 - <em>p</em>) is small), the distribution tends to pile up close to 1.</div>
+            <div data-type="field" key="feedback_correct">Correct. Recall, that <em>n</em> (1 - <em>p</em>) must be at least 10 in order for a sample proportion to be approximately Normal. When <em>np</em> is large (so <em>n</em> (1 - <em>p</em>) is small), the distribution tends to pile up close to 1.</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp961072">
+<h3>Question
+			    <span data-type="number">1.7 </span><span data-type="title"></span>
+</h3>
+          <p id="idp962352">Set <em>p</em> to 0.95. Set n to $thirdvalue. Then “Generate samples.” What is the shape of the distribution? <span data-type="query_display" id="idm396604192"></span><span data-type="query" data-encrypted="true">aAd6vzhWEy/Ie26OyGT0PtxcVpifkoT/LP9qwi8sXGhW8OD36GTRA429dzQ=</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">1</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. Symmetric distributions are at least close to mirror images on both sides of the center. Is this one?</div>
+            <div data-type="field" key="feedback_correct">Correct. Symmetric distributions are at least close to mirror images on both sides of the center. Is this one?</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp65392">
+<h3>Question
+			    <span data-type="number">1.8 </span><span data-type="title"></span>
+</h3>
+          <p id="idp66672">What is the value of <em>np</em>? (Use one decimal place in your answer.)<br><span data-type="query_display" id="idm396598896"></span><span data-type="query" data-encrypted="true">alen/b3rM9iItmsjRqYKTQ==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">Multiply the number of trials (n) by the probability of a success. Enter your answer with one decimal place.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. Here, np = (formula: 0.95*$thirdvalue)</div>
+            <div data-type="field" key="feedback_correct">Yes, here, np = (formula: 0.95*$thirdvalue)</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp931952">
+<h3>Question
+			    <span data-type="number">1.9 </span><span data-type="title"></span>
+</h3>
+          <p id="idp933232">What is the value of <em>n</em> (1 - <em>p</em>)? (Use one decimal place in your answer.)<br><span data-type="query_display" id="idm396592496"></span><span data-type="query" data-encrypted="true">Ausxm3tPeuklh7SNerLjmw==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">Multiply the number of trials (<em>n</em>) by (1 – <em>p</em>), where <em>p</em> is the probability of a success. Enter your answer with one decimal place.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. Here, <em>n</em>(1 - <em>p</em>) = (formula: 0.05*$thirdvalue)</div>
+            <div data-type="field" key="feedback_correct">Yes, here, <em>n</em>(1 - <em>p</em>) = (formula: 0.05*$thirdvalue)</div>
+          </div>
+        </div>
+        <div data-type="question" id="idm6665792">
+<h3>Question
+			    <span data-type="number">1.10 </span><span data-type="title"></span>
+</h3>
+          <p id="idm6664512">Does this fit the rule for a sample proportion to be approximately Normal? <span data-type="query_display" id="idm396584304"></span><span data-type="query" data-encrypted="true">esgbknumN3x7TOMm7lo9Vw==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">1</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. Recall, that <em>n</em> (1 - <em>p</em>) must be at least 10 in order for a sample proportion to be approximately Normal. When <em>np</em> is large (so <em>n</em> (1 - <em>p</em>) is small), the distribution tends to pile up close to 1.</div>
+            <div data-type="field" key="feedback_correct">Correct. Recall, that <em>n</em> (1 - <em>p</em>) must be at least 10 in order for a sample proportion to be approximately Normal. When <em>np</em> is large (so <em>n</em> (1 - <em>p</em>) is small), the distribution tends to pile up close to 1.</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp6389088">
+<h3>Question
+			    <span data-type="number">1.11 </span><span data-type="title"></span>
+</h3>
+          <p id="idp6390368">Set <em>p</em> to 0.15 and <em>n</em> to 200. With these parameters, do you expect the distribution to be approximately Normal? <span data-type="query_display" id="idm2800400"></span><span data-type="query" data-encrypted="true">esgbknumN3x7TOMm7lo9Vw==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">1</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. Here, we have <em>np</em> = 30 and <em>n</em> (1 - <em>p</em>) = 170.</div>
+            <div data-type="field" key="feedback_correct">Correct. Here, we have <em>np</em> = 30 and <em>n</em> (1 - <em>p</em>) = 170.</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp477392">
+<h3>Question
+			    <span data-type="number">1.12 </span><span data-type="title"></span>
+</h3>
+          <p id="idp1423712">What should be the mean of the sampling distribution? <span data-type="query_display" id="idm2793344"></span><span data-type="query" data-encrypted="true">8DZYIWMfcjSUDjuc</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">The mean of the sampling distribution is <em>p</em>, the population proportion.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. The mean of the sampling distribution is <em>p</em>, the population proportion.</div>
+            <div data-type="field" key="feedback_correct">Correct. The mean of the sampling distribution is <em>p</em>, the population proportion.</div>
+          </div>
+        </div>
+        <div data-type="question" id="idm7695984">
+<h3>Question
+			    <span data-type="number">1.13 </span><span data-type="title"></span>
+</h3>
+          <p id="idm7694704">Is the mean of the simulated distribution close? <span data-type="query_display" id="idm2786816"></span><span data-type="query" data-encrypted="true">esgbknumN3x7TOMm7lo9Vw==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">1</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. The mean (center) of the sampling distribution should be VERY close to 0.15.</div>
+            <div data-type="field" key="feedback_correct">Correct. The mean (center) of the sampling distribution should be VERY close to 0.15.</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp4617168">
+<h3>Question
+			    <span data-type="number">1.14 </span><span data-type="title"></span>
+</h3>
+          <p id="idp4618448">What should be the standard deviation of the sampling distribution? (Use two decimal places in your answer) <span data-type="query_display" id="idm2782128"></span><span data-type="query" data-encrypted="true">BZ2bb0hmC68w2Uyb</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">Recall, the standard deviation of this distribution should be \(\sqrt{\frac{p(1-p)}{n}}\).</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. Recall, the standard deviation of this distribution should be \(\sqrt{\frac{p(1-p)}{n}}\).</div>
+            <div data-type="field" key="feedback_correct">You got it!</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp6627024">
+<h3>Question
+			    <span data-type="number">1.15 </span><span data-type="title"></span>
+</h3>
+          <p id="idp6628336">Increase <em>n</em> to 750 and generate samples. Did the center of the distribution move? <span data-type="query_display" id="idm2776256"></span><span data-type="query" data-encrypted="true">7zVRuryDpphPQjDfxtKbZg==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">1</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. The mean of the sampling distribution of p-hat is always <em>p</em>, the population proportion.</div>
+            <div data-type="field" key="feedback_correct">Correct. The mean of the sampling distribution of p-hat is always <em>p</em>, the population proportion.</div>
+          </div>
+        </div>
+        <div data-type="question" id="idp6633120">
+<h3>Question
+			    <span data-type="number">1.16 </span><span data-type="title"></span>
+</h3>
+          <p id="idp6634432">Did the standard deviation change? <span data-type="query_display" id="idm2770816"></span><span data-type="query" data-encrypted="true">yLyjRnn8cuwobl0n443m6khlPqfRXlFhYAwCvMzDNZyrh/NMQLoZFjZn7doZg/m2BNXXnw==</span></p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">1</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. The standard deviation of a sample proportion is \(\sqrt{\frac{p(1-p)}{n}}\). As <em>n</em> gets larger, this quantity gets smaller because <em>n</em> is in the denominator.</div>
+            <div data-type="field" key="feedback_correct">Correct. The standard deviation of a sample proportion is \(\sqrt{\frac{p(1-p)}{n}}\). As <em>n</em> gets larger, this quantity gets smaller because <em>n</em> is in the denominator.</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+<!-- #x-digfir-subsection-insertion-point --></div><!-- /#manuscript -->
+<br class="clear" />
+<!-- end of material in original view -->
+
+	<!--[if IE]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
+    
+<script type="text/javascript" src="js/utilities.js"></script>
+<script type="text/javascript" src="js/query_types.js"></script>
+<script type="text/javascript" src="js/player.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery_extensions.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript" src="js/slide_activity.js"></script>
+<script type="text/javascript" src="js/stats_applet.js"></script>
+<script type="text/javascript">
+    //<!--
+    
+$(window).ready(function () {
+	player.initialize('530df95b757a2edc21000000');
+});
+    //-->
+</script>
+</body>
+</html>
+

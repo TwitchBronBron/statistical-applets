@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <title>stats_applet_2_cltbinom</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link href="css/boilerplate.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/jquery-ui-custom.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/manuscript.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/slide_activity.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/stats_applet.css" media="screen" rel="stylesheet" type="text/css" >    
+    
+    </head>
+<body>
+<div id="manuscript" data-chapter-number="1">
+    <div data-type="chapter" id="id51849009">
+<h1 class="section-title">
+				Chapter
+				<span data-type="number">1</span>. <span data-type="title" data-title-for="id51849009">Normal Approximation to Binomial Distributions</span>
+</h1>
+    <div data-type="section" id="id51849017" level="1">
+<h2 class="section-title"><span data-type="title" data-title-for="id51849017">Introduction</span></h2>
+      <div data-type="metadata" data-block_type="activity_config">
+        <div data-type="field" key="activity_type_title">Statistical Applets</div>
+      </div>
+      <div data-type="figure" data-figure-id="id51849084" data-block_type="thumbnail" data-layout-align="center" data-layout-width="small" data-layout-border="false">
+        
+        <img id="" src="asset/applet_thumbnail.png" data-figure-id="id51849084" data-layout-width="small" data-mmtype="image" data-autoplay="false" width="50" height="50">
+        <div data-type="asset_source"></div>
+      </div>
+      <div data-type="box" data-block_type="instructions" id="id51836196"><div data-type="box_inner">
+        <p id="id51399647">You can use the sliders to change both <em>n</em> and <em>p</em>. Click and drag a slider with the mouse. Start by choosing <em>p</em>. The binomial distributions are symmetric for <em>p</em> = 0.5. They become more skewed as <em>p</em> moves away from 0.5. The bars show the binomial probabilities. The vertical gray line marks the mean <em>np</em>. The red curve is the normal density curve with the same mean and standard deviation as the binomial distribution. As you increase <em>n</em>, the binomial probability histogram looks more and more like the normal curve.</p>
+        <p id="id51427509">Click the "Quiz Me" button to complete the activity.</p>
+      </div></div>
+      <p id="id51427514">The Central Limit Theorem says that as <em>n</em> increases, the binomial distribution with <em>n</em> trials and probability <em>p</em> of success gets closer and closer to a normal distribution. That is, the binomial probability of any event gets closer and closer to the normal probability of the same event. The normal distribution has the same mean <em>μ = np</em> and standard deviation <img id="" src="http://angel.bfwpub.com/intellipro/geteq.ashx?eqtext=%26sigma%3B%3D%40RT%7Bnp(1-p)%7D&amp;doborder=false&amp;bottom=0" data-figure-id="" data-layout-width="" data-mmtype="" alt=""> as the binomial distribution.</p>
+      <div data-type="figure" data-figure-id="id51836784" data-block_type="" data-layout-align="center" data-layout-width="xlarge" data-layout-border="false" data-expandable="true">
+        
+        <img id="" src="../figure_placeholder.jpg" data-figure-id="id51836784" data-layout-width="xlarge" data-mmtype="iframe" data-mmsrc="asset/2_cltbinom/index.html" width="750" height="430" alt="" title="">
+      </div>
+      <div data-type="box" data-block_type="questions" id="id51840805"><div data-type="box_inner">
+        <div data-type="question" id="id51839838">
+<h3>Question
+			    <span data-type="number">1.1 </span><span data-type="title"></span>
+</h3>
+          <p id="id51426966">Suppose you flip a "fair" coin (that is, one with probability 0.5 of coming up either heads or tails) 16 times.  According to the applet, the most likely result will be that <span data-type="query_display" id="id51581720"></span><span data-type="query" data-encrypted="true">L6bSXEGJIC8=</span> of the tosses will come up heads. The probability of this outcome, according to the applet, is approximately <span data-type="query_display" id="id51581726"></span><span data-type="query" data-encrypted="true">eVl1o4RLWZscZlBuQFUlkYJjl4TkN8LtG1MQOqnfHmc=</span>.</p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">Try again.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. See above for the correct answers.</div>
+            <div data-type="field" key="feedback_correct">Great job.</div>
+          </div>
+        </div>
+        <div data-type="question" id="id51554132">
+<h3>Question
+			    <span data-type="number">1.2 </span><span data-type="title"></span>
+</h3>
+          <p id="id51428924">Now increase the number of trials to 50. According to the applet, the most likely result will be that <span data-type="query_display" id="id51581336"></span><span data-type="query" data-encrypted="true">Bqf/EtUReUc=</span> of the tosses will come up heads. Compared to the distribution of results with 16 trials, the distribution with 50 trials <span data-type="query_display" id="id51581990"></span><span data-type="query" data-encrypted="true">j1EopTmnsJsYHFr1WikKhp5fyU2aEd59JcIqxTJvzQI=</span> resembles the normal curve, because with more possible outcomes, the distribution is <span data-type="query_display" id="id51581995"></span><span data-type="query" data-encrypted="true">L4UsIC4XF2D9vWacd/4VPvEEFquRFD1v</span>.</p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">2</div>
+            <div data-type="field" key="feedback_hint">Try again.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect. See above for the correct answers.</div>
+            <div data-type="field" key="feedback_correct">Great job.</div>
+          </div>
+        </div>
+        
+        <div data-type="question" id="id51801594">
+<h3>Question
+			    <span data-type="number">1.3 </span><span data-type="title"></span>
+</h3>
+          <span data-type="query_display" id="id51582040"></span><span data-type="query" data-encrypted="true">cpHW+7otYerim953rxdBjiwGfpLtbGxT4YssfedUnSu3UcVprDray9zwFflrR0C+YEzxT1Ccl7fmF66/Pgbv8J9TRBuJB0+JCM74HBg52Tb+BKSjXlK/utZAmuq1MEEXu/IE0xgWUD1dJKifP2+YQFiy0g/fE5MEZAVKk6FPq+mEZpAKxgKjUy1rR7x6VKfUiXxWCKc9fPOcyld6/f+UD0GzOCTXZms7kJ3gLyOJenWgKoaWvRLQueGuLiYwAab9sxzS/KkjqTMw+1VjYAfmX7WBIhyw7ItxDl0MXk8zhuT3nvvbJ2AH7VkySyrHeoZiErbvT7x0gekcpIoQqoKwVtNeksrQb/TG9usZwCabpTlsdDsoVldqoX0MIexvmMuWQsKTwIWEXcgLmu3VCbckgPV8vwSBoqvvG91O02zxkWo03Rl6e+xWDDB2CnR2hbWINBk2MNScNQKjqG98iGitcfxpuKMSFdKnTE5bl6pCNDI+maVWHzHVhZGTnrefBDEt759d40T1tR97zRkyFAfKzR9QOTs9JpqnW8hiVKTkO69BY4YXOMI9Ow==</span>
+          <div data-type="metadata">
+            <div data-type="field" key="feedback">The most likely outcome for any given probability <em>p</em> and number of trials <em>n</em> is <em>p</em> times <em>n</em>, so the most likely outcomes are that you will toss 2, 5, and 7 heads if the probability of heads is 0.2, 0.5, or 0.7 respectively.</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+<!-- #x-digfir-subsection-insertion-point --></div><!-- /#manuscript -->
+<br class="clear" />
+<!-- end of material in original view -->
+
+	<!--[if IE]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
+    
+<script type="text/javascript" src="js/utilities.js"></script>
+<script type="text/javascript" src="js/query_types.js"></script>
+<script type="text/javascript" src="js/player.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery_extensions.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript" src="js/slide_activity.js"></script>
+<script type="text/javascript" src="js/stats_applet.js"></script>
+<script type="text/javascript">
+    //<!--
+    
+$(window).ready(function () {
+	player.initialize('5053b11bb11c0f4522000000');
+});
+    //-->
+</script>
+</body>
+</html>
+

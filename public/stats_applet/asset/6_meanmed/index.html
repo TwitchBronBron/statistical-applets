@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mean and Median</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+        <script src="../common/jquery.min.js"></script>
+        <script src="../common/raphael-min.js"></script>
+        <script src="math_script.js"></script>
+        <script src="main_script.js"></script>
+    </head>
+    <body>
+       <div id="fone">
+       <div id="mean_med_display">mean = <span id="mean_span">x</span>&nbsp;&nbsp;&nbsp;&nbsp;median = <span id="median_span">x</span></div>
+            <div id="left_panel">
+                <div id="info"> </div>
+                <div id="enter">
+                    <form action="" method="get" id="enter_form">
+                        <div id="settings">
+                            <div class="label_box">
+                                <label for="lVal">Lower value:</label> <input id="lVal" type="text"/>
+                            </div>    
+                            <div class="label_box">
+                                <label for="uVal">Upper value:</label> <input id="uVal" type="text"/>
+                            </div>    
+                        </div>
+                        <p class="inputForm">
+                            <a href="#" id="u_button" >UPDATE</a>
+                        </p>
+                        <p class="inputForm">
+                            <a href="#" id="c_button" >CLEAR</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div id="notepad"> 
+            </div>
+        </div>
+    </body>
+</html>

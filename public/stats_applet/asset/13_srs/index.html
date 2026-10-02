@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Random Sample</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">        
+        <script src="../common/jquery.min.js" type="text/javascript"></script>        
+        <script src="../common/raphael-min.js"></script>
+        <script src="math_script.js"></script>
+        <script src="main_script.js"></script>
+    </head>
+    <body>
+        <div id="fone">
+            <div id="left_panel">
+                <div id="info"> </div>
+                <div id="enter">
+                    <form action="" method="get" id="enter_form">
+                        <div class="settings">
+                            <p class ="fields">
+                                <label for="population">Population = 1 to</label><input id="population" type="text"/>
+                            </p>
+                            <p class ="fields">
+                                <label for="sample_size">Select a sample of size: </label><input id="sample_size" type="text"/>
+                            </p>                                               
+                        </div>
+                        <p class="inputForm">
+                            <a href="#" id="update" >SAMPLE</a>
+                        </p>
+                        <p class="inputForm">
+                            <a href="#" id="reset" >RESET</a>
+                        </p>
+                    </form>
+                    <div id='copy_sample_div'>
+                        <p class="inputForm">
+                            <a href="#" id="copy_sample" >Copy sample to clipboard</a>
+                        </p>
+                    	<div id='copy_sample_ta_div'>
+                    	<textarea id='copy_sample_ta'></textarea>
+                    	<div id='copy_sample_instructions'><i>Use your browser's Copy command to copy the sample to your clipboard.</i></div>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+            <div id="notepad"> 
+            </div>
+        </div>
+    </body>
+</html>
