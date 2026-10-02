@@ -150,5 +150,19 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
   box lists the sample, and a full quiz run scores 10/10 (questions 3–5 are graded by the original quiz hook from
   the applet's own samples).
 
+### Statistical Significance for One Proportion (`asset/generic_versions/21_sigprop/`)
+
+- **From the originals:** the page text (H₀ for p, the alternative, α, n up to 30,000, either the number of
+  successes X or a true p with NEW SAMPLE), the quiz, and its answer key. This is one of the later "generic"
+  applets, with no Java ancestor; it's modeled on the surviving Statistical Significance applet for means
+  (`14_signif`), which has the same controls and display. The method is fixed by the answer key: a z test using
+  p₀ in the standard error with no continuity correction (p₀ = .75, n = 150, X = 105 gives P = 0.157 two-sided
+  and 0.079 one-sided).
+- **Designed for the rebuild:** the code, layout, and labels. The observed proportion is labeled "Sample
+  proportion" rather than p̂, because the hat symbol doesn't render reliably in the drawing. The display also
+  shows "X = … of n = …".
+- **Verified:** P-values match the answer key to 4 decimals, about 10% of simulated samples are significant at
+  α = 0.10 when H₀ is true, and a full quiz run scores 10/10.
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.
