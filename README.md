@@ -47,5 +47,16 @@ Changes to the archived files are marked with `LOCAL PATCH` comments where the f
 - `asset/common/css/ui-lightness/images/`: stock jQuery UI 1.8.20 theme images missing from the archive,
   taken from `code.jquery.com`.
 
+## Reconstructed applets
+
+Some applets' own code wasn't archived (not in Wayback, archive.today, or Macmillan's rehosted copies). Where it matters, they're rebuilt to work with the original wrapper page and quiz, and
+marked "reconstructed" on the landing page.
+
+- **Statistical Power** (`asset/09_power/`): rebuilt from the 2005 Java "Power" applet it was ported from
+  (`power.jar` from W. H. Freeman's archived companion sites, decompiled), and styled after the sibling
+  Statistical Significance applet (`14_signif`). Power uses exact normal math in place of the Java version's
+  two-decimal z table. n allows up to 250, not the "50 or fewer" in the page text (inherited from the Java
+  version), because the quiz's own answer key needs n = 95. Verified against the quiz key: 10/10.
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.
