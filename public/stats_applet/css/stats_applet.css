@@ -103,7 +103,7 @@ body {
 
 /* LOCAL PATCH: notice on applets whose code was lost and has been reconstructed */
 .reconstructed_note {
-	clear:left;
+	clear:both;
 	border-left:4px solid #c60;
 	background-color:#fff6ec;
 	color:#333;

@@ -133,5 +133,22 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
 - **Verified:** counts and proportions add up, the 500-toss limit holds, a probability above 1 is clamped to 1,
   and a full quiz run scores 10/10.
 
+### Simple Random Sample (`asset/13_srs/`)
+
+- **From the originals:** the applet's own `index.html` survived (population and sample-size fields, SAMPLE,
+  RESET, "Copy sample to clipboard" with its text box and instructions), plus the page's quiz hook
+  (`js/stats_applet_13_srs.js`, which grades the mean of a 3-ball sample from 10 balls and tells students to
+  RESET between samples), the page text (populations of 1 to 144, a "Population hopper"), and the quiz. Behavior
+  follows the Java "Random Sample" applet (`RandomSample.jar`, decompiled): sampling without replacement, and
+  further SAMPLE clicks keep drawing from the balls left until RESET. The LOTTO wordmark in `images/` is the Java
+  applet's own.
+- **Designed for the rebuild:** `style.css`, `math_script.js` and `main_script.js` (lost): the 12×12 hopper grid
+  with gaps where drawn balls left, the Sample area, the animation of balls moving between them, and the red
+  numbered balls (after the Java applet's red ball). The sample mean is deliberately not displayed, since the quiz
+  asks students to calculate it. Default population 100 and sample size 10, as in the Java version.
+- **Verified:** draws never repeat a ball, repeated SAMPLE clicks accumulate, RESET refills the hopper, the copy
+  box lists the sample, and a full quiz run scores 10/10 (questions 3–5 are graded by the original quiz hook from
+  the applet's own samples).
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.

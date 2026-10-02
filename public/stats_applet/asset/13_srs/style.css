@@ -1,0 +1,124 @@
+/* LOCAL RECONSTRUCTION: this applet's index.html survived, but its style.css did not. Styled after the
+   sibling applets, sized for the 900x650 frame. */
+
+body {
+	margin:0px;
+	padding:0px;
+	font-family: Arial, sans-serif;
+}
+
+#fone {
+    background: #fff;
+}
+
+#info {
+    height: 20px;
+}
+
+#left_panel {
+    width: 200px;
+    height: 640px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    border-right: none;
+    float: left;
+    font-size: 15px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.settings {
+    padding: 0 10px 0 16px;
+}
+
+.fields label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.fields input {
+    width: 60px;
+    font-size: 14px;
+}
+
+.inputForm {
+    margin-top: 16px;
+}
+
+#update, #reset {
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    border: 3px solid;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    transition: All 0.5s ease;
+}
+
+#update {
+    background-color: #11e911;
+    border-color: #00d800;
+}
+
+#update.busy {
+    background-color: #9be59b;
+    border-color: #8bd88b;
+    cursor: default;
+}
+
+#reset {
+    background-color: #d11717;
+    border-color: #aa1313;
+    background-image: linear-gradient(to bottom, #c23737, #ad2b2b);
+}
+
+#copy_sample_div {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#copy_sample {
+    font-size: 13px;
+    color: #1d3bb3;
+}
+
+#copy_sample_ta_div {
+    display: none;
+    margin: 8px 12px 0 12px;
+}
+
+#copy_sample_ta {
+    width: 160px;
+    height: 140px;
+    font-size: 13px;
+}
+
+#copy_sample_instructions {
+    font-size: 12px;
+    color: #555;
+    margin-top: 4px;
+    text-align: left;
+}
+
+#notepad {
+    margin-top: 0px;
+    width: 691px;
+    height: 640px;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    float: left;
+    background-image: linear-gradient(to bottom, #fafbfc, #f2f3f4);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
