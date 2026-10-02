@@ -239,5 +239,19 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
 - **Verified:** probabilities match standard binomial values (P(X = 8) = 0.1964 for n = 16, p = 0.5), and a full
   quiz run scores 10/10.
 
+### Probability 2, the Roulette Wheel (`asset/generic_versions/23_probroulette/`)
+
+- **From the originals:** the page text (choose an event and a number of spins; results shown as a bar graph of
+  individual results and as the proportion of spins in the event; "show the true probability"; RESET; an American
+  wheel with 1–36, 0, and 00) and the quiz, whose questions use "Spin a 2" (the default) and "Spin a red number",
+  and whose feedback places the proportion line in the middle of the display. A later "generic" applet with no
+  Java ancestor; the spin-and-plot behavior follows the Probability rebuild.
+- **Designed for the rebuild:** the code and layout, the drawn wheel (real American slot order and colors) that
+  turns to each result, the other events (black, even, odd, 1–18, 19–36, 1–12, 0 or 00), and the limit of 10,000
+  spins in all. Changing the event re-scores the same spins. Large batches are animated quickly.
+- **Verified:** every event's true probability is right (for example 1/38 = 0.0263, 18/38 = 0.4737); the wheel is
+  fair (380,000 test spins: chi-square 32.1 on 37 degrees of freedom; repeated 2,000-spin runs land where
+  expected); a full quiz run scores 6/6.
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.

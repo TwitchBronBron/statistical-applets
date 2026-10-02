@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+    LOCAL RECONSTRUCTION. The original HTML5 code for this applet was never archived. This rebuild follows
+    the surviving page text and quiz, and borrows its toss-and-plot behavior from the Probability rebuild
+    (10_prob). Layout, style, and libraries follow the sibling HTML5 applets.
+-->
+<html>
+    <head>
+        <title>Probability 2 (the Roulette Wheel)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+        <script src="../../common/jquery.min.js" type="text/javascript"></script>
+        <script src="../../common/raphael-min.js"></script>
+        <script src="math_script.js"></script>
+        <script src="main_script.js"></script>
+    </head>
+    <body>
+        <div id="fone">
+            <div id="left_panel">
+                <div class="settings">
+                    <div class="label_box">
+                        <label for="event">Event of interest:</label>
+                        <select id="event"></select>
+                    </div>
+                    <div class="label_box">
+                        <label for="num_spins">Number of spins:</label>
+                        <input class="input_box" id="num_spins" type="text" value="5"/>
+                    </div>
+                </div>
+                <p class="inputForm"><a href="#" id="spin_button">SPIN</a></p>
+                <p class="inputForm"><a href="#" id="reset_button">RESET</a></p>
+                <div class="checkbox_row">
+                    <input type="checkbox" id="show_prob"/> <label for="show_prob">Show true probability</label>
+                </div>
+            </div>
+            <div id="notepad">
+                <div id="summary"></div>
+            </div>
+        </div>
+    </body>
+</html>

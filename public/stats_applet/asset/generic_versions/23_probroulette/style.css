@@ -1,0 +1,116 @@
+/* LOCAL RECONSTRUCTION: styled after the sibling applets (via the Probability rebuild, 10_prob), sized for the
+   900x650 frame. */
+
+body {
+	margin:0px;
+	padding:0px;
+	font-family: Arial, sans-serif;
+}
+
+#fone {
+    background: #fff;
+}
+
+#left_panel {
+    width: 200px;
+    height: 640px;
+    background-color: #fff;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    border-right: none;
+    float: left;
+    font-size: 15px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.settings {
+    padding: 20px 10px 0 14px;
+}
+
+.label_box {
+    margin-bottom: 16px;
+}
+
+.label_box label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+#event {
+    width: 170px;
+    font-size: 14px;
+}
+
+.input_box {
+    width: 70px;
+    font-size: 14px;
+}
+
+.inputForm {
+    margin-top: 16px;
+}
+
+#spin_button, #reset_button {
+    height: 38px;
+    width:  147px;
+    overflow: hidden;
+    display: block;
+    text-align: center;
+    line-height: 38px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    border: 3px solid;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    transition: All 0.5s ease;
+}
+
+#spin_button { background-color: #11e911; border-color: #00d800; }
+#spin_button.busy { background-color: #9be59b; border-color: #8bd88b; cursor: default; }
+#reset_button { background-color: #d11717; border-color: #aa1313; background-image: linear-gradient(to bottom, #c23737, #ad2b2b); }
+
+.checkbox_row {
+    margin: 22px 0 0 14px;
+}
+
+#notepad {
+    position: relative;
+    margin-top: 0px;
+    width: 691px;
+    height: 640px;
+    border-style: solid;
+    border-color: #d7d7d7;
+    border-width: 3px;
+    float: left;
+    background-image: linear-gradient(to bottom, #fafbfc, #f2f3f4);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#notepad svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* summary text to the right of the wheel */
+#summary {
+    position: absolute;
+    left: 230px;
+    top: 30px;
+    width: 440px;
+    z-index: 2;
+    font-size: 15px;
+    line-height: 1.7em;
+    color: #292929;
+}
+
+#summary .big {
+    font-size: 20px;
+    font-weight: bold;
+}
