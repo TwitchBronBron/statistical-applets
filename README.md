@@ -101,5 +101,21 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
 - **Verified:** mean and median match hand calculations while adding, stacking, dragging, and trashing points,
   and a full quiz run scores 10/10 (including question 2, which reads the applet's mean and median).
 
+### Normal Density Curve (`asset/7_norm/`)
+
+- **From the originals:** the applet's own `index.html` survived (Mean, Std. Dev., 2-Tail, UPDATE), along with
+  the page text and quiz. Behavior follows the Java "Normal Curve" applet it replaced (`NormalCurve.jar`,
+  decompiled), whose instructions are nearly word for word the same: two green flags starting at mean ± 1 SD;
+  with the flags in order the two tails are shaded and each tail's area is shown, and with the flags crossed the
+  area between them is shaded; 2-Tail mirrors the flags around the mean; flags keep their position in SD units
+  when the mean or SD changes; areas to 4 decimals. From the HTML5 page text: the shaded area is dark yellow, the
+  axis is marked to 4 SD each side, and flag values are always shown.
+- **Designed for the rebuild:** `style.css`, `math_script.js` and `main_script.js` (lost), including colors,
+  label placement, and exact normal math (the Java version used a two-decimal z table). Flag values snap to a
+  clean step just coarser than one pixel (0.02 when SD = 1, 0.1 when SD = 5), so values like 50 or −10 can be hit
+  exactly; the Java version moved in raw pixels.
+- **Verified:** areas match standard normal tables (±1 → 0.1587 each tail, crossed ±1 → 0.6827, ±1.96 → 0.0250),
+  and a full quiz run done by dragging the flags scores 10/10.
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.
