@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <title>stats_applet_20_ciprop</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <link href="css/boilerplate.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/jquery-ui-custom.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/manuscript.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/slide_activity.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="css/stats_applet.css" media="screen" rel="stylesheet" type="text/css" >    
+    
+    </head>
+<body>
+<div id="manuscript" data-chapter-number="1">
+    <div data-type="chapter" id="id51849009">
+<h1 class="section-title">
+				Chapter
+				<span data-type="number">1</span>. <span data-type="title" data-title-for="id51849009">Confidence Intervals for Proportions</span>
+</h1>
+    <div data-type="section" id="id51849017" level="1">
+<h2 class="section-title"><span data-type="title" data-title-for="id51849017">Introduction</span></h2>
+      <div data-type="metadata" data-block_type="activity_config">
+        <div data-type="field" key="activity_type_title">Statistical Applets</div>
+      </div>
+      <div data-type="figure" data-figure-id="id51849084" data-block_type="thumbnail" data-layout-align="center" data-layout-width="small" data-layout-border="false">
+        
+        <img id="" src="asset/applet_thumbnail.png" data-figure-id="id51849084" data-layout-width="small" data-mmtype="image" data-autoplay="false" width="50" height="50">
+        <div data-type="asset_source"></div>
+      </div>
+      <div data-type="box" data-block_type="instructions" id="id51836196"><div data-type="box_inner">
+        <p id="id51400356">Set the underlying population proportion <em>p</em>, the desired confidence level, and the sample size <em>n</em> with the sliders, then click SAMPLE to take a sample. On the right you'll see a large dot representing the sample proportion (i.e., the proportion of people in the sample who said they plan to vote for candidate A), and the lines on each side of this dot span the confidence interval.  Click SAMPLE 25 take 25 samples all at once. The green line indicates the population proportion <em>p</em>.  Intervals that contain <em>p</em> ("hits") will be colored gray; "misses" will be colored red. Click on any confidence interval to reveal the sample proportion and the range of the confidence interval.</p>
+        <p id="id51427501">Click the "Quiz Me" button to complete the activity.</p>
+      </div></div>
+      <p id="id51427506">This applet simulates the process of taking an election poll involving two candidates.  Some proportion <em>p</em> of the population plans to vote for candidate A. If we sample <em>n</em> people from the population, the proportion of people in the sample who say they plan to vote for candidate A is our best estimate of the population proportion.  We can then construct a level <em>C</em> confidence interval, where <em>C</em> is the probability that the interval actually includes the true value of <em>p</em>.  More specifically, the confidence interval is calculated as the sample proportion ± <em>z</em>* times the standard deviation of the sample proportion, where <em>z</em>* is the critical value of <em>z</em> that has (1-<em>C</em>)/2 of the normal distribution to the right of the value, and the standard deviation is <!-- LOCAL PATCH: was a geteq.ashx image --><span class="tex">\(\sqrt{\frac{p(1-p)}{n}}\)</span>.</p>
+      
+      <div data-type="figure" data-figure-id="id51836784" data-block_type="" data-layout-align="center" data-layout-width="xlarge" data-layout-border="false" data-expandable="true">
+        
+        <img id="" src="../figure_placeholder.jpg" data-figure-id="id51836784" data-layout-width="xlarge" data-mmtype="iframe" data-mmsrc="asset/20_ciprop/index.html" width="770" height="600" alt="" title="">
+      </div>
+      <div data-type="box" data-block_type="questions" id="id51840805"><div data-type="box_inner">
+        <div data-type="question" id="id51839838">
+<h3>Question
+			    <span data-type="number">1.1 </span><span data-type="title"></span>
+</h3>
+          <p id="id51426958">Excluding voters for third-party candidates, approximately 52% of the voters in Virginia's 2012 presidential election voted for Barack Obama, with the other 48% voting for Mitt Romney.  In modern presidential politics, the vote in Virginia this year was not particularly close: Obama fairly easily won more than 50% of the votes, claiming Virginia's 13 electoral college votes.</p>
+          <p id="id51426968">Use this applet to simulate what might have happened in 25 pre-election polls, with each poll including a sample size of 250 people.  First click RESET, then set the Population Proportion to .52, the sample size to 250, and click SAMPLE 25.</p>
+          <p id="id51400316">Inspect the 95% confidence intervals of these 25 simulated polls.  How many of them include the true population proportion of .52?</p>
+          <p id="id51400321">
+            <span data-type="query_display" id="id51593121"></span><span data-type="query" data-encrypted="true">M1Us4pqX75xhTU6OdgvW9YXikaeDr8EPReylRKVfRLuOxtogfS8L2jcL6yTIgebQdXe9ow==</span>
+          </p>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">3</div>
+            <div data-type="field" key="feedback_hint">Make sure you actually run the simulation as directed: Click RESET (if necessary), then set the Population Proportion to .52, the Confidence Level to 95, the Sample Size to 250, and click SAMPLE 25. Then enter the number of "Hits" indicated on the left side of the graph.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect.</div>
+            <div data-type="field" key="feedback_correct">Great job.</div>
+            <div data-type="field" key="question_report_text">Number of polls that include the true population proportion.</div>
+          </div>
+        </div>
+        <div data-type="question" id="id51577572">
+<h3>Question
+			    <span data-type="number">1.2 </span><span data-type="title"></span>
+</h3>
+          <span data-type="query_display" id="id51593172"></span><span data-type="query" data-encrypted="true">LmIKaJjn/yWH9/me56iNxwy23p7/Ha2yqM6bfpS14/nz/GLXZSs0oQfdOsWQkcDuHIJmSnf1U2U0dhyHBXjmKrWjuPnLYnNoz3DtvI0/iaKXq5kFC6dUf2Zs4plewIuzWEbEu7JjKekP/amJ1sBTOl604AF9VU4b+s6h+6oXsWowbjjaa7csxPv1bSJlWn8wbl75mzeSA3GcbbwMkblPxAsBy5iOLYug5zD2wMPIObdYnmH7Lxz3ZHnDchVgTQoqx7bmbLz44hGWP8IDWDyAQp7BTScTWpNFpOL6rqHsOvGF4ULRrRi2q/y7GS5QTtjS6lLlzUKQF6KX9gan31UrHakpyKNoJNcrsQwPqLaqNCyqMhWpwnx8OWTz9kQ7pV7Ga2j7Crvt7W8dkOAUisjhGQ==</span>
+          <div data-type="metadata">
+            <div data-type="field" key="max_tries">3</div>
+            <div data-type="field" key="feedback_correct">Correct.</div>
+            <div data-type="field" key="feedback_hint">Note that since we defined the Population Proportion in terms of the percentage of voters who voted for Obama, this question, about the number of polls where Romney was projected to get more than 50% of the votes, asks you to count how many of the polls showed a proportion <em>less than .50</em>. This question does not involve confidence intervals, so ignore the "Percent Hit" statistic on the left.</div>
+            <div data-type="field" key="feedback_incorrect">Incorrect.</div>
+          </div>
+        </div>
+        <div data-type="question" id="id51582230">
+<h3>Question
+			    <span data-type="number">1.3 </span><span data-type="title"></span>
+</h3>
+          <span data-type="query_display" id="id51593225"></span><span data-type="query" data-encrypted="true">O3r9vTgPLECw8RUoqeXgZ0E00eOnCGihGnhcAkvmSD6gWMDWjXgzJcn2zVKTcUe5/Gp30lx+jqSSb9zSgh2pxiodeHCwg/5OVG4Q9dEHlFwAwPLTQVksALiCfGM8e/wfgtov6urEa2rPJE2BbYgjuN/F/mx3SDf022uzWcX5l1C8YIL7Jwg097mjnRkw5vEt35pWktVlotaeQO7kjj7BArZB9kVFPsu0pLf38e9LoAyNuclKAI/EwX6WnGgRrj/jtbZlWB/w8qNatdRBy+5TzC0zMEWFlLNjatqbpbf7G58sFZ5hPXyqwqLk0O9CzxsciRWh71FY9rqivrWCNJ/7jXJlaFo9t9UeJDr1XQ0MrSQtYB2LhMRyDE8XPuy3AKKSZnWjQA==</span>
+          <div data-type="metadata">
+            <div data-type="field" key="feedback">This experiment shows that even with a relatively large sample size, it's impossible to know whether a sample reflects the true underlying population distribution.  First of all, we have to remember that, by definition, a 95% confidence interval will fail to include the true population mean 5% of the time.  5% may not seem all that likely, but when many samples are drawn—as is the case in a presidential election year, when many, many polls are taken—some samples will inevitably miss the mark. Furthermore, in cases when a certain value serves as a hard threshold—such as in an election, where getting 50.01% of the vote wins and getting 49.99% loses—this exercise clearly shows that samples will "call" the result "wrong" even more than 95% of the time.</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+<!-- #x-digfir-subsection-insertion-point --></div><!-- /#manuscript -->
+<br class="clear" />
+<!-- end of material in original view -->
+
+	<!--[if IE]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
+    
+<script type="text/javascript" src="js/utilities.js"></script>
+<script type="text/javascript" src="js/query_types.js"></script>
+<script type="text/javascript" src="js/player.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery_extensions.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript" src="js/slide_activity.js"></script>
+<script type="text/javascript" src="js/stats_applet.js"></script>
+<script type="text/javascript" src="js/stats_applet_20_ciprop.js"></script>
+<script type="text/javascript">
+    //<!--
+    
+$(window).ready(function () {
+	player.initialize('50587d3eb11c0ff331000000');
+});
+    //-->
+</script>
+</body>
+</html>
+

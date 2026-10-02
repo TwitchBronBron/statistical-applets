@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Confidence Interval for Proportions</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">    
+        <link rel="stylesheet" href="../common/css/ui-lightness/jquery-ui.css" type="text/css" media="screen">        
+        <script src="../common/jquery.min.js" type="text/javascript"></script>   
+        <script src="../common/jquery-ui.min.js" type="text/javascript"></script>   
+        <script src="../common/raphael-min.js"></script>
+        <script src="math_script.js"></script>
+        <script src="main_script.js"></script>
+    </head>
+    <body>
+        <div id="fone">
+            <div id="left_panel">
+                <div id="enter">
+                    <form action="" method="get" id="enter_form">
+                        <div class="settings">
+                            <p><label class="label" for="sample_size">Population Proportion (<i>p</i>):</label>                            
+                            <input class ="input" type="text" id="p" disabled></p>
+                            <div id="p_slider"></div>
+
+                            <p>
+                            <label class="label" for="conf_lvl_slider">Confidence Level (<i>C</i>):</label>
+                            <input class ="input" type="text" id="conf_lvl" disabled></p>
+                            <div id="conf_lvl_slider"></div>
+
+                            <p><label class="label" for="sample_size">Sample Size (<i>n</i>):</label>                            
+                            <input class ="input" type="text" id="sample_size" disabled></p>
+                            <div id="sample_size_slider"></div>
+                        </div>
+                        <p class="controlButtons">
+                            <a href="#" id="sample_1" >SAMPLE</a>
+                        </p>
+                        <p class="controlButtons">
+                            <a href="#" id="sample_more" >SAMPLE 25</a>
+                        </p>
+                        <div class="stats">
+                        <label class="label" for="hit">Hit:</label> <input class ="input" id="hit" type = "text" disabled>
+                        <label class="label" for="total">Total:</label> <input class ="input" id="total" type = "text" disabled><br />
+ 						<label class="label" for="percent">Percent hit:</label> <input class ="input" id="percent" type = "text" disabled>
+                        </div>
+                        <p class="controlButtons">
+                            <a href="#" id="reset" >RESET</a>
+                        </p>
+
+
+                    </form>
+                </div>
+            </div>
+            <div id="notepad"> 
+            </div>
+        </div>
+    </body>
+</html>
