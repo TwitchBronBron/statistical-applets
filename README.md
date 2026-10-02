@@ -49,14 +49,24 @@ Changes to the archived files are marked with `LOCAL PATCH` comments where the f
 
 ## Reconstructed applets
 
-Some applets' own code wasn't archived (not in Wayback, archive.today, or Macmillan's rehosted copies). Where it matters, they're rebuilt to work with the original wrapper page and quiz, and
-marked "reconstructed" on the landing page.
+Some applets' own code wasn't archived (not in Wayback, archive.today, or Macmillan's rehosted copies). Those are
+rebuilt to work with the original page and quiz. They're marked "reconstructed" on the landing page, and their
+own page shows a notice above the applet. Treat them with more scrutiny than the restored originals.
 
-- **Statistical Power** (`asset/09_power/`): rebuilt from the 2005 Java "Power" applet it was ported from
-  (`power.jar` from W. H. Freeman's archived companion sites, decompiled), and styled after the sibling
-  Statistical Significance applet (`14_signif`). Power uses exact normal math in place of the Java version's
-  two-decimal z table. n allows up to 250, not the "50 or fewer" in the page text (inherited from the Java
-  version), because the quiz's own answer key needs n = 95. Verified against the quiz key: 10/10.
+### Statistical Power (`asset/09_power/`)
+
+- **From the originals:** the page text, all quiz questions, and the quiz's answer key. The 2005 Java "Power"
+  applet that the HTML5 version was ported from (`power.jar` from W. H. Freeman's archived companion sites,
+  decompiled) supplied the model: inputs, default values, two stacked curves on one x scale, the yellow α area,
+  the red power area, and axis ticks at μ₀ ± 2 and ± 4 standard errors. Layout, colors, fonts and buttons come
+  from the sibling Statistical Significance applet.
+- **Designed for the rebuild:** exact positions of the curves and labels, the gray captions above each curve, and
+  the dashed line at the cutoff value. Power is computed with exact normal math; the Java version used a
+  two-decimal z table, so the lost original may have shown slightly different digits.
+- **Known difference:** n allows up to 250, not the "50 or fewer" in the page text (carried over from the Java
+  version), because question 4's answer is n = 95.
+- **Verified:** power matches hand calculations for one- and two-sided tests, and a full quiz run using only the
+  applet's displayed values scores 10/10.
 
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.

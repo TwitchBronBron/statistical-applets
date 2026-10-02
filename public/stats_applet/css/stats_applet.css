@@ -101,6 +101,17 @@ body {
 	margin-bottom:10px;
 }
 
+/* LOCAL PATCH: notice on applets whose code was lost and has been reconstructed */
+.reconstructed_note {
+	clear:left;
+	border-left:4px solid #c60;
+	background-color:#fff6ec;
+	color:#333;
+	padding:6px 10px;
+	margin:10px 0;
+	font-size:.85em;
+}
+
 #total_score_div {
 	margin-top:10px;
 	font-size:14px;
