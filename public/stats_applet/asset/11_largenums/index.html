@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Law of Large Numbers</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">        
+        <script src="../common/jquery.min.js" type="text/javascript"></script>        
+        <script src="../common/raphael-min.js"></script>
+        <script src="math_script.js"></script>
+        <script src="main_script.js"></script>
+    </head>
+    <body>
+        <div id="fone">
+            <div id="left_panel">
+                <div id="info"> </div>
+                <div id="enter">
+                    <form action="" method="get" id="enter_form">
+                        <div class="settings">
+                            <div id="label">
+                                <label for="rolls">Rolls:</label>
+                                &nbsp;<input id="rolls" type="text"/>
+                            </div>  
+                            <div id="mean">
+
+                                <input id="show_mean" type="checkbox">
+
+
+                                <label id="show_mean_l" for="show_mean">Show µ<sub><i>X</i></sub></label>
+
+                            </div>
+                            <div id="totals">
+                                <input id="show_totals" type="checkbox">           
+
+                                <label id="show_total_l" for="show_totals">Show roll totals</label>
+
+                            </div>
+                        </div>
+                        <p class="controlButtons">
+                            <a href="#" id="f_dice" >FEWER DICE</a>
+                        </p>
+                        <p class="controlButtons">
+                            <a href="#" id="m_dice" >MORE DICE</a>
+                        </p>
+                        <p class="controlButtons">
+                            <a href="#" id="r_dice" >ROLL DICE</a>
+                        </p>
+                        <p class="controlButtons">
+                            <a href="#" id="reset" >RESET</a>
+                        </p>                        
+                    </form>
+                </div>
+            </div>
+            <div id="notepad"> 
+            </div>
+        </div>
+    </body>
+</html>
