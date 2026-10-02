@@ -117,5 +117,21 @@ own page shows a notice above the applet. Treat them with more scrutiny than the
 - **Verified:** areas match standard normal tables (±1 → 0.1587 each tail, crossed ±1 → 0.6827, ±1.96 → 0.0250),
   and a full quiz run done by dragging the flags scores 10/10.
 
+### Probability (`asset/10_prob/`)
+
+- **From the originals:** the page text and quiz (which picks a random probability of heads for each student).
+  Behavior follows the Java "Probability" applet it replaced (`Probability.jar`, decompiled): probability of
+  heads and number of tosses, Toss, Reset, "Show true probability" as a green line, a heads/tails bar with
+  "# Heads = h/n = …" and "# Tails = …" counts, a plot of the proportion of heads after each toss (with dots for
+  the first 40 tosses), and at most 500 tosses in all. The coin pictures in `images/` are the Java applet's own.
+- **Designed for the rebuild:** the layout (controls on the left as in the sibling applets; the Java version had
+  them along the bottom), the plot's axis lengths (10, 20, 50, 100, 200, 300, 400, 500 tosses), and batch size: a
+  single Toss can do up to the 500-toss total, with large batches animated faster (the Java version allowed 40 per
+  click, and the quiz asks for 500 tosses). The coin strip shows the most recent 25 coins. Changing the
+  probability and clicking Toss starts a fresh run so a plot never mixes two coins (the Java version applied a new
+  probability only on Reset).
+- **Verified:** counts and proportions add up, the 500-toss limit holds, a probability above 1 is clamped to 1,
+  and a full quiz run scores 10/10.
+
 The gradebook integration (ARGA) and the answer-validator web service are gone and aren't emulated. Quizzes are
 scored client-side in the browser.
